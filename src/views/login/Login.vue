@@ -100,6 +100,9 @@ export default {
 /*container full screen*/
 .login{
   height: calc(100vh);
+  background: url('../../assets/index/images/China.jpg') no-repeat;
+  background-size: 100% 100%;
+  opacity: 1.0;
 }
 
 .login-form-layout {
@@ -107,7 +110,8 @@ export default {
   left: 0;
   right: 0;
   width: 360px;
-  margin: 140px auto;
+  margin: 80px auto;
   border-top: 10px solid #409eff;
+  opacity: 0.8;
 }
 </style>

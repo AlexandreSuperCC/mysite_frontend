@@ -7,6 +7,7 @@ const UploadFile = () => import('@/views/index/UploadFile')
 const Markdown = () => import('@/views/index/Markdown')
 const SearchEngine = () => import('@/views/index/searchEngine/SearchEngine')
 const AboutMe = () => import('@/views/index/myinfo/AboutMe')
+const MyStory = () => import('@/views/index/myinfo/MyStory')
 
 const routes = [
   {
@@ -38,6 +39,10 @@ const routes = [
       {
         path:'aboutMe',
         component:AboutMe
+      },
+      {
+        path: 'myStory',
+        component:MyStory
       }
     ]
   }

@@ -23,7 +23,12 @@
         <el-menu-item index="2-4-3">item three</el-menu-item>
       </el-sub-menu>
     </el-sub-menu>
-    <el-menu-item index="/home/aboutme" >About me</el-menu-item>
+    <el-sub-menu index="home/myInfo">
+      <template #title>my Info</template>
+      <el-menu-item index="/home/aboutme">About me</el-menu-item>
+      <el-menu-item index="/home/myStory">My story</el-menu-item>
+      <el-menu-item index="2-4-3">item three</el-menu-item>
+    </el-sub-menu>
     <el-menu-item index="4">Orders</el-menu-item>
     <div class="exit-btn">
       <el-popconfirm confirm-button-text="Yes" cancel-button-text="No" icon="el-icon-info" icon-color="red"

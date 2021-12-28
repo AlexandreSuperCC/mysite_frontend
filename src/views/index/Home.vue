@@ -2,7 +2,7 @@
 <div>
 <main-frame></main-frame>
   <router-view v-slot="{ Component }">
-    <keep-alive :include="['UploadFile','Markdown','Article','AboutMe']">
+    <keep-alive :include="['UploadFile','Markdown','Article','AboutMe','MyStory']">
       <component :is="Component" />
     </keep-alive>
   </router-view>

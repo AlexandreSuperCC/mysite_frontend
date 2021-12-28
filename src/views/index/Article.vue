@@ -1,7 +1,13 @@
+/**
+ * @description: the component for the page where all the articles are
+ * @author ycao
+ * @date 2021-12-28 13:37:01
+ * @version 1.0
+ */
 <template>
   <div :style="isHidden" v-loading="getAllFiles">
     <div class="md-items" >
-      <button class="refresh-md-btn" @click="getFiles">refresh</button>
+      <button class="refresh-md-btn" @click="getFiles"></button>
       <span v-if="allCatFile.length===0">no category</span>
       <span v-for="(cat,index) in allCatFile"
             @contextmenu.prevent.native="deleteCatAction(cat)"
@@ -45,7 +51,6 @@
 import {getHomeData, deleteOneFile, deleteCatFilesIn} from "@/network/mainPage/home";
 import ViewFile from "@/views/index/ViewMd/ViewFile";
 import {ElMessageBox} from "element-plus";
-
 export default {
   name: "Article",
   components:{
@@ -230,6 +235,7 @@ export default {
   padding: 4px 4px;
   margin: 0px 3px;
   background-color: #bed5ee;
+  cursor: pointer;
 }
 .box-card{
   height: 400px;
@@ -240,9 +246,13 @@ export default {
 .card-header{
   display: flex;
 }
+/*隐藏滚动条*/
+.file-name::-webkit-scrollbar{
+  display:none
+}
 .file-name{
   font-size: large;
-  padding-top: 10px;
+  padding-top: 6px;/*更改【隐藏滚动条】后需要更改这个因为滚动条本身有长度，有滚动条时值：10*/
   flex: 1px;
   overflow: scroll;
   white-space:nowrap
@@ -262,10 +272,22 @@ export default {
 }
 .refresh-md-btn{
   margin-right: 9px;
-  font-size: 10px;
-  background-color: #e1e6ef;
-  color: #07549f;
-  /*background: url('../../assets/index/images/refresh.png')  no-repeat;*/
+  /*font-size: 10px;*/
+  /*font-weight: lighter;*/
+  /*background-color: #e1e6ef;*/
+  /*color: #032d55;*/
+  /*!*圆形有无边框*!*/
+  border-radius: 50%;
+  border: none;
+  /*鼠标变小手*/
+  cursor: pointer;
+  /*border-style: solid;*/
+  /*border-width: 1px;*/
+  width: 16px;
+  height: 16px;
+  position: relative;
+  top: 1px;
+  background: url('../../assets/index/images/refresh.png')  no-repeat;
 }
 .view-model{
 /*the style here does not work, do it in the component 'ViewFile'*/
