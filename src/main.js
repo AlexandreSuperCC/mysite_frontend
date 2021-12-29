@@ -9,3 +9,4 @@ import axios from "axios";
 
 const app = createApp(App).use(store).use(ElementPlus).use(router).mount('#app')
 axios.defaults.withCredentials = true
+
