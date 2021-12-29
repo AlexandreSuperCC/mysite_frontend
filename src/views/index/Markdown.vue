@@ -228,6 +228,9 @@ margin: 10px 40px;
 #show-content{
   padding:0px 25px;
 }
+.md-info::-webkit-scrollbar{
+  display:none
+}
 .md-info{
   display: flex;
   margin: 20px 0px;

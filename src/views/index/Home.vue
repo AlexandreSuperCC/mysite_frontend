@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="home-container">
 <main-frame></main-frame>
   <router-view v-slot="{ Component }">
     <keep-alive :include="['UploadFile','Markdown','Article','AboutMe','MyStory']">

@@ -5,7 +5,7 @@ import store from "@/store"
 export function request(config){
     const instance1 = axios.create({
         baseURL:baseURL,
-        timeout:20000//change this variable to avoid frequent bad response
+        timeout:60000//change this variable to avoid frequent bad response
     })
 
     //add by ycao 1101 : request handler

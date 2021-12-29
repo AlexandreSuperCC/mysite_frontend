@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <!-- 使用路由缓存 -->
-    <router-view class="box" v-slot="{ Component }">
-      <component :is="Component"/>
+    <router-view v-slot="{ Component }">
+      <keep-alive :include="['Login']">
+        <component :is="Component" />
+      </keep-alive>
     </router-view>
     <!-- 使用路由缓存 -->
   </div>
