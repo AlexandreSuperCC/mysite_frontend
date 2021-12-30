@@ -9,14 +9,14 @@
     <div class="cb-left"><slot name="swiper-left"></slot></div>
     <div class="photo-container" @mouseenter="enterClear" @mouseleave="leaveRestore">
       <div class="swiper-left-before">
-        <img class="swiper-arrow" @click="decreasePhoto"
+        <img class="swiper-arrow" @click="decreasePhoto" alt="before"
              src="~assets/index/images/swiper/before.svg">
       </div>
       <img class="my-photo-side" :src="getPhoto1" alt="me">
       <img class="my-photo-center" :src="getPhoto2" alt="me">
       <img class="my-photo-side" :src="getPhoto3" alt="me">
       <div class="swiper-right-after">
-        <img class="swiper-arrow" @click="increasePhoto"
+        <img class="swiper-arrow" @click="increasePhoto" alt="after"
              src="~assets/index/images/swiper/after.svg">
       </div>
     </div>
@@ -125,7 +125,7 @@ export default {
   height: 250px;
 }
 .my-photo-center{
-  margin: 0px 1px;
+  margin: 0 1px;
   border-style: solid;
   border-color: #0b1e57;
   border-width: 2px;
