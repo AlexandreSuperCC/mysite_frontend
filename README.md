@@ -15,6 +15,10 @@ npm run serve
 npm run build
 ```
 
+### bug
+1. 第一次登录页面没有反应
+2. md文件展示页面分类栏溢出的时候是向下扩展的不是横向扩展
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
