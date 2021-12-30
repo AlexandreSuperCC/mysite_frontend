@@ -1,5 +1,6 @@
 /**
  * @description: 自我介绍轮播图
+                 没有使用，因为element-plus有封装好的更好的
  * @author ycao
  * @date 2021-12-29 17:30:35
  * @version 1.0
@@ -40,6 +41,14 @@ export default {
   },
   mounted() {
   },
+  props:{
+    photoChangeInterval:{
+      type: Number,
+      default(){
+        return 3000
+      }
+    }
+  },
   methods:{
     decreasePhoto(){
       if(this.curImage===1){
@@ -62,7 +71,7 @@ export default {
       //setTimeout里面的this是指向window,所以不bind拿不到这个组件里的curImage
       this.timer=setInterval(function (){
         this.curImage++;
-      }.bind(this),3000)
+      }.bind(this),this.photoChangeInterval)
     }
   },
   computed:{
@@ -92,7 +101,7 @@ export default {
   created() {
     this.timer = setInterval(()=>{
       this.curImage++;
-    },3000)
+    },this.photoChangeInterval)
   }
 }
 </script>
