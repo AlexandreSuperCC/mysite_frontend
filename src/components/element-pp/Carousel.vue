@@ -1,3 +1,9 @@
+/**
+ * @description: 基于element-plus的一个轮播图组件，加了两个插槽设计，分别位于左右两侧
+ * @author ycao
+ * @date 2021-12-31 09:29:35
+ * @version 1.0
+ */
 <template>
   <div class="cr-container">
     <div class="cr-left"><slot name="swiper-left"></slot></div>
@@ -66,16 +72,17 @@ export default {
   display: flex;
 }
 .cr-left{
-  flex: 1;
-  /*background-color: #e87272;*/
+  flex: 5;
+  margin-left: 18px;
+  margin-right: 18px;
 }
 .cr-right{
-  flex: 1;
+  flex: 5;
   background-color: #f35858;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 18px;
+  margin-right: 18px;
 }
 .cr-center{
-  flex: 1;
+  flex: 6;
 }
 </style>

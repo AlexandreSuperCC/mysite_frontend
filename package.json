@@ -17,11 +17,14 @@
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {
+    "@element-plus/icons-vue": "^0.2.4",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0"
+    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/reactivity": "^3.2.26",
+    "@vue/runtime-core": "^3.2.26"
   },
   "browserslist": [
     "> 1%",

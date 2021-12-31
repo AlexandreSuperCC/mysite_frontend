@@ -77,6 +77,19 @@ switch1(param) {undefined
       this[`${param}`] = !this[`${param}`];
 }
 ``` 
+### Vue received a Component which was made a reactive object.
+```js
+runtime-core.esm-bundler.js?5c40:38 [Vue warn]: Vue received a Component which was made a reactive object. This can lead to unnecessary performance overhead, and should be avoided by marking the component with markRaw or using shallowRef instead of ref.
+```
+* 如题，这句提示是自己使用 动态组件component 时控制台打印的 warning，解决方式是将 is 传入的组件使用 markRaw函数标记，让其永远不会转换为 proxy 。返回对象本身。   
+* 重要
+  markRaw 和 shallowXXX API 使你可以有选择地退出默认的深度响应式/只读转换模式，并将原始的，未被代理的对象嵌入状态图中。它们可以根据情况灵活运用： 
+
+有些值不应该是响应式的，例如复杂的第三方类实例或 Vue 组件对象。
+当渲染具有不可变数据源的大列表时，跳过 proxy 转换可以提高性能。
+
+
+
 ## backend 
 ### swagger
 http://localhost:8081/swagger-ui.html

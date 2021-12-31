@@ -46,6 +46,7 @@ export default {
               return constantObj.name===name}
         )
         this.sign = (curConstantObj&&curConstantObj.length>0) && curConstantObj[0].content;
+        this.$store.commit('set_signOfMe',{sign:this.sign})//把sign放入vuex，后续MyStory也会用到
       }).catch(err=>console.log(err))
     }
   },

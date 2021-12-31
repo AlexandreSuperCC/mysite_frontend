@@ -18,6 +18,8 @@ npm run build
 ### bug
 1. 第一次登录页面没有反应
 2. md文件展示页面分类栏溢出的时候是向下扩展的不是横向扩展
+### to be optimized
+1. 在TimeLine.vue里drawer里的上海大学和fff的图片都是固定的
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

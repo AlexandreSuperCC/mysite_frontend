@@ -15,6 +15,6 @@ export default createStore({
     token,
     user,
     upload,
-    markdown
+    markdown,
   }
 })

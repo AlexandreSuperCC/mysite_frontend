@@ -2,40 +2,63 @@
   <div class="container">
     <div class="introduction">
       <div class="intro-text">
-        <h2><span class="text-hi">Hi! </span><br> My name is ycao.</h2>
-        <p>I’m a Java Developer</p>
+        <h2>
+          <span class="text-hi">Hi!</span><br>
+          My name is ycao.<br>
+          I'm {{signFromMyInfo}}
+        </h2>
       </div>
     </div>
     <div class="slideshow-photo">
       <div class="cb-cpn">
-<!--        <circular-banner :photo-change-interval="4000"></circular-banner>-->
         <carousel>
+          <template v-slot:swiper-left>
+            <div class="timeline-title">
+              Formation
+            </div>
+            <timeline></timeline>
+          </template>
           <template v-slot:swiper-right>
             <div class="cr-text-detailIntro">
-              <p>In my free time I enjoy coding, cycling, and badminton.</p>
-              <p>Pendant mon temps libre, j'aime coder, faire du vélo et jouer au badminton</p>
+              <p>
+                In my free time I enjoy coding, cycling, and badminton.<br>
+                I am the vice president of Shanghai University Cycling Association.
+              </p>
+              <p>
+                Pendant mon temps libre, j'aime coder, faire du vélo et jouer au badminton.<br>
+                Je suis Vice - Président de l'Association Cycliste de l'Université de Shanghai.
+              </p>
             </div>
           </template>
         </carousel>
       </div>
     </div>
-    <div class="contact">contact</div>
+    <div class="contact">
+      <contact-me>
+      </contact-me>
+    </div>
   </div>
 </template>
 
 <script>
 import CircularBanner from "@/components/style/CircularBanner";
-import Carousel from "@/components/style/Carousel";
+import Carousel from "@/components/element-pp/Carousel";
+import Timeline from "@/components/element-pp/Timeline";
+import ContactMe from "@/components/element-pp/ContactMe";
+
+
 
 export default {
   name: "MyStory",
   components:{
     CircularBanner,
     Carousel,
+    Timeline,
+    ContactMe,
   },
   data(){
     return {
-
+      signFromMyInfo:this.$store.state.token.signForAboutMe
     }
   },
   mounted() {
@@ -89,10 +112,17 @@ export default {
   color: #f35858;
 }
 .cr-text-detailIntro{
-  margin: 10px 10px;
-  color: white;
-  font-weight: 100 ;
+  margin: 15px;
+  color: #f8f0f0;
+  /*font-weight: 100 ;*/
   /*text-shadow: 0px 0px 10px rgba(255,255,255,0.5);*/
   letter-spacing: 1px;
+  font-family: Arial;
 }
+.timeline-title{
+  color: #f8f0f0;
+  padding-left: 40px;
+  margin-bottom: 15px;
+}
+
 </style>
