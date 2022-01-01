@@ -1,6 +1,7 @@
 /**
  * @description: 自我介绍轮播图
-                 没有使用，因为element-plus有封装好的更好的
+                 只在浏览器不支持carousel时使用，因为element-plus有封装好的更好的
+                 在created时期判断浏览器类型，然后判断使用哪个
  * @author ycao
  * @date 2021-12-29 17:30:35
  * @version 1.0

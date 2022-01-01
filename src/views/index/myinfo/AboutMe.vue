@@ -34,6 +34,15 @@ export default {
     }
   },
   methods:{
+    //赋值data里sign
+    doAssignSign(){
+      //aboutMe和contactMe组件哪一个先渲染后，就不用再次取请求值了
+      if(this.sign===''&&this.$store.state.token.signForAboutMe===''){
+        this.assignConstant(aboutMeIntroductionConstant)
+      }else{
+        this.sign=this.$store.state.token.signForAboutMe;
+      }
+    },
     /**
      * 通过过滤的方法得到需要的签名文字
      * @return
@@ -56,7 +65,7 @@ export default {
     this.ifCreated=true;
   },
   mounted() {
-    this.assignConstant(this.sign_parameter);
+    this.doAssignSign();
     // this.signLength = this.$refs.signContent.offsetWidth;
   },
 }

@@ -21,6 +21,7 @@ export default {
   mounted() {
     window.addEventListener('unload',this.saveStateToken)
     window.addEventListener('load',this.clearStateToken)
+
   },
   data(){
     return {

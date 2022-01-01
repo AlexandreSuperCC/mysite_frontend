@@ -4,8 +4,8 @@
       <div class="intro-text">
         <h2>
           <span class="text-hi">Hi!</span><br>
-          My name is ycao.<br>
-          I'm {{signFromMyInfo}}
+          My name is Yuan Cao.<br>
+          I'm {{sign}}
         </h2>
       </div>
     </div>
@@ -45,6 +45,8 @@ import CircularBanner from "@/components/style/CircularBanner";
 import Carousel from "@/components/element-pp/Carousel";
 import Timeline from "@/components/element-pp/Timeline";
 import ContactMe from "@/components/element-pp/ContactMe";
+import {aboutMeIntroductionConstant} from "@/utils/const/const";
+import {getConstant} from "@/network/constant/Constant";
 
 
 
@@ -58,14 +60,40 @@ export default {
   },
   data(){
     return {
-      signFromMyInfo:this.$store.state.token.signForAboutMe
+      sign:'',
+      curUserId:this.$store.state.token.userId,
+      domain:'AboutMe',//当前组件名字
     }
   },
   mounted() {
+    this.doAssignSign();
 
   },
-  methods:{
 
+  methods:{
+    //赋值data里sign
+    doAssignSign(){
+      if(this.sign===''&&this.$store.state.token.signForAboutMe===''){
+        this.assignConstant(aboutMeIntroductionConstant)
+      }else{
+        this.sign=this.$store.state.token.signForAboutMe;
+      }
+    },
+    /**
+     * 通过过滤的方法得到需要的签名文字
+     * @return
+     * @time 2022-01-01 11:41:15
+     */
+    assignConstant(name){
+      getConstant(this.curUserId,this.domain).then(data=>{
+        const curConstantObj= data.data.filter(
+            (constantObj)=>{
+              return constantObj.name===name}
+        )
+        this.sign = (curConstantObj&&curConstantObj.length>0) && curConstantObj[0].content;
+        this.$store.commit('set_signOfMe',{sign:this.sign})//把sign放入vuex，后续MyStory也会用到
+      }).catch(err=>console.log(err))
+    },
   }
 
 }
@@ -104,12 +132,12 @@ export default {
 .intro-text{
   /*实现div居中 外层div margin: 0*/
   width: 300px;
-  margin: 0 auto;/*auto是关键*/
+  margin: 40px auto;/*auto是关键*/
 
 }
 .text-hi{
   font-size: 50px;
-  color: #f35858;
+  color: #1b555a;
 }
 .cr-text-detailIntro{
   margin: 15px;

@@ -97,7 +97,7 @@ export default {
                 }
               })
               .catch((err)=>{
-                console.log(err);
+                console.log('login error:'+err);
                 this.loading=false;
           })
         }else{
