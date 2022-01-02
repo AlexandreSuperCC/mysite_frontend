@@ -16,20 +16,12 @@
       <el-menu-item index="/home/uploadFile" :disabled="disableUpload">upload your file</el-menu-item>
       <el-menu-item index="/home/markdown">write your markdown</el-menu-item>
       <el-menu-item index="/home/searchEngine" disabled>using your searching engine</el-menu-item>
-      <el-sub-menu index="2-4">
-        <template #title>item four</template>
-        <el-menu-item index="2-4-1">item one</el-menu-item>
-        <el-menu-item index="2-4-2">item two</el-menu-item>
-        <el-menu-item index="2-4-3">item three</el-menu-item>
-      </el-sub-menu>
     </el-sub-menu>
     <el-sub-menu index="home/myInfo">
       <template #title>my Info</template>
       <el-menu-item index="/home/aboutme">About me</el-menu-item>
       <el-menu-item index="/home/myStory">My story</el-menu-item>
-      <el-menu-item index="2-4-3">item three</el-menu-item>
     </el-sub-menu>
-    <el-menu-item index="4">Orders</el-menu-item>
     <div class="exit-btn">
       <el-popconfirm confirm-button-text="Yes" cancel-button-text="No" icon="el-icon-info" icon-color="red"
         title="Are you sure to exit?" @confirm="exitEvent" @cancel="ignoreEvent">

@@ -98,18 +98,18 @@ export default {
   display: flex;
 }
 .cr-left{
-  flex: 5;
-  margin-left: 28px;
-  margin-right: 18px;
+  flex: 1;
+  margin-left: 158px;
+  margin-right: 1px;
 }
 .cr-right{
-  flex: 5;
+  flex: 1;
   background-color: #1c5359;
-  margin-left: 18px;
-  margin-right: 28px;
+  margin-left: 1px;
+  margin-right: 158px;
 }
 .cr-center{
-  flex: 3;
-  padding: 0 90px;
+  flex: 1;
+  padding: 0 100px;
 }
 </style>

@@ -13,7 +13,7 @@
             <img class="email-icon" src="~assets/index/images/contact/email.png" alt="email">
           </template>
         </el-step>
-        <el-step title="linkedin" description="yuancaocc@gmail.com" @click="changeActive(2)">
+        <el-step title="linkedin" description="linkedin.com/in/yuan-cao-75b112208" @click="changeActive(2)">
           <template v-slot:icon>
             <img class="linkedin-icon" src="~assets/index/images/contact/linkedin.png" alt="linkedin">
           </template>

@@ -40,7 +40,6 @@ import {ElMessageBox} from "element-plus";
 export default {
   name: "UploadedFileList",
   created() {
-    console.log("son created");
   },
   mounted() {
     this.getFilesLoading=true;

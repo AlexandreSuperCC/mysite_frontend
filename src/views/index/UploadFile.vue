@@ -90,7 +90,6 @@ export default {
 
   },
   created() {
-    console.log("father created");
   },
   components:{
     UploadFilled,

@@ -1,6 +1,10 @@
 <template>
   <div class="my-info" v-show="ifCreated">
     <div class="background-photo">
+      <div class="next-page">
+        <img class="next-page-icon" src="~assets/index/images/nextPage.png"
+             @click="goDetails" alt="next page">
+      </div>
     </div>
     <div class="content" >
       <div class="box-up">
@@ -21,6 +25,7 @@
 <script>
 import {getConstant} from "@/network/constant/Constant";
 import {aboutMeIntroductionConstant} from "@/utils/const/const";
+import SquareJumping from "@/components/common/SquareJumping";
 
 export default {
   name: "AboutMe",
@@ -57,6 +62,14 @@ export default {
         this.sign = (curConstantObj&&curConstantObj.length>0) && curConstantObj[0].content;
         this.$store.commit('set_signOfMe',{sign:this.sign})//把sign放入vuex，后续MyStory也会用到
       }).catch(err=>console.log(err))
+    },
+    /**
+     * 去往myStory组件
+     * @return
+     * @time 2022-01-02 00:10:26
+     */
+    goDetails(){
+      this.$router.push('/home/myStory')
     }
   },
   created() {
@@ -68,6 +81,9 @@ export default {
     this.doAssignSign();
     // this.signLength = this.$refs.signContent.offsetWidth;
   },
+  components:{
+    SquareJumping
+  }
 }
 </script>
 
@@ -147,5 +163,12 @@ export default {
   border-right: 4px solid white;
   border-bottom: 4px solid white;
   margin-left: 0px;
+}
+.next-page{
+  text-align: right;
+}
+.next-page-icon{
+  margin: 10px 10px;
+  cursor: pointer;
 }
 </style>
