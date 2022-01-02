@@ -40,7 +40,10 @@
       </el-col>
       <el-col :span="12" class="right-md">
         <div ref="htmlText" id="show-content" class="text-left">
-          <div v-if="!this.$refs.htmlText"><h3>type something to see your markdown</h3></div>
+          <div v-if="!this.$refs.htmlText">
+            <h3>Type something to see your markdown</h3>
+            <h3>You can press CTRL+S to save it!</h3>
+          </div>
         </div>
       </el-col>
     </el-row>
@@ -62,14 +65,14 @@ export default {
   data () {
     return {
       'converter':null,
-      ifCreate:false,
+      ifCreate:true,
       saveFileLoading:false,
       getCategoryLoading:false,
-      'content':this.doParseRouteObjOrBlank('rawContent'),
-      uniqueMdFileId:this.doParseRouteObjOrBlank('fid'),
-      fileStar:this.doParseRouteObjOrBlank('rate')===''?0:this.doParseRouteObjOrBlank('rate'),
-      fileName:this.doParseRouteObjOrBlank('fname'),
-      fileCategory:this.doParseRouteObjOrBlank('fcat'),
+      'content':'',
+      uniqueMdFileId:'',
+      fileStar:0,
+      fileName:'',
+      fileCategory:'',
       curUserId:this.$store.state.token.userId,
       categoryOption: [
 
@@ -208,6 +211,13 @@ export default {
       if (str==='') return 0;
       return parseInt(str);
     }
+  },
+  //activated只在replace/push到该页面时执行，所以ifCreated不能每次都变更，使用路由守卫
+  beforeRouteEnter(to,from,next){
+    if(to.query.arr){
+      this.ifCreate=false;
+    }
+    next();
   }
 }
 </script>

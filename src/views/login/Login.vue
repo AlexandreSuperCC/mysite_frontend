@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <el-container>
-      <el-header>Header</el-header>
+      <el-header></el-header>
       <el-main>
         <el-card class="login-form-layout">
           <el-form :model="loginForm" :rules="rules" ref="loginForm">
@@ -19,7 +19,11 @@
           </el-form>
         </el-card>
       </el-main>
-      <el-footer>Footer</el-footer>
+      <el-footer height="90px">
+        <div class="beian-cpn">
+          <beian/>
+        </div>
+      </el-footer>
     </el-container>
   </div>
   <mouse-stars></mouse-stars>
@@ -28,6 +32,8 @@
 <script>
 import {ElMessageBox} from "element-plus";
 import MouseStars from "@/components/style/MouseStars";
+import Beian from "@/components/common/Beian";
+
 export default {
   name:'Login',
   // beforeRouteLeave(to,from,next){
@@ -41,13 +47,14 @@ export default {
     }
   },
   components:{
-    MouseStars
+    MouseStars,
+    Beian
   },
   data(){
     return {
       loading:false,
       loginForm:{
-        username:'ycao',
+        username:'visitor',
         password:''
       },
       rules:{
@@ -95,10 +102,12 @@ export default {
                 }else {
                   console.log("response is null");
                 }
+                return true;//一定要记得返回true
               })
               .catch((err)=>{
                 console.log('login error:'+err);
                 this.loading=false;
+                return true;//一定要记得返回true
           })
         }else{
           console.log('parameters are not all legal')
@@ -113,7 +122,8 @@ export default {
 <style scoped>
 /*container full screen*/
 .login{
-  height: calc(100vh);
+  height: 100%;
+  width: 100%;
   background: url('../../assets/index/images/China.jpg') no-repeat;
   background-size: 100% 100%;
   opacity: 1.0;
@@ -124,7 +134,7 @@ export default {
   left: 0;
   right: 0;
   width: 360px;
-  margin: 80px auto;
+  margin: 100px auto;
   border-top: 10px solid #409eff;
   opacity: 0.8;
 }
