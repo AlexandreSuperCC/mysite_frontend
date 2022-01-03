@@ -8,6 +8,7 @@ const Markdown = () => import('@/views/index/Markdown')
 const SearchEngine = () => import('@/views/index/searchEngine/SearchEngine')
 const AboutMe = () => import('@/views/index/myinfo/AboutMe')
 const MyStory = () => import('@/views/index/myinfo/MyStory')
+const ErrorPage = () => import('@/components/common/ErrorPage')
 
 const routes = [
   {
@@ -45,6 +46,15 @@ const routes = [
         component:MyStory
       }
     ]
+  },
+  {
+    //实现了自己的解析系统，该系统允许路由排名并启用动态路由
+    path: '/:pathMatch(.*)',
+    redirect: '/404',
+  },
+  {
+    path: '/404',
+    component:ErrorPage
   }
 ]
 
@@ -66,6 +76,7 @@ router.beforeEach((to,from,next)=>{
   }
   if(!token && to.path!='/login'){
     next({path:'/login'})
+    return;
   }else{
     next()
   }

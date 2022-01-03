@@ -212,12 +212,17 @@ export default {
       return parseInt(str);
     }
   },
-  //activated只在replace/push到该页面时执行，所以ifCreated不能每次都变更，使用路由守卫
+  /**
+   * activated只在replace/push到该页面时执行，所以ifCreated不能每次都变更，使用路由守卫
+   * beforeRouteEnter → created → mounted →beforeRouteEnter的next。通过给next传一个回调，就可以获取像this一样操作data中的数据
+  */
   beforeRouteEnter(to,from,next){
-    if(to.query.arr){
-      this.ifCreate=false;
-    }
-    next();
+    next(vm=>{
+      if(to.query.arr){
+        // this.ifCreate=false;
+        vm.ifCreate=false;
+      }
+    })
   }
 }
 </script>

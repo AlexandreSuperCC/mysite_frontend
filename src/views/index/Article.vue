@@ -107,11 +107,20 @@ export default {
     getFiles(){
       this.getAllFiles=true
       getHomeData(this.curUserId).then(data=>{
-        this.myData=data&&data.data;
+        if(data.code==='success'){//获得数据成功
+          this.myData=data&&data.data;
+          let temCatFile=[];
+          data&&data.data.forEach(file=>{temCatFile.push(file.pkCategory)});
+          this.allCatFile = temCatFile.filter((cat,index,temCatFile)=>temCatFile.indexOf(cat,0)===index)//过滤掉重复数据
+        }else{//获得数据失败，优化了后端抛异常的部分，前台相应增加显示异常的逻辑
+          ElMessageBox.alert('Error occurs: ['+data.msg + "]", "Attention!", {
+            confirmButtonText: 'OK',
+            callback: () => {
+              window.location.replace("/login")
+            }
+          }).catch(r => console.log(r))
+        }
         this.getAllFiles=false;
-        let temCatFile=[];
-        data&&data.data.forEach(file=>{temCatFile.push(file.pkCategory)});
-        this.allCatFile = temCatFile.filter((cat,index,temCatFile)=>temCatFile.indexOf(cat,0)===index)//过滤掉重复数据
       }).catch((err)=>{
         this.getAllFiles=false;
         console.log(err);
