@@ -93,6 +93,7 @@ export default {
                     this.$router.replace('/home');
 
                     console.log('login success, your userId: '+this.$store.state.token.userId)
+                    return true;//一定要记得返回true
                   }else {
                     ElMessageBox.alert(res.msg+", please re-login","Attention!",{
                       confirmButtonText:'OK'

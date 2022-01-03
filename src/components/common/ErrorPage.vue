@@ -15,7 +15,7 @@
     <div class="error__title">404</div>
     <div class="error__subtitle">Hmmm...</div>
     <div class="error__description">Sorry, but we can't seem to find <br>the page you are looking for</div>
-    <button class="error__button error__button--active" @click="this.$router.replace('/login')" >back to login page</button>
+    <button class="error__button error__button--active" @click="this.$router.replace('/home/article')" >back to home page</button>
     <button class="error__button" @click="this.$router.replace('/home/myStory')">contact me</button>
   </div>
 
