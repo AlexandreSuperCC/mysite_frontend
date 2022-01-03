@@ -25,6 +25,9 @@ export default {
      *                         make sure to make return this flag after closing the view
      * others:
      * 'this.$el' only works in 'mounted'
+     * difference:
+     * $el 获取Vue实例关联的DOM元素；
+     * $ref 获取页面中所有含有ref属性的DOM元素
      * @return
      * @time 2021-12-12 11:23:42
      */
