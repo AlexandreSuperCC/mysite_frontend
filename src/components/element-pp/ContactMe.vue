@@ -68,7 +68,7 @@ export default {
 <style scoped>
 .cm-container{
   display: flex;
-  margin-top: 10px;
+  margin-top: 30px;
 }
 .cm-left,.cm-right{
   flex: 1;
