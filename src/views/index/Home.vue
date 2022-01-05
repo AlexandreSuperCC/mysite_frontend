@@ -40,5 +40,9 @@ export default {
 </script>
 
 <style scoped>
-
+.home-container{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 </style>

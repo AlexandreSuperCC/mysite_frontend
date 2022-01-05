@@ -101,11 +101,12 @@ export default {
 
 <style scoped>
 .container{
-  position: fixed;
+  /*position: fixed;*/
+  overflow: auto;
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  /*height: calc(100% - 61px);*/
   /*渐变不支持时的颜色*/
   background-color: #3d8690;
   /*线性渐变*/
@@ -115,13 +116,16 @@ export default {
   /*background-color: #a75151;*/
   flex: 3;
   margin: 0;
+  /*height: 0;*/
 }
 .slideshow-photo {
   flex: 5;
+  /*height: 0;*/
 }
 .contact {
   /*background-color: #bed5ee;*/
   flex: 4;
+  /*height: 0;*/
 }
 .cb-cpn{
   /*通过观察盒子模型发现高度/宽度为0，因此一定要指定高度和宽度！！！*/

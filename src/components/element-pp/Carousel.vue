@@ -96,6 +96,9 @@ export default {
 }
 .cr-container{
   display: flex;
+  height: 100%;
+  /*margin: 0;*/
+  /*padding: 0;*/
 }
 .cr-left{
   flex: 1;

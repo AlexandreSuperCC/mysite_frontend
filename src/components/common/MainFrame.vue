@@ -98,7 +98,8 @@ export default {
 </script>
 <style scoped>
 .exit-btn{
-  position: fixed;
+  /*不会随着下滑往下动*/
+  position: absolute;
   margin-top: 18px;
   right: 5px
 }

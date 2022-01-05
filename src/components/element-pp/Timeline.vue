@@ -1,28 +1,30 @@
 <template>
-  <div class="block" @click="drawer = true">
-    <el-timeline>
-      <el-timeline-item
-          v-for="(activity, index) in activities"
-          :key="index"
-          :icon="activity.icon"
-          :type="activity.type"
-          :color="activity.color"
-          :size="activity.size"
-          :hollow="activity.hollow"
-          :timestamp="activity.timestamp"
-      >
-        <div class="timeline-content">
-          {{ activity.content }}
-        </div>
-      </el-timeline-item>
-    </el-timeline>
-    <div class="formation-click">
-      <img class="formation-click-icon" src="~assets/index/images/click_32.png" alt="click-me">
+  <div class="timeline-container">
+    <div class="block" @click="drawer = true">
+      <el-timeline>
+        <el-timeline-item
+            v-for="(activity, index) in activities"
+            :key="index"
+            :icon="activity.icon"
+            :type="activity.type"
+            :color="activity.color"
+            :size="activity.size"
+            :hollow="activity.hollow"
+            :timestamp="activity.timestamp"
+        >
+          <div class="timeline-content">
+            {{ activity.content }}
+          </div>
+        </el-timeline-item>
+      </el-timeline>
+      <div class="formation-click">
+        <img class="formation-click-icon" src="~assets/index/images/click_32.png" alt="click-me">
+      </div>
     </div>
+    <el-drawer v-model="drawer" title="I am the title" :with-header="true">
+      <span>Hi there!</span>
+    </el-drawer>
   </div>
-  <el-drawer v-model="drawer" title="I am the title" :with-header="true">
-    <span>Hi there!</span>
-  </el-drawer>
 </template>
 
 <script>
@@ -63,6 +65,9 @@ export default {
 </script>
 
 <style scoped>
+.timeline-container{
+  height: 100%;
+}
 .block{
   cursor: pointer;
 }
