@@ -114,15 +114,13 @@ export default {
   background-image: linear-gradient(to right, #18545A, #F1F2B5);
 }
 .introduction {
-  flex: 1 1;
+  height: calc((100% - 326px)/3);
   margin: 0;
 }
 .slideshow-photo {
   flex: 0 0 0;
 }
 .contact {
-  flex: 3 1;
-  height: 100%;
   /*background-color: #bed5ee;*/
 }
 .cb-cpn{
