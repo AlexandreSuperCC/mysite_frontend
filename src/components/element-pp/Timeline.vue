@@ -21,7 +21,7 @@
         <img class="formation-click-icon" src="~assets/index/images/click_32.png" alt="click-me">
       </div>
     </div>
-    <el-drawer v-model="drawer" title="I am the title" :with-header="true">
+    <el-drawer direction="ltr" v-model="drawer" title="I am the title" :with-header="true">
       <span>Hi there!</span>
     </el-drawer>
   </div>
@@ -81,6 +81,8 @@ export default {
   width: 100%;
   height: 100%;
   text-align: right;
+  position: relative;
+  bottom: 330px;
 }
 .formation-click-icon{
   width: 20px;
