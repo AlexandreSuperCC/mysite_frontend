@@ -114,19 +114,12 @@ export default {
   background-image: linear-gradient(to right, #18545A, #F1F2B5);
 }
 .introduction {
-  /*background-color: #a75151;*/
-  flex: 3;
   margin: 0;
-  /*height: 0;*/
 }
 .slideshow-photo {
-  flex: 5;
-  /*height: 0;*/
 }
 .contact {
   /*background-color: #bed5ee;*/
-  flex: 4;
-  /*height: 0;*/
 }
 .cb-cpn{
   /*通过观察盒子模型发现高度/宽度为0，因此一定要指定高度和宽度！！！*/
