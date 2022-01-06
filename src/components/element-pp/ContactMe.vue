@@ -73,6 +73,8 @@ export default {
   /*div固定在底部*/
   position: fixed;
   bottom: 0;
+  z-index: 2;
+  opacity: 0.9;
 }
 .cm-left,.cm-right{
   flex: 1;
