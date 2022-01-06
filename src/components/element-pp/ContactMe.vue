@@ -68,7 +68,11 @@ export default {
 <style scoped>
 .cm-container{
   display: flex;
-  margin-top: 30px;
+  height: 150px;
+  width: 100%;
+  /*div固定在底部*/
+  position: fixed;
+  bottom: 0;
 }
 .cm-left,.cm-right{
   flex: 1;

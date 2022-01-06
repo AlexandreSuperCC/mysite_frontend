@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="slideshow-photo">
-      <div class="cb-cpn">
+      <div class="c b-cpn">
         <carousel>
           <template v-slot:swiper-left>
             <div class="timeline-title">
@@ -114,11 +114,15 @@ export default {
   background-image: linear-gradient(to right, #18545A, #F1F2B5);
 }
 .introduction {
+  flex: 2 1;
   margin: 0;
 }
 .slideshow-photo {
+  flex: 0 0 0;
 }
 .contact {
+  flex: 3 1;
+  height: 100%;
   /*background-color: #bed5ee;*/
 }
 .cb-cpn{

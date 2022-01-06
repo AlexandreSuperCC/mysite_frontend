@@ -101,19 +101,19 @@ export default {
   /*padding: 0;*/
 }
 .cr-left{
-  flex: 1;
-  margin-left: 58px;
-  margin-right: 1px;
+  flex: 1 1 auto;
+  margin-left: 88px;
+  margin-right: 28px;
 }
 .cr-right{
-  flex: 1;
+  flex: 1 1 auto;
   background-color: #1c5359;
-  margin-left: 1px;
-  margin-right: 58px;
+  margin-left: 28px;
+  margin-right: 88px;
 }
 .cr-center{
-  width: 400px;
   padding: 0 60px;
-  flex: 0 0 1;
+  flex: 0 0 400px;
+  justify-content: center;
 }
 </style>
