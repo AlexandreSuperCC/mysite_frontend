@@ -114,7 +114,7 @@ export default {
   background-image: linear-gradient(to right, #18545A, #F1F2B5);
 }
 .introduction {
-  height: calc((100% - 326px)/1.2);
+  flex: 0 0 0;
   margin: 0;
 }
 .slideshow-photo {

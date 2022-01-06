@@ -110,6 +110,7 @@ export default {
   background-color: #1c5359;
   margin-left: 28px;
   margin-right: 88px;
+  margin-bottom: 20px;
 }
 .cr-center{
   padding: 0 60px;
