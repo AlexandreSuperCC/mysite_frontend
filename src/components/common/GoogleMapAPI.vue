@@ -1,9 +1,9 @@
 /**
 * @description: 使用GoogleMap组件
-  https://www.npmjs.com/package/googlemaps-vue3
-  https://developers.google.com/maps/documentation/javascript/usage-and-billing?hl=fr
-  1000次大约50块
-  【Modifier la limite de quota】这里可以更改每天访问的次数，20220108修改为100次
+  使用手册：https://www.npmjs.com/package/googlemaps-vue3
+  平台：https://developers.google.com/maps/documentation/javascript/usage-and-billing?hl=fr
+  费用：1000次大约50块
+  注意：【Modifier la limite de quota】这里可以更改每天访问的次数，20220108修改为100次
 * @author ycao
 * @date 2022-01-08 22:08:27
 * @version 1.0
