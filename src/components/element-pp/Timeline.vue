@@ -76,11 +76,11 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
-  left: 35px;
-  bottom: 40px;
+  left: 39px;
+  bottom: 38px;
 }
 .formation-click-icon{
-  width: 20px;
+  width: 15px;
   /*opacity: 0.9;*/
   /*transform: rotateX(180deg);*/
 }
