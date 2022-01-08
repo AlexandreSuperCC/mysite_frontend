@@ -1,5 +1,5 @@
 <template>
-  <div class="block" @click="drawer = true">
+  <div class="block" @click="infoDrawer = true">
     <el-timeline>
       <el-timeline-item
           v-for="(activity, index) in activities"
@@ -20,7 +20,7 @@
       <img class="formation-click-icon" src="~assets/index/images/click_32.png" alt="click-me">
     </div>
   </div>
-  <el-drawer v-model="drawer" title="I am the title" :with-header="true">
+  <el-drawer v-model="infoDrawer" direction="ltr" title="I am the title" :with-header="true">
     <span>Hi there!</span>
   </el-drawer>
 </template>
@@ -32,7 +32,7 @@ export default {
   name: "Timeline",
   data() {
     return {
-      drawer:false,
+      infoDrawer:false,
       activities: [
         {
           content: 'Etudiant en Ingénierie Informatique à l\'Université de Technologie de Belfort-Montbéliard, FR',

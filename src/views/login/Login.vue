@@ -90,7 +90,7 @@ export default {
                     //if login succeeds, save the token into Vuex
                     this.$store.commit('set_token',{token:res.token,userId:res.userId})
                     // window.location.replace('/home')
-                    this.$router.replace('/home');
+                    this.$router.push('/home');
 
                     console.log('login success, your userId: '+this.$store.state.token.userId)
                     return true;//一定要记得返回true

@@ -94,7 +94,8 @@ function interceptorHandler(error){
         ElMessageBox.alert("Please refreshed", "Attention!", {
             confirmButtonText: 'OK',
             callback: () => {
-                window.location.replace("/login")
+                window.location.reload();
+                // window.location.replace("/login")
             }
         }).catch(r => console.log(r))
     }

@@ -27,5 +27,4 @@ html,body,#app,.el-container{
   padding: 0;
   height:100%;
 }
-
 </style>
