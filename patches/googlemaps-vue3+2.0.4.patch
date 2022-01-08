@@ -1,0 +1,106 @@
+diff --git a/node_modules/googlemaps-vue3/GoogleMap.js b/node_modules/googlemaps-vue3/GoogleMap.js
+index c9bec9c..b53f0bc 100644
+--- a/node_modules/googlemaps-vue3/GoogleMap.js
++++ b/node_modules/googlemaps-vue3/GoogleMap.js
+@@ -1,4 +1,7 @@
+-import GoogleMap from '@/components/GoogleMap.vue';
++//edit by ycao 20220108
++// import GoogleMap from '@/components/GoogleMap.vue';
++import GoogleMap from './GoogleMap.vue';
++
+ export default {
+     install: (app, options) => {
+         if (!options) {
+diff --git a/node_modules/googlemaps-vue3/GoogleMap.vue b/node_modules/googlemaps-vue3/GoogleMap.vue
+index 1e7eb8b..0387902 100644
+--- a/node_modules/googlemaps-vue3/GoogleMap.vue
++++ b/node_modules/googlemaps-vue3/GoogleMap.vue
+@@ -1,6 +1,8 @@
+ <script>
+ import { onMounted, watch } from "vue";
+ import { inject } from "vue";
++import {gMapCurPosPath} from "../../src/utils/const/const";
++
+ export default {
+   props: {
+     getUserLocation: {
+@@ -43,7 +45,7 @@ export default {
+   setup(props, { emit }) {
+     let map, heatmap;
+     const apiKey = inject("googleMapApiKey");
+-    console.log(apiKey);
++    // console.log(apiKey);
+     function addScripts() {
+       const googleMapScript = document.createElement("script");
+       googleMapScript.setAttribute("defer", "defer");
+@@ -66,11 +68,39 @@ export default {
+                 ...props.init,
+                 position: { lat: data.latitude, lng: data.longitude },
+               });
+-              new google.maps.Marker({
++              /*获得当前用户位置*/
++              const mark = new google.maps.Marker({
+                 position: { lat: data.latitude, lng: data.longitude },
+                 map: map,
+-                icon: "https://i.hizliresim.com/8UefTs.png",
++                //edit by ycao 20220108
++                icon: require("@/assets/index/images/gmap/sniperLocate.png")
+               });
++              const infowindow = new google.maps.InfoWindow({ content: 'Your current location' });
++              mark.addListener("click", () => {
++                infowindow.open(map, mark);
++              });
++              /*获得当前用户位置*/
++
++              /*放在markers里显示不出来*/
++              props.markers.forEach((marker) => {
++                const { lat, lng, content, icon } = marker;
++                const mark = new google.maps.Marker({
++                  position: { lat, lng },
++                  map: map,
++                  // icon: require("@/assets/index/images/gmap/baseLocation.png"),
++                  icon: icon ? icon : require("@/assets/index/images/gmap/baseLocation.png"),
++                });
++                // console.log('added one mark: '+mark);
++                if (content) {
++                  const infowindow = new google.maps.InfoWindow(content);
++                  mark.addListener("click", () => {
++                    infowindow.open(map, mark);
++                  });
++                }
++              });
++             /*test*/
++
++
+             });
+           if (props.tile) {
+             var TILE_URL = props.tile;
+@@ -143,8 +173,10 @@ export default {
+             const mark = new google.maps.Marker({
+               position: { lat, lng },
+               map: map,
++              // icon: require("@/assets/index/images/gmap/sniperLocate.png"),
+               icon: icon ? icon : "https://i.hizliresim.com/dX9CHa.png",
+             });
++            // console.log('added one mark: '+mark);
+             if (content) {
+               const infowindow = new google.maps.InfoWindow(content);
+               mark.addListener("click", () => {
+@@ -249,7 +281,8 @@ export default {
+     addScripts();
+     window.addEventListener("load", (_) => {
+       initMap();
+-      loadMarkers();
++      //delete by ycao 20220108 暂时除去，因为没有起效所以把逻辑放入iniMap中
++      // loadMarkers();
+       addEvents();
+       checkHeatData();
+       setLayers();
+@@ -258,6 +291,7 @@ export default {
+       //new marker added
+       watch(props.markers, (newData, oldData) => {
+         loadMarkers();
++        console.log('new marker added');
+       });
+     });
+ 

@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "axios": "^0.24.0",
@@ -26,7 +27,8 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/reactivity": "^3.2.26",
-    "@vue/runtime-core": "^3.2.26"
+    "@vue/runtime-core": "^3.2.26",
+    "patch-package": "^6.4.7"
   },
   "browserslist": [
     "> 1%",
