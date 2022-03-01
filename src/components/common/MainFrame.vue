@@ -72,7 +72,7 @@ export default {
               })
             }else{//not normal case, perhaps due to unknown error or long-time no interaction
               if(res&&res.msg){
-                ElMessageBox.alert(res.msg+", error!","Attention!",{
+                ElMessageBox.alert(res.msg+", error1!","Attention!",{
                   confirmButtonText:'OK',
                   callback:()=>{
                     this.$router.replace('/login')

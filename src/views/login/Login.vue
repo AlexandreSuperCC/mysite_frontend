@@ -55,7 +55,7 @@ export default {
       loading:false,
       loginForm:{
         username:'visitor',
-        password:''
+        password:'666666'
       },
       rules:{
         username:[//here the name must be the same as the object in model strictly
@@ -92,7 +92,7 @@ export default {
                     // window.location.replace('/home')
                     this.$router.push('/home');
 
-                    console.log('login success, your userId: '+this.$store.state.token.userId)
+                    // console.log('login success, your userId: '+this.$store.state.token.userId)
                     return true;//一定要记得返回true
                   }else {
                     ElMessageBox.alert(res.msg+", please re-login","Attention!",{
