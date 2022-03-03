@@ -21,7 +21,7 @@
           <template v-slot:swiper-right>
             <div class="cr-text-detailIntro">
               <p>
-                In my free time I enjoy coding, cycling, and badminton.<br>
+                In my free time I enjoy coding, cycling and playing badminton.<br>
                 I am the vice president of Shanghai University Cycling Association.
               </p>
               <p>

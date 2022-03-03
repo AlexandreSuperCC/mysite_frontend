@@ -16,6 +16,8 @@
             <el-form-item style="margin-bottom: 20px">
               <el-button type="primary" :loading="loading" @click.native.prevent="handlerLogin">login</el-button>
             </el-form-item>
+            <div class="login-tips">
+            </div>
           </el-form>
         </el-card>
       </el-main>
@@ -33,6 +35,7 @@
 import {ElMessageBox} from "element-plus";
 import MouseStars from "@/components/style/MouseStars";
 import Beian from "@/components/common/Beian";
+import {httpOrHttps} from "@/utils/const/const";
 
 export default {
   name:'Login',
@@ -49,6 +52,17 @@ export default {
   components:{
     MouseStars,
     Beian
+  },
+  created() {
+    /**
+     * 使用ngrok遇到的问题，输入域名自动跳转到使用https的主页，访问资源会出现问题
+     * @return
+     * @time 2022-03-02 21:08:57
+     */
+    let isHttps = 'https:' === document.location.protocol ? true: false;
+    if (isHttps){
+      window.location.replace(httpOrHttps+document.location.host);
+    }
   },
   data(){
     return {
@@ -115,13 +129,16 @@ export default {
           return false;
         }
       })
-    }
+    },
   }
 }
 
 </script>
 <style scoped>
 /*container full screen*/
+.login-tips{
+  color: red;
+}
 .login{
   height: 100%;
   width: 100%;
