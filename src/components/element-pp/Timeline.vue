@@ -20,8 +20,28 @@
       <img class="formation-click-icon" src="~assets/index/images/click_32.png" alt="click-me">
     </div>
   </div>
-  <el-drawer v-model="infoDrawer" direction="ltr" title="I am the title" :with-header="true">
-    <span>Hi there!</span>
+  <el-drawer v-model="infoDrawer" direction="ltr" title="Stage 2021 - Développeur Backend chez Yonyou" :with-header="true">
+    <span>
+      Yonyou Network Technology Co., Ltd. a son siège social à Beijing. Fondée en 1988, Yonyou, (en chinois : 用友) est devenue le principal fournisseur de logiciels de gestion d'entreprise, de solutions et de services en nuage en Chine et en Asie - Pacifique.
+      <br><br>
+      <a href="https://www.yonyou.com" target="_blank">
+        <img class="next-page-icon" src="~assets/index/images/stage/yonyou.jpg" style="width: 100%"
+              alt="Youyou">
+      </a>
+      <br><br>
+      Pendant ces 6 mois, j’ai principalement participé à 4 projets qui m’ont pris chacun le temps entre une semaine et 2 mois concernant les améliorations et développements des logiciels ERP de séries différents. J’ai également fait beaucoup de maintenances correctives à ces systèmes en résolvant de problèmes posés fréquemment par les développeurs maintenances applicatives. Ces projets concernent essentiellement les secteurs Supply Chain et affaires financières.
+      <br><br>
+      <a href="https://www.yonyou.com" target="_blank">
+        <img class="next-page-icon" src="~assets/index/images/stage/rapport.png" style="width: 50%;height: 38%"
+             alt="Youyou">
+      </a>
+      <a href="https://www.yonyou.com" target="_blank">
+        <img class="next-page-icon" src="~assets/index/images/stage/UML.png" style="width: 50%;height: 38%"
+             alt="Youyou">
+      </a>
+      <h4><span style="color: red">Mots clefs :</span> Algorithmes, Java, Oracle, ERP, Supply Chain, Finance</h4>
+
+    </span>
   </el-drawer>
 </template>
 
