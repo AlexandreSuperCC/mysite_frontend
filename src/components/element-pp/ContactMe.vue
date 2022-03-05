@@ -42,15 +42,18 @@
     </div>
     <div class="cm-right"></div>
   </div>
-  <el-dialog v-model="mapDrawer" @opened="openedEve"
+  <el-dialog v-model="mapDrawer" @open="openedEve"
              close-on-press-escape width="35%" top="12vh" center>
     <template v-slot:title>
       <span style="color: blue">LOCATE ME ON GOOGLE MAP</span>&nbsp;
       <img class="locate-me-icon" src="~assets/index/images/contact/locateOnMap.png" alt="location">
     </template>
-    <div class="google-map" v-loading="ifMapLoaded">
-      <google-map-a-p-i></google-map-a-p-i>
+    <div class="dialog-content" style="height: 400px">
+      <div class="google-map" v-loading="ifMapLoaded" style="height: 100%">
+        <google-map-a-p-i></google-map-a-p-i>
+      </div>
     </div>
+
   </el-dialog>
 </template>
 
@@ -77,7 +80,7 @@ export default {
     openedEve(){
       //每隔200ms判断是不是已经加载完毕（已经生成了html），以此起到监视器的效果
       this.monitorTimer =  setInterval(function (){
-        if(document.getElementById('map').innerText!==''){
+        if(document.getElementsByClassName('vue-map').length>0){
           this.ifMapLoaded=false
           clearInterval(this.monitorTimer)
         }

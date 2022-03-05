@@ -8,11 +8,11 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
+    "@fawmi/vue-google-maps": "^0.9.4",
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
     "element-plus": "^1.2.0-beta.5",
     "google": "^2.1.0",
-    "googlemaps-vue3": "^2.0.4",
     "showdown": "^1.9.1",
     "vant": "^2.12.35",
     "vue": "^3.0.0",

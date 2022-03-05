@@ -1,6 +1,6 @@
 /**
 * @description: 使用GoogleMap组件
-  使用手册：https://www.npmjs.com/package/googlemaps-vue3
+  使用手册：https://vue-map.netlify.app/docs/#install
   平台：https://developers.google.com/maps/documentation/javascript/usage-and-billing?hl=fr
   费用：1000次大约50块
   注意：【Modifier la limite de quota】这里可以更改每天访问的次数，20220108修改为100次
@@ -10,44 +10,44 @@
 /
 <template>
   <div class="google-map-container">
-    <GoogleMap :init="initializeGoogleMap"
-               :markers="locationList"
-               :getUserLocation="true"
-               @clicked="customCoordinates = $event"
-    />
+    <GMapMap
+        :center="center"
+        :zoom="10"
+        map-type-id="terrain"
+        style="width: 100vw; height: 20rem"
+    >
+      <GMapCluster :zoomOnClick="true">
+        <GMapMarker
+            :key="index"
+            v-for="(m, index) in markers"
+            :position="m.position"
+            :clickable="true"
+            :draggable="true"
+            @click="center = m.position"
+        />
+      </GMapCluster>
+    </GMapMap>
   </div>
 </template>
 
 <script>
-import {reactive} from "@vue/reactivity";
 
 export default {
   name: "GoogleMapAPI",
   data(){
     return {
-      //当前用户位置参数对象
-      curPosObj:{
-        lng:0,
-        lat:0
-      },
-      cityBelfortPosObj:{
+      center: {
         lat: 47.6397,
         lng: 6.8638
       },
-      customCoordinates:null
+      markers: [
+      ],
     }
-  },
-  created() {
-  },
-  mounted() {
-
-  },
-  methods:{
-
   },
   components:{
     //改过GoogleMap.js的源码里组件的地址
   },
+  /*
   computed:{
     initializeGoogleMap(){
       return {
@@ -57,8 +57,9 @@ export default {
         zoom: 2,
       }
     },
+
     locationList(){
-      return reactive([
+      return ([
         {
           lat: 48.8566,
           lng: 2.3522,
@@ -80,11 +81,13 @@ export default {
         },
       ]);
     },
-  }
+  }*/
 }
 </script>
 
 <style scoped>
 .google-map-container{
+  height: 100%;
+  width: 100%;
 }
 </style>
