@@ -4,6 +4,9 @@
       <el-header></el-header>
       <el-main>
         <el-card class="login-form-layout">
+          <div class="login-jt">
+            <jumping-text></jumping-text>
+          </div>
           <el-form :model="loginForm" :rules="rules" ref="loginForm">
             <el-form-item prop="username">
               <el-input type="text" v-model="loginForm.username"
@@ -34,6 +37,7 @@
 import {ElMessageBox} from "element-plus";
 import Beian from "@/components/common/Beian";
 import {httpOrHttps} from "@/utils/const/const";
+import JumpingText from "@/components/common/JumpingText";
 
 export default {
   name:'Login',
@@ -45,6 +49,7 @@ export default {
   //   }
   // },
   components:{
+    JumpingText,
     Beian
   },
   created() {
@@ -149,5 +154,11 @@ export default {
   margin: 100px auto;
   border-top: 10px solid #409eff;
   opacity: 0.8;
+}
+.login-jt{
+  text-align: center;
+  vertical-align: center;
+  padding-bottom: 20px;
+  margin-top: 0;
 }
 </style>

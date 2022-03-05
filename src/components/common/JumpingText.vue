@@ -5,7 +5,7 @@
  */
 <template>
   <div class="jumping-text-div">
-    see more
+    Bienvenue sur mon site
   </div>
 </template>
 
@@ -18,6 +18,7 @@ export default {
 <style scoped>
 /* start */
 .jumping-text-div {
+  color: blue;
   animation: jumping-text 5s infinite ease-in-out;
   display: inline-block;
   margin: 0 5px;
