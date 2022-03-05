@@ -28,29 +28,23 @@
       </el-footer>
     </el-container>
   </div>
-  <mouse-stars></mouse-stars>
 </template>
 
 <script>
 import {ElMessageBox} from "element-plus";
-import MouseStars from "@/components/style/MouseStars";
 import Beian from "@/components/common/Beian";
 import {httpOrHttps} from "@/utils/const/const";
 
 export default {
   name:'Login',
-  // beforeRouteLeave(to,from,next){
-  //   this.haveMouseStarsEffect=false;
-  //   next();
+
+  // watch: {
+  //   '$route' (to, from) {
+  //     //add by ycao 20211229 路由跳转后刷新，为了清除星星特效，跳转回来的时候因为是alive所以本来就有特效
+  //     window.location.reload();
+  //   }
   // },
-  watch: {
-    '$route' (to, from) {
-      //add by ycao 20211229 路由跳转后刷新，为了清除星星特效，跳转回来的时候因为是alive所以本来就有特效
-      window.location.reload();
-    }
-  },
   components:{
-    MouseStars,
     Beian
   },
   created() {
