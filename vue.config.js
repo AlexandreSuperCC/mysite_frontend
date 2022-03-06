@@ -26,5 +26,9 @@ module.exports={
             ]
         }
     },
-
+    chainWebpack:config => {
+        config.devServer
+            .port(8084)
+            .disableHostCheck(true)
+    }
 }
