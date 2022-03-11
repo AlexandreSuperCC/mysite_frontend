@@ -37,6 +37,12 @@ export default {
       sign_parameter: aboutMeIntroductionConstant,
       curUserId:this.$store.state.token.userId,
       domain:this.$options.name,//当前组件名字
+      /*
+      * add by ycao 20220311
+      * 图片加载太慢所以在article组建里使用require先加载进行缓存
+      * 跳到该页面后会向后台请求签名，在请求期间使用loading组件实现加载等待效果
+      * 多次试验发现先加载完已经缓存的图片后签名才会出现
+      * */
       loadingFin:false,
     }
   },
