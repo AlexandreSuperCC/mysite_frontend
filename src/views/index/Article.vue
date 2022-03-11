@@ -214,11 +214,25 @@ export default {
     rateToInt(str){
       if (str==='') return 0;
       return parseInt(str);
+    },
+    /**
+     * 为aboutme里面的背景图提前做好缓存
+     * 在前面定义，因为用缓存直接加载没来得及定义上
+     * @return
+     * @time 2022-03-11 18:49:24
+     */
+    doCacheForBgMS(){
+      let bgImg = new Image()
+      bgImg.onerror = ()=>{
+        console.log('background photo of Aboutme error')
+      }
+      bgImg.src = require('../../assets/index/images/myPhoto.jpeg')
     }
 
   },
   mounted() {
     this.getFiles();
+    this.doCacheForBgMS();
   }
 }
 </script>

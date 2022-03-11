@@ -1,5 +1,6 @@
 <template>
-  <div class="my-info" v-show="ifCreated">
+  <div v-show="!loadingFin"><loading></loading></div>
+  <div class="my-info" v-show="loadingFin">
     <div class="background-photo">
       <div class="next-page">
         <img class="next-page-icon" src="~assets/index/images/nextPage.png"
@@ -26,6 +27,7 @@
 import {getConstant} from "@/network/constant/Constant";
 import {aboutMeIntroductionConstant} from "@/utils/const/const";
 import SquareJumping from "@/components/common/SquareJumping";
+import Loading from "@/components/common/Loading";
 
 export default {
   name: "AboutMe",
@@ -35,7 +37,7 @@ export default {
       sign_parameter: aboutMeIntroductionConstant,
       curUserId:this.$store.state.token.userId,
       domain:this.$options.name,//当前组件名字
-      ifCreated:false,
+      loadingFin:false,
     }
   },
   methods:{
@@ -44,8 +46,10 @@ export default {
       //aboutMe和contactMe组件哪一个先渲染后，就不用再次取请求值了
       if(this.sign===''&&this.$store.state.token.signForAboutMe===''){
         this.assignConstant(aboutMeIntroductionConstant)
+        this.loadingFin=true;
       }else{
         this.sign=this.$store.state.token.signForAboutMe;
+        this.loadingFin=true;
       }
     },
     /**
@@ -70,19 +74,36 @@ export default {
      */
     goDetails(){
       this.$router.push('/home/myStory')
-    }
+    },
+    /**
+     * 当背景图片没有完全加载完之前，使用加载动画 用在首页提前加载代替
+     * 在前面定义，因为用缓存直接加载没来得及定义上
+     * @return
+     * @time 2022-03-11 17:56:12
+     */
+    // executeLoading(){
+    //   let bgImg = new Image()
+    //   bgImg.onerror = ()=>{
+    //     console.log('background img error')}
+    //   bgImg.onload = ()=>{
+    //     this.loadingFin=true;
+    //   }
+    //   bgImg.src = require('../../../assets/index/images/myPhoto.jpeg')
+    // }
   },
   created() {
     /*使用的是vue-router，切换子路由的时候，因为子路由的页面一整块都是v-show值是0或者1判断的页面显示，
       v-show的值在created时赋值1，加载时v-show的值为=0*/
-    this.ifCreated=true;
+    // this.ifCreated=true;
   },
   mounted() {
     this.doAssignSign();
     // this.signLength = this.$refs.signContent.offsetWidth;
+    // this.executeLoading();
   },
   components:{
-    SquareJumping
+    SquareJumping,
+    Loading
   }
 }
 </script>
