@@ -46,7 +46,6 @@ export default {
       //aboutMe和contactMe组件哪一个先渲染后，就不用再次取请求值了
       if(this.sign===''&&this.$store.state.token.signForAboutMe===''){
         this.assignConstant(aboutMeIntroductionConstant)
-        this.loadingFin=true;
       }else{
         this.sign=this.$store.state.token.signForAboutMe;
         this.loadingFin=true;
@@ -65,7 +64,11 @@ export default {
         )
         this.sign = (curConstantObj&&curConstantObj.length>0) && curConstantObj[0].content;
         this.$store.commit('set_signOfMe',{sign:this.sign})//把sign放入vuex，后续MyStory也会用到
-      }).catch(err=>console.log(err))
+        this.loadingFin=true;
+      }).catch(err=> {
+        console.log(err);
+        this.loadingFin=true;
+      })
     },
     /**
      * 去往myStory组件
