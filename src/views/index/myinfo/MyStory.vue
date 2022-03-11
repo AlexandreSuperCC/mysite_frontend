@@ -141,7 +141,7 @@ export default {
 }
 .cr-text-detailIntro{
   margin: 15px;
-  color: #f8f0f0;
+  color: rgba(255,255,255,0.9);
   /*font-weight: 100 ;*/
   /*text-shadow: 0px 0px 10px rgba(255,255,255,0.5);*/
   letter-spacing: 1px;

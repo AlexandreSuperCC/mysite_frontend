@@ -8,7 +8,7 @@
             <img class="smartphone-icon" src="~assets/index/images/contact/smartphone.png" alt="phone">
           </template>
           <template v-slot:description>
-            <a class="my-telephone" href="tel:0668252048">+(33) 06 68 25 20 48</a>
+            <a class="my-telephone" href="tel:0668252048">+33 6 68 25 20 48</a>
           </template>
         </el-step>
         <el-step title="e-mail" @click="changeActive(1)">
