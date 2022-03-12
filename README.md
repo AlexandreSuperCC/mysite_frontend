@@ -9,6 +9,9 @@ npm install
 ```
 npm run serve
 ```
+### token安全方面
+1. 每次登陆后后端生成一个token返回前端，前端每次发送请求携带token，token过期必须重新登录，后端校验token包括时间
+2. 前端sessionStorage里存储一个nowTime长时间没有响应后也需要重新登录，每次前端校验未请求后端数据时间段是否过长
 
 ### Compiles and minifies for production
 ```

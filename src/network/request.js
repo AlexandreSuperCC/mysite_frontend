@@ -43,10 +43,16 @@ export function request(config){
             let today = new Date().getTime();
             if(sessionStorage.getItem("nowTime")!=null){
                 if(today-sessionStorage.getItem("nowTime")>1000*60*30){
-                    sessionStorage.removeItem('token');
-                    sessionStorage.removeItem('nowTime');
-                    window.location.replace('/login');
-                    location.reload()
+                    //add by ycao resolve the problem : after 30m, it should login twice
+                    ElMessageBox.alert("Long time no interaction, please re-login", "Attention!", {
+                        confirmButtonText: 'OK',
+                        callback: () => {
+                            sessionStorage.removeItem('token');
+                            sessionStorage.removeItem('nowTime');
+                            window.location.replace("/login")
+                        }
+                    }).catch(r => console.log(r))
+                    // location.reload()
                     return;
                 }else{
                     sessionStorage.removeItem('nowTime');
@@ -80,7 +86,7 @@ function interceptorHandler(error){
                 alertMes = "Invalid token";
                 break;
             default:
-                alertMes = "unknown error";
+                alertMes = "Unknown error";
                 console.log(error);
                 break;
         }
