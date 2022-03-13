@@ -44,8 +44,8 @@ export function request(config){
             if(sessionStorage.getItem("nowTime")!=null){
                 if(today-sessionStorage.getItem("nowTime")>1000*60*30){
                     //add by ycao resolve the problem : after 30m, it should login twice
-                    ElMessageBox.alert("Long time no interaction, press 'OK' to extend the session","Attention",{
-                        confirmButtonText:'OK',
+                    ElMessageBox.alert("Your session is about to expire. Do you want to extend the duration of the current session?","No activity recently",{
+                        confirmButtonText:'Extend session duration',
                         showCancelButton: true,
                         callback:(action)=>{
                             if(action!='confirm') {//不延长session
