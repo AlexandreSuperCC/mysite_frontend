@@ -90,6 +90,9 @@ function interceptorHandler(error){
                 break;
             case 402:
                 alertMes = "Invalid token";
+                //add by ycao 20220313
+                sessionStorage.removeItem('token');
+                sessionStorage.removeItem('nowTime');
                 break;
             default:
                 alertMes = "Unknown error";
