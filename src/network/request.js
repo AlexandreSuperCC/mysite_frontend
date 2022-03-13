@@ -44,12 +44,18 @@ export function request(config){
             if(sessionStorage.getItem("nowTime")!=null){
                 if(today-sessionStorage.getItem("nowTime")>1000*60*30){
                     //add by ycao resolve the problem : after 30m, it should login twice
-                    ElMessageBox.alert("Long time no interaction, please re-login", "Attention!", {
-                        confirmButtonText: 'OK',
-                        callback: () => {
-                            sessionStorage.removeItem('token');
-                            sessionStorage.removeItem('nowTime');
-                            window.location.replace("/login")
+                    ElMessageBox.alert("Long time no interaction, press 'OK' to extend the session","Attention",{
+                        confirmButtonText:'OK',
+                        showCancelButton: true,
+                        callback:(action)=>{
+                            if(action!='confirm') {//不延长session
+                                sessionStorage.removeItem('token');
+                                sessionStorage.removeItem('nowTime');
+                                window.location.replace("/login")
+                            }else{
+                                sessionStorage.removeItem('nowTime');
+                                store.commit('set_time',today);//延长session。
+                            }
                         }
                     }).catch(r => console.log(r))
                     // location.reload()
