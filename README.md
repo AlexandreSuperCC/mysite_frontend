@@ -23,6 +23,8 @@ npm run build
 ### bug
 1. 第一次登录页面没有反应
 2. md文件展示页面分类栏溢出的时候是向下扩展的不是横向扩展
+3. 登录后又返回登录页面原因：
+    invalid token返回登录页面时没有及时清除token，携带原来过期token被前端返回拦截后只能又返回登录页面
 ### to be optimized
 1. 在TimeLine.vue里drawer里的上海大学和fff的图片都是固定的
 
