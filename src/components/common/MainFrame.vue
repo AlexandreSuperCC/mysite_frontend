@@ -11,7 +11,7 @@
       :router="true"
   >
     <el-menu-item index="/home/article">my articles</el-menu-item>
-    <el-sub-menu index="2">
+    <el-sub-menu v-if="role===0" index="2">
       <template #title>Workspace</template>
       <el-menu-item index="/home/uploadFile" :disabled="disableUpload">upload your file</el-menu-item>
       <el-menu-item index="/home/markdown">write your markdown</el-menu-item>
@@ -47,7 +47,8 @@ export default {
     return {
       // activeIndex:this.$store.state.token.curIndex,
       // activeIndex2:'2',
-      disableUpload:false
+      disableUpload:false,
+      role:this.$store.getters.userRole,
     }
   },
   methods:{

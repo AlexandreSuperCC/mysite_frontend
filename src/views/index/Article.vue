@@ -161,6 +161,12 @@ export default {
       })
     },
     deleteFile(){
+      if(this.$store.getters.userRole!==0){
+        ElMessageBox.alert("Not authorized","Sorry!",{
+          confirmButtonText:'OK'
+        })
+        return;
+      }
       deleteOneFile(this.tempMidForPopCDelete).then((data)=>{
         ElMessageBox.alert("deleting one file succeeds",{
           confirmButtonText:'OK',
@@ -196,6 +202,12 @@ export default {
     //   })
     // }
     deleteCatAction(cat) {
+      if(this.$store.getters.userRole!==0){
+        ElMessageBox.alert("Not authorized","Sorry!",{
+          confirmButtonText:'OK'
+        })
+        return;
+      }
       ElMessageBox.alert("Are you sure to delete this category and all the files in it?",{
         confirmButtonText:'OK',
         showCancelButton: true,

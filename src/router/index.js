@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import {ElMessageBox} from "element-plus";
 
 const Login = () => import('@/views/login/Login')
 const Home = () => import('@/views/index/Home')
@@ -9,6 +10,7 @@ const SearchEngine = () => import('@/views/index/searchEngine/SearchEngine')
 const AboutMe = () => import('@/views/index/myinfo/AboutMe')
 const MyStory = () => import('@/views/index/myinfo/MyStory')
 const ErrorPage = () => import('@/components/common/ErrorPage')
+import store from "@/store"
 
 const routes = [
   {
@@ -71,6 +73,15 @@ router.beforeEach((to,from,next)=>{
   }
   const token = sessionStorage.getItem('token')
   if (token) {
+    if(to.path==='/home/uploadFile'||to.path==='/home/markdown'){
+      let role = store.getters.userRole
+      if(role!==0){
+        ElMessageBox.alert("Not authorized","Sorry!",{
+          confirmButtonText:'OK'
+        })
+        return;
+      }
+    }
     next();
     return;
   }

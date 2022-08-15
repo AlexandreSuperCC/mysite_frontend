@@ -18,9 +18,13 @@ const token={
         :{
         token:'',
         userId:'',
+        userRole:'',
         nowTime:'',
         signForAboutMe:'',//a java developer...
         // curIndex:'1',//used widely: store the current index of the page so that the related icon of the mainFrame will be selected after refreshing
+    },
+    getters:{
+        userRole:state=>state.userRole,
     },
     mutations:{
         set_signOfMe(state,object){
@@ -29,11 +33,13 @@ const token={
         set_token(state,object){
             state.token = object.token
             state.userId = object.userId
+            state.userRole = object.userRole
             sessionStorage.token = object.token
         },
         del_token(state){
             state.token = ''
             state.userId = ''
+            state.userRole = ''
             sessionStorage.removeItem('token')
         },
         //the time of saving

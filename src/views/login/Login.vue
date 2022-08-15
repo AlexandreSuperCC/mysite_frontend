@@ -101,7 +101,7 @@ export default {
                 if(res){//有结果返回 406情况就没有结果
                   if(res&&res.code==='success'){
                     //if login succeeds, save the token into Vuex
-                    this.$store.commit('set_token',{token:res.token,userId:res.userId})
+                    this.$store.commit('set_token',{token:res.token,userId:res.userId,userRole:res.userRole})
                     // window.location.replace('/home')
                     this.$router.push('/home');
 
