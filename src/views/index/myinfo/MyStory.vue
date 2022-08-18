@@ -13,20 +13,21 @@
       <div class="c b-cpn">
         <carousel>
           <template v-slot:swiper-left>
-            <div class="timeline-title">
-              Formation
-            </div>
             <timeline></timeline>
           </template>
           <template v-slot:swiper-right>
             <div class="cr-text-detailIntro">
               <p>
-                In my free time I enjoy coding, cycling and playing badminton.<br>
-                I am the vice president of Shanghai University Cycling Association.
-              </p>
-              <p>
-                Pendant mon temps libre, j'aime coder, faire du vélo et jouer au badminton.<br>
-                Je suis Vice - Président de l'Association Cycliste de l'Université de Shanghai.
+                Results-driven and motivated Junior Software Engineer
+                <br>with extensive knowledge of Java, Javascript,
+                <br>experienced in improving software performance,
+                <br>testing and updating existing software,
+                <br>and developing new software
+                functionalities.
+                <br>
+                <br>Offers proven track record of extraordinary achievements,
+                <br>strong attention to detail, and ability to
+                <br>finish projects on schedule and within budget.
               </p>
             </div>
           </template>
@@ -145,12 +146,7 @@ export default {
   /*font-weight: 100 ;*/
   /*text-shadow: 0px 0px 10px rgba(255,255,255,0.5);*/
   letter-spacing: 1px;
-  font-family: Arial;
-}
-.timeline-title{
-  color: #f8f0f0;
-  padding-left: 40px;
-  margin-bottom: 15px;
+  /*font-family: Arial;*/
 }
 
 </style>

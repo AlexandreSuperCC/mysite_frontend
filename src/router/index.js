@@ -9,6 +9,7 @@ const Markdown = () => import('@/views/index/Markdown')
 const SearchEngine = () => import('@/views/index/searchEngine/SearchEngine')
 const AboutMe = () => import('@/views/index/myinfo/AboutMe')
 const MyStory = () => import('@/views/index/myinfo/MyStory')
+const MyProject = () => import('@/views/index/myCreation/MyProject')
 const ErrorPage = () => import('@/components/common/ErrorPage')
 import store from "@/store"
 
@@ -46,6 +47,10 @@ const routes = [
       {
         path: 'myStory',
         component:MyStory
+      },
+      {
+        path: 'myProject',
+        component:MyProject
       }
     ]
   },

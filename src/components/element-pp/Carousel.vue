@@ -6,20 +6,30 @@
  */
 <template>
   <div class="cr-container">
-    <div class="cr-left"><slot name="swiper-left"></slot></div>
-    <div class="cr-center">
-      <div class="not-safari" v-if="!usingSafari">
-        <el-carousel :interval="4000" type="card" height="300px">
-          <el-carousel-item v-for="item in photosUrl" :key="item">
-            <img class="my-photo" :src="item" alt="photo">
-          </el-carousel-item>
-        </el-carousel>
-      </div>
-      <div class="is-safari" v-if="usingSafari">
-        <circular-banner/>
-      </div>
-    </div>
-    <div class="cr-right"><slot name="swiper-right"></slot></div>
+    <el-row>
+      <el-col :xl="{span:1}" :lg="{span:1}" :md="{span:0}" :sm="{span:0}"/>
+      <el-col :xl="{span:8}" :lg="{span:7}" :md="{span:7}" :sm="{span:6}">
+        <div class="cr-left"><slot name="swiper-left"></slot></div>
+      </el-col>
+      <el-col :xl="{span:6}" :lg="{span:8}" :md="{span:10}" :sm="{span:12}">
+        <div class="cr-center">
+          <div class="not-safari" v-if="!usingSafari">
+            <el-carousel :interval="4000" type="card" height="300px">
+              <el-carousel-item v-for="item in photosUrl" :key="item">
+                <img class="my-photo" :src="item" alt="photo">
+              </el-carousel-item>
+            </el-carousel>
+          </div>
+          <div class="is-safari" v-if="usingSafari">
+            <circular-banner/>
+          </div>
+        </div>
+      </el-col>
+      <el-col :xl="{span:1}" :lg="{span:1}" :md="{span:0}" :sm="{span:0}"/>
+      <el-col :xl="{span:7}" :lg="{span:7}" :md="{span:7}" :sm="{span:6}">
+        <div class="cr-right"><slot name="swiper-right"></slot></div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -95,26 +105,19 @@ export default {
   height: 100%;
 }
 .cr-container{
-  display: flex;
   height: 100%;
   /*margin: 0;*/
   /*padding: 0;*/
 }
 .cr-left{
-  flex: 1 1 auto;
-  margin-left: 88px;
-  margin-right: 28px;
 }
 .cr-right{
-  flex: 1 1 auto;
+  padding: 8px 8px;
   background-color: #1c5359;
-  margin-left: 28px;
   margin-right: 88px;
-  margin-bottom: 20px;
 }
 .cr-center{
-  padding: 0 60px;
-  flex: 0 0 400px;
+  padding: 0 20px;
   justify-content: center;
 }
 </style>

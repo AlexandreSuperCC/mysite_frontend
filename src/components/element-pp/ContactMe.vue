@@ -1,4 +1,5 @@
 <template>
+
   <div class="cm-container">
     <div class="cm-left"></div>
     <div class="cm-middle">
@@ -8,7 +9,8 @@
             <img class="smartphone-icon" src="~assets/index/images/contact/smartphone.png" alt="phone">
           </template>
           <template v-slot:description>
-            <a class="my-telephone" href="tel:0668252048">+33 6 68 25 20 48</a>
+            <a class="my-telephone" href="tel:0668252048">+33 6 68 25 20 48</a><br>
+            <a class="my-telephone" href="tel:18019010788">+86 18019010788</a>
           </template>
         </el-step>
         <el-step title="e-mail" @click="changeActive(1)">
@@ -16,7 +18,7 @@
             <img class="email-icon" src="~assets/index/images/contact/email.png" alt="email">
           </template>
           <template v-slot:description>
-            <a class="my-email" target="_blank" href="mailto:yuan.cao@utbm.fr">yuan.cao@utbm.fr</a>
+            <a class="my-email" target="_blank" href="mailto:yuancaocc@gmail.com">yuancaocc@gmail.com</a>
           </template>
         </el-step>
         <el-step title="linkedin" @click="changeActive(2)">
@@ -32,10 +34,15 @@
             <img class="location-icon" src="~assets/index/images/contact/location.png" alt="location">
           </template>
           <template v-slot:description>
-            <span class="my-direction"  @click="mapDrawer=true">Belfort, France</span>
-            <span class="locate-me">
-              <img class="locate-img" src="~assets/index/images/contact/locate.png" alt="locate me">
-            </span>
+            <div>
+              <span class="my-direction"  @click="mapDrawer=true">Paris, France</span>
+              <span class="locate-me">
+                <img class="locate-img" src="~assets/index/images/contact/locate.png" alt="locate me">
+              </span>
+            </div>
+            <div>
+              <span class="my-direction"  @click="mapDrawer=true">Shanghai, China</span>
+            </div>
           </template>
         </el-step>
       </el-steps>
@@ -125,15 +132,37 @@ export default {
   z-index: 2;
   opacity: 0.9;
 }
+@media (min-width: 1600px) {
+  .cm-middle{
+    width: 685px;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #e8e9af;
+  }
+}
+
+@media (min-width: 1300px) and (max-width: 1599px) {
+  .cm-middle{
+    opacity: 0.8;
+    width: 500px;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #e8e9af;
+  }
+}
+
+@media (max-width: 1299px) {
+  .cm-middle{
+    opacity: 0.7;
+    width: 450px;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #e8e9af;
+  }
+}
+
 .cm-left,.cm-right{
   flex: 1;
-}
-.cm-middle{
-  flex: 2;
-  padding: 20px;
-  margin-top: 20px;
-  background-color: #e8e9af;
-;
 }
 a{
   color: #0022ff;

@@ -1,5 +1,8 @@
 <template>
   <div class="block" @click="infoDrawer = true">
+    <div class="timeline-title">
+      Education
+    </div>
     <el-timeline>
       <el-timeline-item
           v-for="(activity, index) in activities"
@@ -16,6 +19,25 @@
         </div>
       </el-timeline-item>
     </el-timeline>
+    <div class="timeline-title">
+      Intern Experience
+    </div>
+  <el-timeline>
+    <el-timeline-item
+        v-for="(activity, index) in experiences"
+        :key="index"
+        :icon="activity.icon"
+        :type="activity.type"
+        :color="activity.color"
+        :size="activity.size"
+        :hollow="activity.hollow"
+        :timestamp="activity.timestamp"
+    >
+      <div class="timeline-content">
+        {{ activity.content }}
+      </div>
+    </el-timeline-item>
+  </el-timeline>
     <div class="formation-click">
       <img class="formation-click-icon" src="~assets/index/images/click_32.png" alt="click-me">
     </div>
@@ -55,27 +77,35 @@ export default {
       infoDrawer:false,
       activities: [
         {
-          content: 'Etudiant en Ingénierie Informatique à l\'Université de Technologie de Belfort-Montbéliard, FR',
-          timestamp: '2020-09-01 à 2023-01-31',
+          content: 'Master\'s degree, Software Engineering in UTBM, Belfort, FR',
+          timestamp: '2020-09-01 - 2023-01-31',
           size: 'large',
           type: 'primary',
           icon: markRaw(MoreFilled),
         },
         {
-          content: 'Licence en Génie Informatique à l\'U.T.S.E.U.S. de l\'Université de Shanghai, CN',
-          timestamp: '2017-09-01 à 2020-06-30',
+          content: 'Bachelor\'s degree, Computer Science in SHU, Shanghai, CN',
+          timestamp: '2017-09-01 - 2020-06-30',
+          size: 'large',
+          type: 'primary',
+          icon: markRaw(MoreFilled),
+        },
+      ],
+      experiences: [
+        {
+          content: 'ERP Backend Developer in Yonyou, Shanghai, CN',
+          timestamp: '2021-08-01 - 2022-01-31',
           size: 'large',
           type: 'primary',
           icon: markRaw(MoreFilled),
         },
         {
-          content: 'Bac au Lycée rattaché à Fudan Université, Pudong Campus, Shanghai, CN',
-          timestamp: '2014-09-01 à 2017-06-30',
+          content: 'Fullstack Developer in Diapason, Paris, FR',
+          timestamp: '2022-07-01 - 2022-12-31',
           size: 'large',
           type: 'primary',
           icon: markRaw(MoreFilled),
         },
-
       ],
     }
   }
@@ -103,5 +133,10 @@ export default {
   width: 15px;
   /*opacity: 0.9;*/
   /*transform: rotateX(180deg);*/
+}
+.timeline-title{
+  color: #f8f0f0;
+  padding-left: 40px;
+  margin-bottom: 15px;
 }
 </style>

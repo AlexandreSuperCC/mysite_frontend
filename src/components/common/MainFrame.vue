@@ -22,14 +22,20 @@
       <el-menu-item index="/home/aboutme">About me</el-menu-item>
       <el-menu-item index="/home/myStory">My story</el-menu-item>
     </el-sub-menu>
-    <div class="exit-btn">
-      <el-popconfirm confirm-button-text="Yes" cancel-button-text="No" icon="el-icon-info" icon-color="red"
-        title="Are you sure to exit?" @confirm="exitEvent" @cancel="ignoreEvent">
-        <template #reference>
-          <el-button size="mini" round>Exit</el-button>
-        </template>
-      </el-popconfirm>
-    </div>
+    <el-sub-menu index="home/myProject">
+      <template #title>my creation</template>
+      <el-menu-item index="/home/myProject">My project</el-menu-item>
+    </el-sub-menu>
+    <el-menu-item index="#logout">
+      <template #title>
+        <el-popconfirm confirm-button-text="Yes" cancel-button-text="No" icon="el-icon-info" icon-color="red"
+                       title="Are you sure to exit?" @confirm="exitEvent" @cancel="ignoreEvent">
+          <template #reference>
+            <el-icon><SwitchButton /></el-icon>
+          </template>
+        </el-popconfirm>
+      </template>
+    </el-menu-item>
   </el-menu>
 </template>
 

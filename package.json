@@ -28,7 +28,11 @@
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/reactivity": "^3.2.26",
     "@vue/runtime-core": "^3.2.26",
-    "patch-package": "^6.4.7"
+    "node-scss": "^7.0.3",
+    "patch-package": "^6.4.7",
+    "sass": "^1.26.5",
+    "sass-loader": "^8.0.2",
+    "scss-loader": "0.0.1"
   },
   "browserslist": [
     "> 1%",
