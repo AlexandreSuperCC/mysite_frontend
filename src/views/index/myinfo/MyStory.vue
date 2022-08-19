@@ -121,7 +121,6 @@ export default {
         }else{
           this.screenAdapt=true
         }
-        console.log("屏幕宽度等于" + val + "px");
       },
       immediate: true,
     },

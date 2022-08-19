@@ -23,7 +23,7 @@
   </div>
   <div class="no-display" style="text-align: center;" v-else>
     <h2>
-      Please set your browser window width larger <br><br>(*^﹏^*)
+      Please set your browser window size larger <br><br>(*^﹏^*)
     </h2>
   </div>
 </template>
@@ -50,7 +50,7 @@ export default {
       * */
       loadingFin:false,
       screenAdapt:true,
-      screenWidth: document.body.clientWidth,
+      screenSize: document.body.clientWidth/document.body.clientHeight,
     }
   },
   methods:{
@@ -92,14 +92,14 @@ export default {
       this.$router.push('/home/myStory')
     },
     getWindowWidth() {
-      this.screenWidth = document.body.clientWidth;
+      this.screenSize = document.body.clientWidth / document.body.clientHeight;
       window.onresize = () => {
-        this.screenWidth =
-            window.innerWidth ||
-            document.documentElement.clientWidth ||
-            document.body.clientWidth;
+        this.screenSize =
+            window.innerWidth / window.innerHeight ||
+            document.documentElement.clientWidth / document.documentElement.clientHeight ||
+            document.body.clientWidth / document.body.clientHeight;
       };
-    },
+    }
     /**
      * 当背景图片没有完全加载完之前，使用加载动画 用在首页提前加载代替
      * 在前面定义，因为用缓存直接加载没来得及定义上
@@ -134,14 +134,13 @@ export default {
     Loading
   },
   watch: {
-    screenWidth: {
+    screenSize: {
       handler: function (val) {
-        if(val<616){
+        if(val<1){
           this.screenAdapt=false
         }else{
           this.screenAdapt=true
         }
-        console.log("屏幕宽度等于" + val + "px");
       },
       immediate: true,
     },
