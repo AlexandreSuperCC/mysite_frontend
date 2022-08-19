@@ -1,6 +1,6 @@
 <template>
   <div v-show="!loadingFin"><loading></loading></div>
-  <div class="my-info" v-show="loadingFin">
+  <div class="my-info" v-if="screenAdapt" v-show="loadingFin">
     <div class="background-photo">
       <div class="next-page">
         <img class="next-page-icon" src="~assets/index/images/nextPage.png"
@@ -20,6 +20,11 @@
         <div class='box' id='box4'></div>
       </div>
     </div>
+  </div>
+  <div class="no-display" style="text-align: center;" v-else>
+    <h2>
+      Please set your browser window width larger <br><br>(*^﹏^*)
+    </h2>
   </div>
 </template>
 
@@ -44,6 +49,8 @@ export default {
       * 多次试验发现先加载完已经缓存的图片后签名才会出现
       * */
       loadingFin:false,
+      screenAdapt:true,
+      screenWidth: document.body.clientWidth,
     }
   },
   methods:{
@@ -84,6 +91,15 @@ export default {
     goDetails(){
       this.$router.push('/home/myStory')
     },
+    getWindowWidth() {
+      this.screenWidth = document.body.clientWidth;
+      window.onresize = () => {
+        this.screenWidth =
+            window.innerWidth ||
+            document.documentElement.clientWidth ||
+            document.body.clientWidth;
+      };
+    },
     /**
      * 当背景图片没有完全加载完之前，使用加载动画 用在首页提前加载代替
      * 在前面定义，因为用缓存直接加载没来得及定义上
@@ -110,10 +126,26 @@ export default {
     // this.signLength = this.$refs.signContent.offsetWidth;
     // this.executeLoading();
   },
+  activated() {
+    this.getWindowWidth();
+  },
   components:{
     SquareJumping,
     Loading
-  }
+  },
+  watch: {
+    screenWidth: {
+      handler: function (val) {
+        if(val<616){
+          this.screenAdapt=false
+        }else{
+          this.screenAdapt=true
+        }
+        console.log("屏幕宽度等于" + val + "px");
+      },
+      immediate: true,
+    },
+  },
 }
 </script>
 

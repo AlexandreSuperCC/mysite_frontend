@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="screenAdapt">
     <div class="introduction">
       <div class="intro-text">
         <h2>
@@ -39,6 +39,11 @@
       </contact-me>
     </div>
   </div>
+  <div class="no-display" style="text-align: center;" v-else>
+    <h2>
+      Please set your browser window width larger <br><br>(*^﹏^*)
+    </h2>
+  </div>
 </template>
 
 <script>
@@ -64,14 +69,26 @@ export default {
       sign:'',
       curUserId:this.$store.state.token.userId,
       domain:'AboutMe',//当前组件名字
+      screenAdapt:true,
+      screenWidth: document.body.clientWidth,
     }
   },
   mounted() {
     this.doAssignSign();
-
   },
-
+  activated() {
+    this.getWindowWidth();
+  },
   methods:{
+    getWindowWidth(){
+      this.screenWidth = document.body.clientWidth;
+      window.onresize = () => {
+        this.screenWidth =
+            window.innerWidth ||
+            document.documentElement.clientWidth ||
+            document.body.clientWidth;
+      };
+    },
     //赋值data里sign
     doAssignSign(){
       if(this.sign===''&&this.$store.state.token.signForAboutMe===''){
@@ -95,8 +112,20 @@ export default {
         this.$store.commit('set_signOfMe',{sign:this.sign})//把sign放入vuex，后续MyStory也会用到
       }).catch(err=>console.log(err))
     },
-  }
-
+  },
+  watch: {
+    screenWidth: {
+      handler: function (val) {
+        if(val<=1278){
+          this.screenAdapt=false
+        }else{
+          this.screenAdapt=true
+        }
+        console.log("屏幕宽度等于" + val + "px");
+      },
+      immediate: true,
+    },
+  },
 }
 </script>
 
