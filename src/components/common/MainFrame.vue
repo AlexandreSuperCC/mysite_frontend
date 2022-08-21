@@ -11,18 +11,18 @@
       :router="true"
   >
     <el-menu-item index="/home/article">my articles</el-menu-item>
-    <el-sub-menu v-if="role===0" index="2">
+    <el-sub-menu v-if="role===0" index="1">
       <template #title>Workspace</template>
       <el-menu-item index="/home/uploadFile" :disabled="disableUpload">upload your file</el-menu-item>
       <el-menu-item index="/home/markdown">write your markdown</el-menu-item>
       <el-menu-item index="/home/searchEngine" disabled>using your searching engine</el-menu-item>
     </el-sub-menu>
-    <el-sub-menu index="home/myInfo">
+    <el-sub-menu index="2">
       <template #title>my Info</template>
       <el-menu-item index="/home/aboutme">About me</el-menu-item>
       <el-menu-item index="/home/myStory">My story</el-menu-item>
     </el-sub-menu>
-    <el-sub-menu index="home/myProject">
+    <el-sub-menu index="3">
       <template #title>my creation</template>
       <el-menu-item index="/home/myProject">My project</el-menu-item>
     </el-sub-menu>
