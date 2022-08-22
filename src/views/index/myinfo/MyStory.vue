@@ -136,7 +136,7 @@ export default {
   flex-direction: column;
   width: 100%;
   /*height: 100%;*/
-  height: calc(100% - 61px);
+  height: 100%;
   /*渐变不支持时的颜色*/
   background-color: #3d8690;
   /*线性渐变*/

@@ -1,50 +1,55 @@
 <template>
-  <div class="line"></div>
-  <el-menu
-      :default-active="$route.path"
-      class="el-menu-demo"
-      mode="horizontal"
-      background-color="#545c64"
-      text-color="#fff"
-      active-text-color="#ffd04b"
-      @select="handleSelect"
-      :router="true"
-  >
-    <el-menu-item index="/home/article">my articles</el-menu-item>
-    <el-sub-menu v-if="role===0" index="1">
-      <template #title>Workspace</template>
-      <el-menu-item index="/home/uploadFile" :disabled="disableUpload">upload your file</el-menu-item>
-      <el-menu-item index="/home/markdown">write your markdown</el-menu-item>
-      <el-menu-item index="/home/searchEngine" disabled>using your searching engine</el-menu-item>
-    </el-sub-menu>
-    <el-sub-menu index="2">
-      <template #title>my Info</template>
-      <el-menu-item index="/home/aboutme">About me</el-menu-item>
-      <el-menu-item index="/home/myStory">My story</el-menu-item>
-    </el-sub-menu>
-    <el-sub-menu index="3">
-      <template #title>my creation</template>
-      <el-menu-item index="/home/myProject">My project</el-menu-item>
-    </el-sub-menu>
-    <el-menu-item index="#logout">
-      <template #title>
-        <el-popconfirm confirm-button-text="Yes" cancel-button-text="No" icon="el-icon-info" icon-color="red"
+  <Slide width="200" v-if="$route.path!=='/home/aboutme'">
+    <a id="love-create">
+      <span id="show-text">
+        CKLOVERY
+      </span>
+    </a>
+    <a id="my-article" href="/home/article">
+      <span>Home</span>
+    </a>
+    <a id="my-info" href="/home/aboutme">
+      <span>About Me</span>
+    </a>
+    <a id="my-story" href="/home/myStory">
+      <span>My Story</span>
+    </a>
+    <a id="my-project" href="/home/myProject">
+      <span>My Project</span>
+    </a>
+    <a id="markdown-editor" href="/home/markdown" v-if="role===0">
+      <span>Markdown Editor</span>
+    </a>
+    <a id="upload-file" href="/home/uploadFile" v-if="role===0">
+      <span>Upload File</span>
+    </a>
+    <a id="logout" href="#">
+      <span style="font-size: medium">
+         <el-popconfirm confirm-button-text="Yes" cancel-button-text="No" icon="el-icon-info" icon-color="red"
                        title="Are you sure to exit?" @confirm="exitEvent" @cancel="ignoreEvent">
-          <template #reference>
-            <el-icon><SwitchButton /></el-icon>
-          </template>
-        </el-popconfirm>
-      </template>
-    </el-menu-item>
-  </el-menu>
+                     <template #reference>
+                       <el-icon size="24"><SwitchButton /></el-icon>
+                     </template>
+         </el-popconfirm>
+        Exit
+      </span>
+    </a>
+    <a id="site-git" href="https://github.com/AlexandreSuperCC/mysite_frontend_public" target="_blank">
+      <span style="font-family: STLiti;font-size: medium;font-weight: normal">Code Source<br>See me on github ^_^</span>
+    </a>
+  </Slide>
 </template>
 
 <script>
 
 import {ElMessageBox} from "element-plus";
+import { Slide } from 'vue3-burger-menu'
 
 export default {
   name: "MainFrame",
+  components:{
+    Slide
+  },
   mounted() {
   },
   watch:{
@@ -104,11 +109,16 @@ export default {
 }
 </script>
 <style scoped>
+@import '../../assets/style/menu-bar.css';
+#show-text{
+  font-family: Castellar;
+  font-size: 18px;
+  color: antiquewhite;
+}
 .exit-btn{
   /*不会随着下滑往下动*/
   position: absolute;
   margin-top: 18px;
   right: 5px
 }
-
 </style>

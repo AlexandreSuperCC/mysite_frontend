@@ -5,46 +5,49 @@
  * @version 1.0
  */
 <template>
-  <div :style="isHidden" v-loading="getAllFiles">
-    <div class="md-items" >
-      <button class="refresh-md-btn" @click="getFiles"></button>
-      <span v-if="allCatFile.length===0">no category</span>
-      <span v-for="(cat,index) in allCatFile"
-            @contextmenu.prevent.native="deleteCatAction(cat)"
-            :key="cat" class="file-cat" @click="changeCategory(cat,index)" :style="isSelected(index)">{{cat}}</span>
-      <span class="cat-inform-text">right-click to delete a category</span>
-    </div>
-    <div class="allFiles">
-      <el-space wrap class="file-space" size="medium">
-        <el-card v-for="file in curCatData" :key="file" class="box-card" style="width: 250px">
-          <template #header>
-            <div class="card-header">
-              <div class="file-name">{{file.mname}}</div>
-              <div class="md-action">
-                <el-button class="md-view" type="text" @click="doShowModel(file.htmlText)">View</el-button>
-                <el-button class="md-edit" type="text" @click="toEditPage(file)">Edit</el-button>
-                <el-popconfirm title="Are you sure to delete this file?" @confirm="deleteFile">
-                  <template #reference>
-                    <el-button class="md-delete" type="text" @click="assignFidForDelete(file.mid)">Delete</el-button>
-                  </template>
-                </el-popconfirm>
+  <div id="articles-all">
+    <div id="articles-welcome">My Articles</div>
+    <div :style="isHidden" v-loading="getAllFiles">
+      <div class="md-items" >
+        <button class="refresh-md-btn" @click="getFiles"></button>
+        <span v-if="allCatFile.length===0">no category</span>
+        <span v-for="(cat,index) in allCatFile"
+              @contextmenu.prevent.native="deleteCatAction(cat)"
+              :key="cat" class="file-cat" @click="changeCategory(cat,index)" :style="isSelected(index)">{{cat}}</span>
+        <span class="cat-inform-text">right-click to delete a category</span>
+      </div>
+      <div class="allFiles">
+        <el-space wrap class="file-space" size="medium">
+          <el-card v-for="file in curCatData" :key="file" class="box-card" style="width: 250px">
+            <template #header>
+              <div class="card-header">
+                <div class="file-name">{{file.mname}}</div>
+                <div class="md-action">
+                  <el-button class="md-view" type="text" @click="doShowModel(file.htmlText)">View</el-button>
+                  <el-button class="md-edit" type="text" @click="toEditPage(file)">Edit</el-button>
+                  <el-popconfirm title="Are you sure to delete this file?" @confirm="deleteFile">
+                    <template #reference>
+                      <el-button class="md-delete" type="text" @click="assignFidForDelete(file.mid)">Delete</el-button>
+                    </template>
+                  </el-popconfirm>
+                </div>
+              </div>
+            </template>
+            <div class="text-container">
+              <div class="text-item" v-html="file.htmlText">
               </div>
             </div>
-          </template>
-          <div class="text-container">
-            <div class="text-item" v-html="file.htmlText">
-            </div>
-          </div>
-        </el-card>
-      </el-space>
-    </div>
-    <el-backtop />
+          </el-card>
+        </el-space>
+      </div>
+      <el-backtop />
 
-  </div>
+    </div>
     <view-file v-show="showModal"
                :transfer-view-status-change-flag="viewStatusChangeFlag"
                :text-html="toSendShowModelText"
                @hiddenView="showModal=false"></view-file>
+  </div>
 </template>
 
 <script>
@@ -250,22 +253,44 @@ export default {
 </script>
 
 <style scoped>
+#articles-all{
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background: url('../../assets/index/images/article/article-back.jpeg') no-repeat fixed;
+  overflow-y: scroll;
+}
+#articles-welcome{
+  font-family: "Lucida Calligraphy", cursive, serif, sans-serif;
+  text-align: center;
+  padding-top: 8px;
+  font-size: 24px;
+  font-weight: bold;
+  color: rgb(60, 63, 65);
+}
 .md-items{
   height: 22px;
   margin: 2px 2px 10px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #3c1018;
+  border-style: hidden;
+  /*border-width: 2px;*/
+  /*border-color: #3c1018;*/
   padding: 9px;
   overflow: auto;
 }
 .cat-inform-text{
+  opacity: 0.8;
   font-size: small;
   margin-left: 4px;
+}
+@media (max-width: 520px) {
+  .cat-inform-text{
+    display: none;
+  }
 }
 .file-cat{
   border-style: solid;
   border-color: #3c0a08;
+  border-radius: 4px;
   border-width: 1px;
   padding: 4px 4px;
   margin: 0px 3px;
