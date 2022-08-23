@@ -40,7 +40,7 @@
           </el-card>
         </el-space>
       </div>
-      <el-backtop />
+      <el-backtop target="#articles-all"/>
 
     </div>
     <view-file v-show="showModal"
