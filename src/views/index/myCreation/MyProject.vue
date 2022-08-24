@@ -44,12 +44,12 @@ export default {
         },
         {
           id: 'docfetcher-audit',
-          title: 'Project Audit for Docfetcher',
-          description: 'Universities have a computer park that includes all of the school\'s equipment. This infrastructure is generally used by teachers and students from different departments for courses and tps in networks and computer development.\n' +
-              'The problem that arises relates to the management of this computer equipment insofar as this procedure is managed only by determined managers of IT-Support who carry out the mission of managing all the equipment in a traditional way, namely the periodic development of the inventory and the direct and on-site consultation of the state of the resources.',
+          title: 'Project Audit for DocFetcher',
+          description: 'DocFetcher is an Open Source desktop search application: It allows you to search the contents of files on your computer. — You can think of it as Google for your local files. The application runs on Windows, Linux and OS X. We made an audit report based on DocFetcher which presents the audited application, conclusions obtained, methodology used and course of the project, difficulties and reflections and proposals for the future.',
           link: [
             { href: 'http://www.cklovery.site/work/site/FatouGUEYE_YuanCAO_docfetcher.pdf', text: 'Audit Report' },
             { href: 'http://www.cklovery.site/work%2Fsite%2FFatouGUEYE_YuanCAO_docfetcher-ppt.pdf', text: 'Audit Presentation' },
+            { href: 'http://www.cklovery.site/work%2Fsite%2FPre%CC%81sentationTPAuditP22.pdf', text: 'Requirement Specification' },
             { href: 'https://github.com/AlexandreSuperCC/docfetcher', text: 'Docfetcher Code Source Github' },
           ],
           image: 'http://www.cklovery.site/work%2Fsite%2Faudit.png',
