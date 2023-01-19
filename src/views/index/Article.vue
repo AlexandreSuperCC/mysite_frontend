@@ -352,4 +352,7 @@ export default {
 .view-model{
 /*the style here does not work, do it in the component 'ViewFile'*/
 }
+.text-item{
+  overflow: hidden;
+}
 </style>

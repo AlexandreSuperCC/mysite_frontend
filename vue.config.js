@@ -10,6 +10,7 @@ module.exports={
         }
     },
     configureWebpack:{
+        devtool: 'source-map',
         resolve:{
             alias:{
                 'assets':'@/assets',

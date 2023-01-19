@@ -17,20 +17,15 @@
     <a id="my-project" href="/home/myProject">
       <span>My Project</span>
     </a>
-    <a id="markdown-editor" href="/home/markdown" v-if="role===0">
+    <a id="markdown-editor-menu" href="/home/markdown" v-if="role===0">
       <span>Markdown Editor</span>
     </a>
     <a id="upload-file" href="/home/uploadFile" v-if="role===0">
       <span>Upload File</span>
     </a>
-    <a id="logout" href="#">
+    <a id="logout" href="#" @click="exitEvent">
       <span style="font-size: medium">
-         <el-popconfirm confirm-button-text="Yes" cancel-button-text="No" icon="el-icon-info" icon-color="red"
-                       title="Are you sure to exit?" @confirm="exitEvent" @cancel="ignoreEvent">
-                     <template #reference>
-                       <el-icon size="24"><SwitchButton /></el-icon>
-                     </template>
-         </el-popconfirm>
+         <el-icon size="24"><SwitchButton /></el-icon>
         Exit
       </span>
     </a>
