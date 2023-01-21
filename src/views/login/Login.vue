@@ -2,7 +2,20 @@
   <div class="login">
     <el-container>
       <el-header></el-header>
-      <el-main>
+      <el-main v-if="!toLogin">
+      <!-- <el-button @click="goLogin">go</el-button> -->
+        <div class="container">
+          <div class="avatar">
+            <a href="/home/myStory">
+              <img src="~assets/index/images/my-sea-big.jpg" alt="YCAO" />
+            </a>
+          </div>
+          <div class="content">
+            <social-button></social-button>
+          </div>
+        </div>
+      </el-main>
+      <el-main v-else>
         <el-card class="login-form-layout">
           <div class="login-jt">
             <jumping-text></jumping-text>
@@ -38,6 +51,7 @@ import {ElMessageBox} from "element-plus";
 import Beian from "@/components/common/Beian";
 import {httpOrHttps} from "@/utils/const/const";
 import JumpingText from "@/components/common/JumpingText";
+import SocialButton from "@/components/common/SocialButton";
 
 export default {
   name:'Login',
@@ -50,7 +64,8 @@ export default {
   // },
   components:{
     JumpingText,
-    Beian
+    Beian,
+    SocialButton,
   },
   created() {
     /**
@@ -65,6 +80,7 @@ export default {
   },
   data(){
     return {
+      toLogin:false,
       loading:false,
       loginForm:{
         username:'visitor',
@@ -90,6 +106,9 @@ export default {
     }
   },
   methods:{
+    goLogin(){
+      this.toLogin=!this.toLogin
+    },
     handlerLogin(){
       this.$refs.loginForm.validate(valid=>{
         if(valid){
@@ -133,7 +152,8 @@ export default {
 }
 
 </script>
-<style scoped>
+<style lang="scss" scoped>
+@use "@/assets/style/login-page.scss" as login;
 /*container full screen*/
 .login-tips{
   color: red;
@@ -141,8 +161,12 @@ export default {
 .login{
   height: 100%;
   width: 100%;
-  background: url('../../assets/index/images/China.jpg') no-repeat;
-  background-size: 100% 100%;
+  background: rgb(26, 188, 156);
+  background: -moz-linear-gradient(-45deg, rgba(26, 188, 156, 1) 0%, rgba(142, 68, 173, 1) 100%);
+  background: -webkit-linear-gradient(-45deg, rgba(26, 188, 156, 1) 0%, rgba(142, 68, 173, 1) 100%);
+  background: linear-gradient(135deg, rgba(26, 188, 156, 1) 0%, rgba(142, 68, 173, 1) 100%);
+  // background: url('../../assets/index/images/China.jpg') no-repeat;
+  // background-size: 100% 100%;
   opacity: 1.0;
 }
 
