@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import {ElMessageBox} from "element-plus";
 
+const Index = () => import('@/views/Index')
 const Login = () => import('@/views/login/Login')
 const Home = () => import('@/views/index/Home')
 const Article = () => import('@/views/index/Article')
@@ -12,11 +13,12 @@ const MyStory = () => import('@/views/index/myinfo/MyStory')
 const MyProject = () => import('@/views/index/myCreation/MyProject')
 const ErrorPage = () => import('@/components/common/ErrorPage')
 import store from "@/store"
+import { adminPages } from '../utils/const/const';
 
 const routes = [
   {
     path:'',
-    redirect:'/login'
+    redirect:'/home/index'
   },
   {
     path:'/login',
@@ -27,6 +29,10 @@ const routes = [
     component:Home,
     redirect: '/home/article',
     children:[
+      {
+        path:'index',
+        component:Index
+      },
       {
         path:'article',
         component:Article
@@ -72,29 +78,27 @@ const router = createRouter({
 
 //if you haven't exited but close the page, you can enter the page without login again
 router.beforeEach((to,from,next)=>{
-  if(to.path==='/login') {
+  if(to.path.indexOf(adminPages)===-1) {
     next();
-    return;
-  }
-  const token = sessionStorage.getItem('token')
-  if (token) {
-    if(to.path==='/home/uploadFile'||to.path==='/home/markdown'){
-      let role = store.getters.userRole
-      if(role!==0){
-        ElMessageBox.alert("Not authorized","Sorry!",{
-          confirmButtonText:'OK'
-        })
-        return;
-      }
-    }
-    next();
-    return;
-  }
-  if(!token && to.path!='/login'){
-    next({path:'/login'})
     return;
   }else{
-    next()
+    const token = sessionStorage.getItem('token')
+    if (token) {
+      if(to.path==='/home/uploadFile'||to.path==='/home/markdown'){
+        let role = store.getters.userRole
+        if(role!==0){
+          ElMessageBox.alert("Not authorized","Sorry!",{
+            confirmButtonText:'OK'
+          })
+          return;
+        }
+      }
+      next();
+      return;
+    }else{
+      next({path:'/login'})
+      return;
+    }
   }
 })
 

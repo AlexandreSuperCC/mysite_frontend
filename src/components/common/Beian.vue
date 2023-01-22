@@ -19,7 +19,15 @@
 
 <script>
 export default {
-  name: "Beian"
+  name: "Beian",
+  props: {
+    fontColor: { 
+      type: String,       
+      default(){
+        return '#939393'
+      } 
+    }
+  },
 }
 </script>
 
@@ -34,7 +42,7 @@ export default {
   align-items: center;
 }
 .right-reserved{
-  color: black;
+  color: v-bind(fontColor);
 }
 .beian-id,.hudongwanganbei,.right-reserved{
   flex: 1;
@@ -46,6 +54,6 @@ export default {
 .beian-id-text,.gongan-text{
   float:left;
   margin: 0px 0px 0px 5px;
-  color: black;
+  color: v-bind(fontColor);
 }
 </style>

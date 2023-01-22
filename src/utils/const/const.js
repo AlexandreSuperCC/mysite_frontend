@@ -14,3 +14,5 @@ export const gMapCurPosPath = httpOrHttps+'assets.cklovery.life/gmap/sniperLocat
 //google map api key
 export const googleMapPrivateKey = ''
 
+export const adminPages = ['/home/markdown','/home/uploadFile']
+
