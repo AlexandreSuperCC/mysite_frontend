@@ -52,7 +52,8 @@ import Carousel from "@/components/element-pp/Carousel";
 import Timeline from "@/components/element-pp/Timeline";
 import ContactMe from "@/components/element-pp/ContactMe";
 import {aboutMeIntroductionConstant} from "@/utils/const/const";
-import {getConstant} from "@/network/constant/Constant";
+import {setConstants} from "../../../utils/utils";
+import { ycaoId } from "../../../utils/const/const";
 
 
 
@@ -91,26 +92,14 @@ export default {
     },
     //赋值data里sign
     doAssignSign(){
-      if(this.sign===''&&this.$store.state.token.signForAboutMe===''){
-        this.assignConstant(aboutMeIntroductionConstant)
+      //aboutMe和contactMe组件哪一个先渲染后，就不用再次取请求值了
+      if(this.sign===''&&!this.$store.getters.constants[aboutMeIntroductionConstant]){
+        setConstants(ycaoId,this.domain,()=>{
+          this.sign=this.$store.getters.constants[aboutMeIntroductionConstant]
+        })
       }else{
-        this.sign=this.$store.state.token.signForAboutMe;
+        this.sign=this.$store.getters.constants[aboutMeIntroductionConstant];
       }
-    },
-    /**
-     * 通过过滤的方法得到需要的签名文字
-     * @return
-     * @time 2022-01-01 11:41:15
-     */
-    assignConstant(name){
-      getConstant(this.curUserId,this.domain).then(data=>{
-        const curConstantObj= data.data.filter(
-            (constantObj)=>{
-              return constantObj.name===name}
-        )
-        this.sign = (curConstantObj&&curConstantObj.length>0) && curConstantObj[0].content;
-        this.$store.commit('set_signOfMe',{sign:this.sign})//把sign放入vuex，后续MyStory也会用到
-      }).catch(err=>console.log(err))
     },
   },
   watch: {

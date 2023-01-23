@@ -23,6 +23,9 @@
     <a id="upload-file" href="/home/uploadFile" v-if="role===0">
       <span>Upload File</span>
     </a>
+    <a id="admin-login" href="/login" @click.native.prevent="smallExitEvent">
+      <span>Admin Login</span>
+    </a>
     <a id="logout" href="#" @click="exitEvent">
       <span style="font-size: medium">
          <el-icon size="24"><SwitchButton /></el-icon>
@@ -61,6 +64,14 @@ export default {
     handleSelect(){
 
     },
+    smallExitEvent(){
+      const token = sessionStorage.getItem('token')
+      if (token) {//when it is already logged in
+        this.exitEvent()
+      }else{
+        this.$router.push('/login');
+      }
+    },
     exitEvent(){
       //tell the backend to clear session
       this.$store
@@ -69,24 +80,17 @@ export default {
             this.$store.commit("del_token");
             this.$store.commit("del_time");
             if(res&&res.code&&res.code==='success'){//normal case
-              ElMessageBox.alert(res.msg+", click 'OK' to return to the login page",{
-                confirmButtonText:'OK',
-                callback:()=>{
-                  //pay attention to the order of the three phrases, sync action will come before async
-                  //so token is null when execute Logout
-                  this.$router.replace('/login');
-                }
-              })
+              this.$router.replace('/');
             }else{//not normal case, perhaps due to unknown error or long-time no interaction
               if(res&&res.msg){
-                ElMessageBox.alert(res.msg+", error1!","Attention!",{
+                ElMessageBox.alert(res.msg+", error!","Attention!",{
                   confirmButtonText:'OK',
                   callback:()=>{
-                    this.$router.replace('/login')
+                    this.$router.replace('/')
                   }
                 })
               }
-              this.$router.replace('/login')//long time no interaction, 'no res.msg' error occurs
+              this.$router.replace('/')//long time no interaction, 'no res.msg' error occurs
             }
           })
           .catch(err=>{//rare case

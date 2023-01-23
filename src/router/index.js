@@ -13,7 +13,6 @@ const MyStory = () => import('@/views/index/myinfo/MyStory')
 const MyProject = () => import('@/views/index/myCreation/MyProject')
 const ErrorPage = () => import('@/components/common/ErrorPage')
 import store from "@/store"
-import { adminPages } from '../utils/const/const';
 
 const routes = [
   {
@@ -78,6 +77,7 @@ const router = createRouter({
 
 //if you haven't exited but close the page, you can enter the page without login again
 router.beforeEach((to,from,next)=>{
+  const adminPages = store.getters.constants[adminPages]
   if(to.path.indexOf(adminPages)===-1) {
     next();
     return;

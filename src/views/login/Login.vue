@@ -18,6 +18,7 @@
             </el-form-item>
             <el-form-item style="margin-bottom: 20px">
               <el-button type="primary" :loading="loading" @click.native.prevent="handlerLogin">login</el-button>
+              <el-button type="primary" @click="this.$router.back()">back to previous page</el-button>
             </el-form-item>
             <div class="login-tips">
             </div>

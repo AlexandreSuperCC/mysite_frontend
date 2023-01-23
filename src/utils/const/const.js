@@ -2,7 +2,8 @@ import {baseURL} from "@/network/api";
 
 export const uploadAddress = baseURL+'/home/uploadFile/'
 export const maxUploadFileSize = 100
-export const aboutMeIntroductionConstant = 'sign_java'
+export const aboutMeIntroductionConstant = 'signForAboutMe'
+export const ycaoId = 0
 
 export const httpOrHttps = 'http://'
 //assets 七牛云文件链接地址 【点击鼠标有星星特效】
@@ -13,6 +14,3 @@ export const myPhotoPath = httpOrHttps+'assets.cklovery.life/myPhoto'
 export const gMapCurPosPath = httpOrHttps+'assets.cklovery.life/gmap/sniperLocate.png'
 //google map api key
 export const googleMapPrivateKey = ''
-
-export const adminPages = ['/home/markdown','/home/uploadFile']
-

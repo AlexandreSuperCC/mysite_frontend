@@ -20,15 +20,18 @@ const token={
         userId:'',
         userRole:'',
         nowTime:'',
-        signForAboutMe:'',//a java developer...
+        constants:{
+            adminPages:[]
+        }
         // curIndex:'1',//used widely: store the current index of the page so that the related icon of the mainFrame will be selected after refreshing
     },
     getters:{
         userRole:state=>state.userRole,
+        constants:state=>state.constants,
     },
     mutations:{
-        set_signOfMe(state,object){
-          state.signForAboutMe = object.sign;
+        set_constants(state,object){
+            state.constants[object.name] = object.value
         },
         set_token(state,object){
             state.token = object.token

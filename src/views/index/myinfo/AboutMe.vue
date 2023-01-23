@@ -29,18 +29,17 @@
 </template>
 
 <script>
-import {getConstant} from "@/network/constant/Constant";
+import {setConstants} from "../../../utils/utils";
 import {aboutMeIntroductionConstant} from "@/utils/const/const";
 import SquareJumping from "@/components/common/SquareJumping";
 import Loading from "@/components/common/Loading";
+import { ycaoId } from "../../../utils/const/const";
 
 export default {
   name: "AboutMe",
   data(){
     return {
       sign:'',
-      sign_parameter: aboutMeIntroductionConstant,
-      curUserId:this.$store.state.token.userId,
       domain:this.$options.name,//当前组件名字
       /*
       * add by ycao 20220311
@@ -57,31 +56,17 @@ export default {
     //赋值data里sign
     doAssignSign(){
       //aboutMe和contactMe组件哪一个先渲染后，就不用再次取请求值了
-      if(this.sign===''&&this.$store.state.token.signForAboutMe===''){
-        this.assignConstant(aboutMeIntroductionConstant)
+      if(this.sign===''&&!this.$store.getters.constants[aboutMeIntroductionConstant]){
+        setConstants(ycaoId,this.domain,()=>{
+          this.sign=this.$store.getters.constants[aboutMeIntroductionConstant]
+          this.loadingFin=true;
+        },()=>{
+          this.loadingFin=true;
+        })
       }else{
-        this.sign=this.$store.state.token.signForAboutMe;
+        this.sign=this.$store.getters.constants[aboutMeIntroductionConstant];
         this.loadingFin=true;
       }
-    },
-    /**
-     * 通过过滤的方法得到需要的签名文字
-     * @return
-     * @time 2021-12-26 13:13:11
-     */
-    assignConstant(name){
-      getConstant(this.curUserId,this.domain).then(data=>{
-        const curConstantObj= data.data.filter(
-            (constantObj)=>{
-              return constantObj.name===name}
-        )
-        this.sign = (curConstantObj&&curConstantObj.length>0) && curConstantObj[0].content;
-        this.$store.commit('set_signOfMe',{sign:this.sign})//把sign放入vuex，后续MyStory也会用到
-        this.loadingFin=true;
-      }).catch(err=> {
-        console.log(err);
-        this.loadingFin=true;
-      })
     },
     /**
      * 去往myStory组件

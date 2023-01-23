@@ -109,7 +109,7 @@ export default {
     },
     getFiles(){
       this.getAllFiles=true
-      getHomeData(this.curUserId).then(data=>{
+      getHomeData().then(data=>{
         if(data.code==='success'){//获得数据成功
           this.myData=data&&data.data;
           let temCatFile=[];
