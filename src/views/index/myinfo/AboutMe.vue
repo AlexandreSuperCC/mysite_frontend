@@ -25,6 +25,7 @@
     <h2>
       Please set your browser window size larger <br><br>(*^﹏^*)
     </h2>
+    <el-button type="primary" @click="this.$router.back()">back to previous page</el-button>
   </div>
 </template>
 
@@ -211,7 +212,7 @@ export default {
   margin-left: 0px;
 }
 .next-page{
-  text-align: right;
+  text-align: left;
 }
 .next-page-icon{
   margin: 10px 10px;

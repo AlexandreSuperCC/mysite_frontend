@@ -8,6 +8,7 @@
       v-loading="getFilesLoading"
       element-loading-text="getting files..."
       size="medium"
+      :height="uploadedFileListHeight"
       style="width: 100%"
   >
     <el-table-column label="Date" prop="created" width="150"/>
@@ -59,6 +60,12 @@ export default {
       type:String,
       default(){
         return ''
+      }
+    },
+    uploadedFileListHeight:{
+      type: Number,
+      default(){
+        return 300
       }
     }
   },

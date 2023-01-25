@@ -1,0 +1,19 @@
+@media (min-width: 1600px) {
+    .timeline-content,.cr-text-detailIntro,.el-step__description.el-step__title{
+      font-size: 18px !important;
+    }
+  }
+  @media (min-width: 950px) and (max-width: 1599px) {
+    .timeline-content,.cr-text-detailIntro,.el-step__description,.el-step__title{
+      font-size: 14px !important;
+    }
+  }
+    
+  @media (max-width: 949px) {
+    .timeline-content,.cr-text-detailIntro,.el-step__title{
+      font-size: 11px !important;
+    }
+    .el-step__description{
+      font-size: 9px !important;
+    }
+  }

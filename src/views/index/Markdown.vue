@@ -35,8 +35,15 @@
     </div>
     <el-row >
       <el-col :span="11" class="left-md">
-        <el-input ref="rawText" id="markdown-editor" type="textarea" v-model="content" :autosize="{ minRows: 20, maxRows: 80}" placeholder="type your markdown and use CTRL+S to save it!" >
-        </el-input>
+        <el-row>
+          <el-input ref="rawText" id="markdown-editor" type="textarea" v-model="content" :autosize="{ minRows: 20, maxRows: 80}" placeholder="type your markdown and use CTRL+S to save it!" >
+          </el-input>
+        </el-row>
+        <el-row>
+          <div class="upload-file-in-md">
+            <upload-file :show-uploaded-file-list="false"></upload-file>
+          </div>
+        </el-row>
       </el-col>
       <el-col :span="12" class="right-md">
         <div ref="htmlText" id="show-content" class="text-left">
@@ -58,10 +65,14 @@
 import {surpportTab, supportSave, sendThisOut, vm} from '@/assets/js/textarea_extend.js'
 import {ElMessageBox} from "element-plus";
 import {Upload} from '@element-plus/icons';
+import UploadFile from "@/views/index/UploadFile";
 
 export default {
   name:"Markdown",
-  components:{Upload},
+  components:{
+    UploadFile,
+    Upload
+  },
   data () {
     return {
       'converter':null,

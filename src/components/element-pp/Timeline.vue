@@ -1,6 +1,6 @@
 <template>
   <div class="block" @click="infoDrawer = true">
-    <div class="timeline-title">
+      <div class="timeline-title">
       Education
     </div>
     <el-timeline>
@@ -19,31 +19,31 @@
         </div>
       </el-timeline-item>
     </el-timeline>
-    <div class="timeline-title">
+      <div class="timeline-title">
       Intern Experience
-    </div>
-  <el-timeline>
-    <el-timeline-item
-        v-for="(activity, index) in experiences"
-        :key="index"
-        :icon="activity.icon"
-        :type="activity.type"
-        :color="activity.color"
-        :size="activity.size"
-        :hollow="activity.hollow"
-        :timestamp="activity.timestamp"
-    >
-      <div class="timeline-content">
-        {{ activity.content }}
       </div>
-    </el-timeline-item>
-  </el-timeline>
+      <el-timeline>
+        <el-timeline-item
+            v-for="(activity, index) in experiences"
+            :key="index"
+            :icon="activity.icon"
+            :type="activity.type"
+            :color="activity.color"
+            :size="activity.size"
+            :hollow="activity.hollow"
+            :timestamp="activity.timestamp"
+        >
+          <div class="timeline-content">
+            {{ activity.content }}
+          </div>
+        </el-timeline-item>
+      </el-timeline>
     <div class="formation-click">
       <img class="formation-click-icon" src="~assets/index/images/click_32.png" alt="click-me">
     </div>
   </div>
-  <el-drawer v-model="infoDrawer" direction="ltr" title="Stage 2021 - Développeur Backend chez Yonyou" :with-header="true">
-    <span>
+  <el-drawer :size="drawerSize" v-model="infoDrawer" direction="ltr" title="Stage 2021 - Développeur Backend chez Yonyou" :with-header="true">
+    <div>
       Yonyou Network Technology Co., Ltd. a son siège social à Beijing. Fondée en 1988, Yonyou, (en chinois : 用友) est devenue le principal fournisseur de logiciels de gestion d'entreprise, de solutions et de services en nuage en Chine et en Asie - Pacifique.
       <br><br>
       <a href="https://www.yonyou.com" target="_blank">
@@ -63,7 +63,7 @@
       </a>
       <h4><span style="color: red">Mots clefs :</span> Algorithmes, Java, Oracle, ERP, Supply Chain, Finance</h4>
 
-    </span>
+    </div>
   </el-drawer>
 </template>
 
@@ -108,7 +108,10 @@ export default {
         },
       ],
     }
-  }
+  },
+  props: {
+    drawerSize: { type: String, default: "35%" }
+  },
 }
 </script>
 
@@ -120,7 +123,6 @@ export default {
   color: #f8f0f0;
   letter-spacing: 1px;
   font-family: Arial;
-  font-size: small;
 }
 .formation-click{
   width: 100%;

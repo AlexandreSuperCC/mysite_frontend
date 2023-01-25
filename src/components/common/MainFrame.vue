@@ -48,10 +48,6 @@ export default {
   components:{
     Slide
   },
-  mounted() {
-  },
-  watch:{
-  },
   data(){
     return {
       // activeIndex:this.$store.state.token.curIndex,

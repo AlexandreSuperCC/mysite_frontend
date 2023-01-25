@@ -13,6 +13,7 @@ const MyStory = () => import('@/views/index/myinfo/MyStory')
 const MyProject = () => import('@/views/index/myCreation/MyProject')
 const ErrorPage = () => import('@/components/common/ErrorPage')
 import store from "@/store"
+import { loginRequiredMethodsCheck } from '../utils/utils';
 
 const routes = [
   {
@@ -77,19 +78,16 @@ const router = createRouter({
 
 //if you haven't exited but close the page, you can enter the page without login again
 router.beforeEach((to,from,next)=>{
-  const adminPages = store.getters.constants[adminPages]
-  if(to.path.indexOf(adminPages)===-1) {
+  const adminPages = store.getters.constants.adminPages
+  if(adminPages.indexOf(to.path)===-1) {
     next();
     return;
   }else{
     const token = sessionStorage.getItem('token')
     if (token) {
       if(to.path==='/home/uploadFile'||to.path==='/home/markdown'){
-        let role = store.getters.userRole
-        if(role!==0){
-          ElMessageBox.alert("Not authorized","Sorry!",{
-            confirmButtonText:'OK'
-          })
+        if(loginRequiredMethodsCheck()){
+          next({path:'/login'})
           return;
         }
       }

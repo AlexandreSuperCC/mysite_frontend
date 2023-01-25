@@ -1,5 +1,6 @@
 import {getConstant} from "@/network/constant/Constant";
 import store from "@/store"
+import {ElMessageBox} from "element-plus";
 
 export function isArrayToArray(str){
     if(str){
@@ -24,4 +25,14 @@ export function setConstants(id,domain,successFallback,failFallback){
         console.log(err)
         failFallback&&failFallback()
     })
+}
+
+export function loginRequiredMethodsCheck(){
+    if(store.getters.userRole!==0){
+        ElMessageBox.alert("Not authorized! Please login!","Sorry!",{
+          confirmButtonText:'OK'
+        })
+        return true;
+    }
+    return false;
 }

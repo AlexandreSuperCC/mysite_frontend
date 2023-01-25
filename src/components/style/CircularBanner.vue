@@ -108,6 +108,39 @@ export default {
 </script>
 
 <style scoped>
+@media (min-width: 2000px) {
+  .my-photo-side{
+    height: 250px;
+  }
+  .my-photo-center{
+    height: 300px;
+  }
+}
+@media (min-width: 950px) and (max-width: 1999px) {
+  .my-photo-side{
+    width: 180px;
+  }
+  .my-photo-center{
+    width: 200px;
+  }
+}
+@media (min-width: 450px) and (max-width: 949px) {
+  .my-photo-side{
+    width: 130px;
+  }
+  .my-photo-center{
+    width: 150px;
+  }
+}
+  
+@media (max-width: 449px) {
+  .my-photo-side{
+    height: 120px;
+  }
+  .my-photo-center{
+    height: 140px;
+  }
+}
 .cb-container{
   display: flex;
   width: 100%;
@@ -132,7 +165,6 @@ export default {
   border-color: #0b1e57;
   border-width: 1px;
   flex: 2;
-  height: 250px;
 }
 .my-photo-center{
   margin: 0 1px;
@@ -140,7 +172,6 @@ export default {
   border-color: #0b1e57;
   border-width: 2px;
   flex: 3;
-  height: 300px;
 }
 .swiper-left-before{
   position: relative;

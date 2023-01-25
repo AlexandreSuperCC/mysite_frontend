@@ -20,9 +20,16 @@
         </div>
       </template>
     </el-upload>
-    <div class="list-container">
+    <div class="upload-msg">
+      <el-input v-model="uploadReturnMsg" placeholder="Uploaded File URL">
+      </el-input>
+      <el-button style="margin-top: 8px" type="primary" @click="copyText">Copy</el-button>
+      <el-button style="margin-top: 8px" type="primary" @click="clearText">Clear</el-button>
+    </div>
+    <div class="list-container" v-if="showUploadedFileList">
       <div class="list-title">All uploaded files</div>
       <uploaded-file-list :curUserId="curUserId"
+                          :uploaded-file-list-height="getWindowHeightToFileList"
                           @doRefreshFileList="doRefresh"
                           :key="childTimer" ref="ufl"></uploaded-file-list>
     </div>
@@ -32,6 +39,7 @@ import { UploadFilled } from '@element-plus/icons'
 import {Const} from "@/utils";
 import {ElMessageBox} from "element-plus";
 import UploadedFileList from "@/views/index/uploadFile/UploadedFileList";
+import { httpOrHttps } from '../../utils/const/const';
 export default {
   name: "UploadFile",
   data(){
@@ -40,10 +48,38 @@ export default {
        uploadAddress:Const.uploadAddress,
       curUserId:this.$store.state.token.userId,
       uploadLoading:false,
-      childTimer:''
+      childTimer:'',
+      uploadReturnMsg:'',
+      httpOrHttpsIn:httpOrHttps
     }
   },
+  props: {
+    showUploadedFileList: { 
+      type: Boolean,       
+      default(){
+        return true
+      } 
+    }
+  },
+  computed:{
+    getWindowHeightToFileList(){
+      let width = document.body.clientHeight
+      if(width>999){
+        return 550;
+      } else if(width>649){
+        return 350;
+      }else{
+        return 200;
+      }
+    },
+  },
   methods:{
+    copyText() {
+      navigator.clipboard.writeText(this.uploadReturnMsg);
+    },
+    clearText() {
+      this.uploadReturnMsg="";
+    },
     uploadFileAccAction(params){
       this.uploadLoading=true;//使页面处于加载中
       const file = params.file,
@@ -64,14 +100,15 @@ export default {
       this.$store.dispatch('UploadFile',form).then(res=>{
         let resJson = JSON.parse(res.request.response);//解析返回的json字符串
         if(resJson&&resJson.code==='fail'){
-          ElMessageBox.alert("upload fails: "+resJson.msg+", heading back to login page...",{
+          ElMessageBox.alert("upload fails: "+resJson.msg+", please try again...",{
             confirmButtonText:'OK',
             callback:()=>{
               //pay attention to the order of the three phrases, sync action will come before async
               //so token is null when execute Logout
-              this.$router.replace('/login');
             }
           })
+        }else{
+          this.uploadReturnMsg=resJson.msg
         };
         this.uploadLoading=false//停止加载
         this.childTimer = new Date().getTime()//force refresh file list
@@ -99,6 +136,11 @@ export default {
 </script>
 
 <style scoped>
+.upload-msg{
+  width: 360px;  
+  margin: 10px auto;
+  display: block;
+}
 .list-container{
   margin-top: 50px;
 }
@@ -110,7 +152,7 @@ export default {
 }
 .upload-demo{
   text-align: center;
-  margin-top: 20px;
+  padding-top: 40px;
 }
 .upload-img{
   height: 150px;

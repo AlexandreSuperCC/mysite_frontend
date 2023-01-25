@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-if="screenAdapt">
+  <div class="container">
     <div class="introduction">
       <div class="intro-text">
         <h2>
@@ -13,7 +13,7 @@
       <div class="c b-cpn">
         <carousel>
           <template v-slot:swiper-left>
-            <timeline></timeline>
+            <timeline :drawer-size=drawerSizeFather></timeline>
           </template>
           <template v-slot:swiper-right>
             <div class="cr-text-detailIntro">
@@ -35,14 +35,9 @@
       </div>
     </div>
     <div class="contact">
-      <contact-me>
+      <contact-me :map-size=mapSizeFather>
       </contact-me>
     </div>
-  </div>
-  <div class="no-display" style="text-align: center;" v-else>
-    <h2>
-      Please set your browser window width larger <br><br>(*^﹏^*)
-    </h2>
   </div>
 </template>
 
@@ -67,10 +62,11 @@ export default {
   },
   data(){
     return {
+      drawerSizeFather:"35%",
+      mapSizeFather:"35%",
       sign:'',
       curUserId:this.$store.state.token.userId,
       domain:'AboutMe',//当前组件名字
-      screenAdapt:true,
       screenWidth: document.body.clientWidth,
     }
   },
@@ -105,10 +101,10 @@ export default {
   watch: {
     screenWidth: {
       handler: function (val) {
-        if(val<=1278){
-          this.screenAdapt=false
+        if(val<=978){
+          this.drawerSizeFather="85%"
         }else{
-          this.screenAdapt=true
+          this.drawerSizeFather="35%"
         }
       },
       immediate: true,
@@ -119,8 +115,8 @@ export default {
 
 <style scoped>
 .container{
-  /*position: fixed;*/
-  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -137,9 +133,6 @@ export default {
 }
 .slideshow-photo {
   flex: 0 0 0;
-}
-.contact {
-  /*background-color: #bed5ee;*/
 }
 .cb-cpn{
   /*通过观察盒子模型发现高度/宽度为0，因此一定要指定高度和宽度！！！*/

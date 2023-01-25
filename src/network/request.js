@@ -39,9 +39,9 @@ export function request(config){
     */
     instance1.interceptors.response.use(
         response=>{
-            const adminPages = store.getters.constants[adminPages]
+            const adminPages = store.getters.constants.adminPages
 
-            if(response.config.url.indexOf(adminPages)===-1&&response.config.url!=='/login'){//coming from the pages not authorized
+            if(adminPages.indexOf(response.config.url)===-1&&response.config.url!=='/login'){//coming from the pages not authorized
                 return response.data;
             }else{
                 //下面我是进行一个时间的一个对比；如果前台进行一个三十分钟没有操作的话会进行一个重新登入状态；重新登入时候后台会重新生成一个新token；从而不要担心后端token的一个刷新导致前端token不相同问题。

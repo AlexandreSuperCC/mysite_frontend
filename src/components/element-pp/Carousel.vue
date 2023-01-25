@@ -7,8 +7,8 @@
 <template>
   <div class="cr-container">
     <el-row>
-      <el-col :xl="{span:1}" :lg="{span:1}" :md="{span:0}" :sm="{span:0}"/>
-      <el-col :xl="{span:8}" :lg="{span:7}" :md="{span:7}" :sm="{span:6}">
+      <el-col :xl="{span:1}" :lg="{span:1}" :md="{span:0}"/>
+      <el-col :xl="{span:8}" :lg="{span:7}" :md="{span:7}">
         <div class="cr-left"><slot name="swiper-left"></slot></div>
       </el-col>
       <el-col :xl="{span:6}" :lg="{span:8}" :md="{span:10}" :sm="{span:12}">
@@ -25,10 +25,12 @@
           </div>
         </div>
       </el-col>
-      <el-col :xl="{span:1}" :lg="{span:1}" :md="{span:0}" :sm="{span:0}"/>
-      <el-col :xl="{span:7}" :lg="{span:7}" :md="{span:7}" :sm="{span:6}">
+      <el-col :xl="{span:2}" :lg="{span:1}" :md="{span:0}"/>
+      <el-col :xl="{span:0}" :lg="{span:0}" :md="{span:0}" :sm="{span:0}" :xs="{span:2}"><div class="espace-for-phone-up"></div></el-col>
+      <el-col :xl="{span:7}" :lg="{span:7}" :md="{span:7}" :sm="{span:18}" :xs="{span:22}">
         <div class="cr-right"><slot name="swiper-right"></slot></div>
       </el-col>
+      <el-col :xl="{span:0}" :lg="{span:0}" :md="{span:0}" :sm="{span:0}"><div class="espace-for-phone-down" style="height: 150px"></div></el-col>
     </el-row>
   </div>
 </template>
@@ -82,6 +84,9 @@ export default {
 </script>
 
 <style scoped>
+.is-safari{
+  margin-bottom: 36px;
+}
 /*模版里的*/
 .el-carousel__item img {
   color: #475669;

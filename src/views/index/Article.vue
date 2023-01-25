@@ -54,6 +54,7 @@
 import {getHomeData, deleteOneFile, deleteCatFilesIn} from "@/network/mainPage/home";
 import ViewFile from "@/views/index/ViewMd/ViewFile";
 import {ElMessageBox} from "element-plus";
+import { loginRequiredMethodsCheck } from "../../utils/utils";
 export default {
   name: "Article",
   components:{
@@ -147,6 +148,9 @@ export default {
      * @time 2021-12-12 12:30:55
      */
     toEditPage(file){
+      if(loginRequiredMethodsCheck()){
+        return;
+      }
       let sendEditPageObj={
         'fid':file.mid,
         'rate': this.rateToInt(file.rate),
@@ -164,10 +168,7 @@ export default {
       })
     },
     deleteFile(){
-      if(this.$store.getters.userRole!==0){
-        ElMessageBox.alert("Not authorized","Sorry!",{
-          confirmButtonText:'OK'
-        })
+      if(loginRequiredMethodsCheck()){
         return;
       }
       deleteOneFile(this.tempMidForPopCDelete).then((data)=>{
@@ -178,6 +179,19 @@ export default {
           }
         })
         }).catch(err=>console.log(err))
+    },
+    deleteCatAction(cat) {
+      if(loginRequiredMethodsCheck()){
+        return;
+      }
+      ElMessageBox.alert("Are you sure to delete this category and all the files in it?",{
+        confirmButtonText:'OK',
+        showCancelButton: true,
+        callback:(action)=>{
+          if(action!='confirm') return;
+          this.deleteCat(cat,this.curUserId);
+        }
+      })
     },
     deleteCat(cat,curUserId){
       deleteCatFilesIn(cat,curUserId).then((data)=>{
@@ -204,22 +218,6 @@ export default {
     //     this.isReloadAfterDelOneFile = true;
     //   })
     // }
-    deleteCatAction(cat) {
-      if(this.$store.getters.userRole!==0){
-        ElMessageBox.alert("Not authorized","Sorry!",{
-          confirmButtonText:'OK'
-        })
-        return;
-      }
-      ElMessageBox.alert("Are you sure to delete this category and all the files in it?",{
-        confirmButtonText:'OK',
-        showCancelButton: true,
-        callback:(action)=>{
-          if(action!='confirm') return;
-          this.deleteCat(cat,this.curUserId);
-        }
-      })
-    },
     /**
      * used for sending rate to edit page
      * to avoid Invalid prop: type check failed for prop "modelValue"...

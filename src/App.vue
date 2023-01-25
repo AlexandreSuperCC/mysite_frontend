@@ -33,7 +33,9 @@ import {setConstants} from './utils/utils'
     }
   }
 </script>
-<style>
+<style lang="scss">
+@use "@/assets/style/shared-responsive.scss" as resp;
+
 /*container full screen*/
 html,body,#app,.el-container{
   margin: 0;

@@ -4,13 +4,12 @@
     <div class="cm-left"></div>
     <div class="cm-middle">
       <el-steps :active="curActive">
-        <el-step title="phone number" @click="changeActive(0)">
+        <el-step title="linkedin" @click="changeActive(0)">
           <template v-slot:icon>
-            <img class="smartphone-icon" src="~assets/index/images/contact/smartphone.png" alt="phone">
+            <img class="linkedin-icon" src="~assets/index/images/contact/linkedin.png" alt="linkedin">
           </template>
           <template v-slot:description>
-            <a class="my-telephone" href="tel:0668252048">+33 6 68 25 20 48</a><br>
-            <a class="my-telephone" href="tel:18019010788">+86 18019010788</a>
+            <a class="my-linkedin" target="_blank" href="https://www.linkedin.com/in/yuan-cao-75b112208">linkedin.com/in/yuan-cao-75b112208</a>
           </template>
         </el-step>
         <el-step title="e-mail" @click="changeActive(1)">
@@ -21,12 +20,13 @@
             <a class="my-email" target="_blank" href="mailto:yuancaocc@gmail.com">yuancaocc@gmail.com</a>
           </template>
         </el-step>
-        <el-step title="linkedin" @click="changeActive(2)">
+        <el-step title="phone number" @click="changeActive(2)">
           <template v-slot:icon>
-            <img class="linkedin-icon" src="~assets/index/images/contact/linkedin.png" alt="linkedin">
+            <img class="smartphone-icon" src="~assets/index/images/contact/smartphone.png" alt="phone">
           </template>
           <template v-slot:description>
-            <a class="my-linkedin" target="_blank" href="https://www.linkedin.com/in/yuan-cao-75b112208">linkedin.com/in/yuan-cao-75b112208</a>
+            <a class="my-telephone" href="tel:0668252048">+33 6 68 25 20 48</a><br>
+            <a class="my-telephone" href="tel:18019010788">+86 18019010788</a>
           </template>
         </el-step>
         <el-step title="location" @click="changeActive(3)">
@@ -50,7 +50,7 @@
     <div class="cm-right"></div>
   </div>
   <el-dialog v-model="mapDrawer" @open="openedEve"
-             close-on-press-escape width="35%" top="12vh" center>
+             close-on-press-escape :width=mapSize top="12vh" center>
     <template v-slot:title>
       <span style="color: blue">LOCATE ME ON GOOGLE MAP</span>&nbsp;
       <img class="locate-me-icon" src="~assets/index/images/contact/locateOnMap.png" alt="location">
@@ -82,6 +82,9 @@ export default {
       LocationInformation: markRaw(LocationInformation),
       curActive:4,
     }
+  },
+  props: {
+    mapSize: { type: String, default: "35%" }
   },
   methods:{
     openedEve(){
