@@ -1,3 +1,5 @@
+@import './common-variables.scss';
+
 @media (min-width: 1600px) {
     .timeline-content,.cr-text-detailIntro,.el-step__description.el-step__title{
       font-size: 18px !important;
@@ -17,3 +19,16 @@
       font-size: 9px !important;
     }
   }
+
+
+
+.el-checkbox__label{
+  color: $font-color-bright !important;
+}
+.el-checkbox__input.is-checked .el-checkbox__inner {
+  background-color: $menu-color-dark !important;
+  border-color: $menu-color-dark !important;
+}
+.el-checkbox__input.is-focus .el-checkbox__inner {
+  border: $menu-color-dark !important;
+}
