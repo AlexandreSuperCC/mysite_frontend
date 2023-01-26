@@ -69,7 +69,3 @@
     name: "SocialButton"
   }
   </script>
-  
-  <style lang="scss" scoped>
-  @use "@/assets/style/social-button.scss" as social;
-  </style>

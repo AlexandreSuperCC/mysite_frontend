@@ -54,7 +54,6 @@
   
   </script>
   <style lang="scss" scoped>
-  @use "@/assets/style/login-page.scss" as login;
   /*container full screen*/
   .first-page{
     height: 100%;

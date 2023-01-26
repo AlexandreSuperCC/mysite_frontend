@@ -34,7 +34,7 @@ import {setConstants} from './utils/utils'
   }
 </script>
 <style lang="scss">
-@use "@/assets/style/style-override.scss";
+@use "@/assets/style/cklovery.scss";
 
 /*container full screen*/
 html,body,#app,.el-container{

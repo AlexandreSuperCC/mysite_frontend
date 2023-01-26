@@ -152,7 +152,6 @@ export default {
 }
 </script>
 <style scoped>
-@import '../../assets/style/menu-bar.css';
 #show-text{
   font-family: Castellar;
   font-size: 18px;
