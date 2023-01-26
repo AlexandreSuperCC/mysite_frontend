@@ -2,7 +2,7 @@
   <div id="app">
     <!-- 使用路由缓存 -->
     <router-view v-slot="{ Component }">
-      <keep-alive :include="['Login']">
+      <keep-alive :include="[]">
         <component :is="Component" />
       </keep-alive>
     </router-view>

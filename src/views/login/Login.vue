@@ -68,8 +68,8 @@ export default {
     return {
       loading:false,
       loginForm:{
-        username:'visitor',
-        password:'666666'
+        username:'',
+        password:''
       },
       rules:{
         username:[//here the name must be the same as the object in model strictly
