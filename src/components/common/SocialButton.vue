@@ -40,7 +40,7 @@
                 </g>
                 </svg>
             </a>
-            <a class="social-link social-link--instagram" id="instagram" href="https://www.instagram.com/yuancaocc" target="_blank">
+            <a class="social-link social-link--instagram" id="instagram" href="https://www.instagram.com/alexandresuper6" target="_blank">
                 <svg class="social-svg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
                 <title>
                     instagram
