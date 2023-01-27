@@ -11,6 +11,7 @@ const SearchEngine = () => import('@/views/index/searchEngine/SearchEngine')
 const AboutMe = () => import('@/views/index/myinfo/AboutMe')
 const MyStory = () => import('@/views/index/myinfo/MyStory')
 const MyProject = () => import('@/views/index/myCreation/MyProject')
+const Dashboard = () => import('@/views/index/Dashboard')
 const ErrorPage = () => import('@/components/common/ErrorPage')
 import store from "@/store"
 import { loginRequiredMethodsCheck } from '../utils/utils';
@@ -57,6 +58,10 @@ const routes = [
       {
         path: 'myProject',
         component:MyProject
+      },
+      {
+        path: 'dashboard',
+        component:Dashboard
       }
     ]
   },

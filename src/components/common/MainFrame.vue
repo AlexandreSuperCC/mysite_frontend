@@ -5,6 +5,9 @@
         CKLOVERY
       </span>
     </a>
+    <a id="my-dashboard" href="#" @click.native.prevent="getRoute('dashboard')" v-if="role===0">
+      <span>Dashboard</span>
+    </a>
     <a id="my-article" href="#" @click.native.prevent="getRoute('article')">
       <span>Home</span>
     </a>
@@ -65,6 +68,8 @@ export default {
     getRoute(cpn){
       if(this.enableCache){
         switch (cpn) {
+        case 'dashboard':
+          return this.$router.push('/home/dashboard')
         case 'article':
           return this.$router.push('/home/article')
         case 'aboutme':
@@ -82,6 +87,8 @@ export default {
       }
       }else{
         switch (cpn) {
+        case 'dashboard':
+          return window.location.replace('/home/dashboard')
         case 'article':
           return window.location.replace('/home/article')
         case 'aboutme':

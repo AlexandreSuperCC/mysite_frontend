@@ -109,7 +109,7 @@ function interceptorHandler(error){
         ElMessageBox.alert(alertMes + ", please re-login", "Attention!", {
             confirmButtonText: 'OK',
             callback: () => {
-                window.location.replace("/login")
+                window.location.replace("/")
             }
         }).catch(r => console.log(r))
     }else{
