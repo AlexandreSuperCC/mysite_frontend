@@ -103,8 +103,10 @@ export default {
       handler: function (val) {
         if(val<=978){
           this.drawerSizeFather="85%"
+          this.mapSizeFather="85%"
         }else{
           this.drawerSizeFather="35%"
+          this.mapSizeFather="35%"
         }
       },
       immediate: true,
