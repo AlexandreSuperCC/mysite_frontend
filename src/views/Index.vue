@@ -5,7 +5,7 @@
         <el-main v-if="!toLogin">
           <div class="container">
             <div class="avatar">
-              <a href="/home/myStory">
+              <a href="#" @click.native.prevent="this.$router.push('/home/myStory')" >
                 <img src="~assets/index/images/my-sea-big.jpg" alt="YCAO" />
               </a>
             </div>
