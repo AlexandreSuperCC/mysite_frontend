@@ -35,7 +35,7 @@
         Exit
       </span>
     </a>
-    <el-checkbox v-model="enableCache">Enable Cache</el-checkbox>
+    <el-checkbox v-model="enableCache" disabled>Enable Cache</el-checkbox>
     <a id="site-git" href="https://github.com/AlexandreSuperCC/mysite_frontend_public" target="_blank">
       <span style="font-family: STLiti;font-size: medium;font-weight: normal">Code Source<br>See me on github ^_^</span>
     </a>
