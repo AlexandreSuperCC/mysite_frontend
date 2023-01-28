@@ -30,3 +30,7 @@
 .el-checkbox__input.is-focus .el-checkbox__inner {
   border: $menu-color-dark !important;
 }
+
+.el-drawer.ltr.open{
+  overflow: scroll;
+}
