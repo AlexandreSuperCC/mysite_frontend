@@ -17,7 +17,7 @@ export function isArrayToArray(str){
 
 export function setConstants(id,domain,successFallback,failFallback){
     getConstant(id,domain).then(data=>{
-        data.data.forEach(constant => {
+        data.data&&data.data.forEach(constant => {
           store.commit('set_constants',{name:constant.name,value: isArrayToArray(constant.content)})//把sign放入vuex，后续MyStory也会用到
         });
         successFallback&&successFallback()

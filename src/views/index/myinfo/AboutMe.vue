@@ -23,7 +23,7 @@
   </div>
   <div class="no-display" style="text-align: center;" v-else>
     <h2>
-      Please set your browser window size larger <br><br>(*^﹏^*)
+      Please open this page on desktop <br><br>(*^﹏^*)
     </h2>
     <el-button type="primary" @click="this.$router.back()">back to previous page</el-button>
   </div>

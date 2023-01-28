@@ -27,12 +27,18 @@
   import Beian from "@/components/common/Beian";
   import {httpOrHttps} from "@/utils/const/const";
   import SocialButton from "@/components/common/SocialButton";
-  
+  import {aboutMeIntroductionConstant} from "@/utils/const/const";
+  import {setConstants} from "../utils/utils";
+  import { ycaoId } from "../utils/const/const";
+
   export default {
     name:'Index',
     components:{
       Beian,
       SocialButton,
+    },
+    mounted(){
+      this.init()
     },
     created() {
       /**
@@ -50,6 +56,17 @@
         beianFontColor: '#000000',
       }
     },
+    methods:{
+      init(){
+        this.doAssignSign()
+      },
+      doAssignSign(){
+        //aboutMe和contactMe组件哪一个先渲染后，就不用再次取请求值了
+        if(!this.$store.getters.constants[aboutMeIntroductionConstant]){
+          setConstants(ycaoId,"AboutMe")
+        }
+      },
+    }
   }
   
   </script>
