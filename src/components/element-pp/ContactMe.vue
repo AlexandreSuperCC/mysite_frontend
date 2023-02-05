@@ -20,7 +20,7 @@
             <a class="my-email" target="_blank" href="mailto:yuancaocc@gmail.com">yuancaocc@gmail.com</a>
           </template>
         </el-step>
-        <el-step title="phone number" @click="changeActive(2)">
+        <el-step title="phone" @click="changeActive(2)">
           <template v-slot:icon>
             <img class="smartphone-icon" src="~assets/index/images/contact/smartphone.png" alt="phone">
           </template>

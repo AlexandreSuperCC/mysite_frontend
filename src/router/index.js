@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import {ElMessageBox} from "element-plus";
 
 const Index = () => import('@/views/Index')
 const Login = () => import('@/views/login/Login')
