@@ -9,6 +9,15 @@ export function getAllLogs (){
             .catch(err=>reject(err))
     })
 }
+export function getVisitLogs (){
+    return new Promise((resolve,reject) => {
+        request({
+            url:'/db/visitLogs',
+            method:'get',
+        }).then(data=>resolve(data))
+            .catch(err=>reject(err))
+    })
+}
 export function getLoginLogs (){
     return new Promise((resolve,reject) => {
         request({

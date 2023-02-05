@@ -21,6 +21,23 @@
                 </el-table-column>
             </el-table>
         </div>
+        <div class="visit-log-table">
+            <el-table       
+                :data="
+                visitLogData.filter(
+                    (data) =>
+                    !searchVisitLogs || data.info.toLowerCase().includes(searchVisitLogs.toLowerCase())
+                )"
+                v-loading="getVisitLogsLoading"
+                element-loading-text="getting visit logs..." max-height="500" border>
+                <el-table-column prop="id" label="ID" width="60" />
+                <el-table-column prop="info" label="Visit Info">
+                    <template #header>
+                        <el-input v-model="searchVisitLogs" size="small" placeholder="Search in visit info" />
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
         <div class="all-log-table">
             <el-table       
                 :data="
@@ -52,10 +69,13 @@ export default {
     return {
         logData:[],
         loginLogData:[],
+        visitLogData:[],
         searchAllLogs:'',
-        getAllLogsLoading: true,
+        searchVisitLogs:'',
         searchLoginLogs:'',
+        getAllLogsLoading: true,
         getLoginLogsLoading: true,
+        getVisitLogsLoading: true,
     }
   },
   mounted(){
@@ -68,6 +88,7 @@ export default {
     getTwoLogs(){
         this.getAllLogsLoading=true;
         this.getLoginLogsLoading=true;
+        this.getVisitLogsLoading=true;
         this.$store.dispatch('GetAllLogs').then(data=>{
             if(data&&data.data){//保证拿到数据
                 data.data.forEach((object)=>{
@@ -78,6 +99,20 @@ export default {
         }).catch(err=>{
             console.log(err)
             this.getAllLogsLoading=false;
+        })
+        this.$store.dispatch('GetVisitLogs').then(data=>{
+            if(data&&data.data){//保证拿到数据
+                for(let i=data.data.length-1;i>=0;i--){
+                    this.visitLogData.push({
+                            id:i,
+                            info:JSON.stringify(data.data[i]).slice(1,-1)
+                        })
+                }
+            }
+            this.getVisitLogsLoading=false;
+        }).catch(err=>{
+            console.log(err)
+            this.getVisitLogsLoading=false;
         })
         this.$store.dispatch('GetLoginLogs').then(data=>{
             if(data&&data.data){//保证拿到数据
@@ -107,7 +142,7 @@ export default {
     margin:0 auto;
     text-align: center;
 }
-.login-log-table{
+.login-log-table,.visit-log-table{
     width: 500px;
     padding: 8px 8px;
     margin: 0 auto;
