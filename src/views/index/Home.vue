@@ -1,8 +1,8 @@
 <template>
 <div class="home-container">
-<main-frame></main-frame>
+<main-frame @changeCacheOptions="changeCacheArr"></main-frame>
   <router-view v-slot="{ Component }">
-    <keep-alive :include="['UploadFile','Markdown','Article','AboutMe','MyStory']">
+    <keep-alive :include="cacheArr">
       <component :is="Component" />
     </keep-alive>
   </router-view>
@@ -25,7 +25,7 @@ export default {
   },
   data(){
     return {
-
+      cacheArr:[]
     }
   },
   methods:{
@@ -35,6 +35,13 @@ export default {
     clearStateToken(){
       sessionStorage.removeItem('stateToken')
     },
+    changeCacheArr(opt){
+      if(opt){
+        this.cacheArr=['UploadFile','Markdown','Article','AboutMe','MyStory']
+      }else{
+        this.cacheArr=[]
+      }
+    }
   }
 }
 </script>

@@ -3,6 +3,7 @@ import user from "@/store/modules/user";
 import token from "@/store/modules/token";
 import upload from "@/store/modules/upload";
 import markdown from "@/store/modules/markdown";
+import dashboard from "@/store/modules/dashboard";
 
 export default createStore({
   state: {
@@ -16,5 +17,6 @@ export default createStore({
     user,
     upload,
     markdown,
+    dashboard
   }
 })

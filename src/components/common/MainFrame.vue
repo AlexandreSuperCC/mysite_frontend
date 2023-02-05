@@ -5,35 +5,37 @@
         CKLOVERY
       </span>
     </a>
-    <a id="my-article" href="/home/article">
+    <a id="my-dashboard" href="#" @click.native.prevent="getRoute('dashboard')" v-if="role===0">
+      <span>Dashboard</span>
+    </a>
+    <a id="my-article" href="#" @click.native.prevent="getRoute('article')">
       <span>Home</span>
     </a>
-    <a id="my-info" href="/home/aboutme">
+    <a id="my-info" href="#" @click.native.prevent="getRoute('aboutme')">
       <span>About Me</span>
     </a>
-    <a id="my-story" href="/home/myStory">
+    <a id="my-story" href="#" @click.native.prevent="getRoute('myStory')">
       <span>My Story</span>
     </a>
-    <a id="my-project" href="/home/myProject">
+    <a id="my-project" href="#" @click.native.prevent="getRoute('myProject')">
       <span>My Project</span>
     </a>
-    <a id="markdown-editor" href="/home/markdown" v-if="role===0">
+    <a id="markdown-editor-menu" href="#" @click.native.prevent="getRoute('markdown')" v-if="role===0">
       <span>Markdown Editor</span>
     </a>
-    <a id="upload-file" href="/home/uploadFile" v-if="role===0">
+    <a id="upload-file" href="#" @click.native.prevent="getRoute('uploadFile')" v-if="role===0">
       <span>Upload File</span>
     </a>
-    <a id="logout" href="#">
+    <a id="admin-login" href="#" @click.native.prevent="smallExitEvent">
+      <span>Admin Login</span>
+    </a>
+    <a id="logout" href="#" @click.native.prevent="exitEvent">
       <span style="font-size: medium">
-         <el-popconfirm confirm-button-text="Yes" cancel-button-text="No" icon="el-icon-info" icon-color="red"
-                       title="Are you sure to exit?" @confirm="exitEvent" @cancel="ignoreEvent">
-                     <template #reference>
-                       <el-icon size="24"><SwitchButton /></el-icon>
-                     </template>
-         </el-popconfirm>
+         <el-icon size="24"><SwitchButton /></el-icon>
         Exit
       </span>
     </a>
+    <el-checkbox v-model="enableCache">Enable Cache</el-checkbox>
     <a id="site-git" href="https://github.com/AlexandreSuperCC/mysite_frontend_public" target="_blank">
       <span style="font-family: STLiti;font-size: medium;font-weight: normal">Code Source<br>See me on github ^_^</span>
     </a>
@@ -50,21 +52,67 @@ export default {
   components:{
     Slide
   },
-  mounted() {
-  },
-  watch:{
-  },
   data(){
     return {
       // activeIndex:this.$store.state.token.curIndex,
       // activeIndex2:'2',
       disableUpload:false,
       role:this.$store.getters.userRole,
+      enableCache:this.$store.getters.cacheEnable,
     }
   },
   methods:{
     handleSelect(){
 
+    },
+    getRoute(cpn){
+      if(this.enableCache){
+        switch (cpn) {
+        case 'dashboard':
+          return this.$router.push('/home/dashboard')
+        case 'article':
+          return this.$router.push('/home/article')
+        case 'aboutme':
+          return this.$router.push('/home/aboutme')
+        case 'myStory':
+          return this.$router.push('/home/myStory')
+        case 'myProject':
+          return this.$router.push('/home/myProject')
+        case 'markdown':
+          return this.$router.push('/home/markdown')
+        case 'uploadFile':
+          return this.$router.push('/home/uploadFile')
+        default:
+          break;
+      }
+      }else{
+        switch (cpn) {
+        case 'dashboard':
+          return window.location.replace('/home/dashboard')
+        case 'article':
+          return window.location.replace('/home/article')
+        case 'aboutme':
+          return window.location.replace('/home/aboutme')
+        case 'myStory':
+          return window.location.replace('/home/myStory')
+        case 'myProject':
+          return window.location.replace('/home/myProject')
+        case 'markdown':
+          return window.location.replace('/home/markdown')
+        case 'uploadFile':
+          return window.location.replace('/home/uploadFile')
+        default:
+          break;
+      }
+      }
+    },
+    smallExitEvent(){
+      const token = sessionStorage.getItem('token')
+      if (token) {//when it is already logged in
+        this.exitEvent()
+      }else{
+        this.$router.push('/login');
+      }
     },
     exitEvent(){
       //tell the backend to clear session
@@ -74,24 +122,17 @@ export default {
             this.$store.commit("del_token");
             this.$store.commit("del_time");
             if(res&&res.code&&res.code==='success'){//normal case
-              ElMessageBox.alert(res.msg+", click 'OK' to return to the login page",{
-                confirmButtonText:'OK',
-                callback:()=>{
-                  //pay attention to the order of the three phrases, sync action will come before async
-                  //so token is null when execute Logout
-                  this.$router.replace('/login');
-                }
-              })
+              window.location.replace('/');
             }else{//not normal case, perhaps due to unknown error or long-time no interaction
               if(res&&res.msg){
-                ElMessageBox.alert(res.msg+", error1!","Attention!",{
+                ElMessageBox.alert(res.msg+", error!","Attention!",{
                   confirmButtonText:'OK',
                   callback:()=>{
-                    this.$router.replace('/login')
+                    window.location.replace('/')
                   }
                 })
               }
-              this.$router.replace('/login')//long time no interaction, 'no res.msg' error occurs
+              window.location.replace('/')//long time no interaction, 'no res.msg' error occurs
             }
           })
           .catch(err=>{//rare case
@@ -105,11 +146,19 @@ export default {
     ignoreEvent(){
 
     },
-  }
+  },
+  watch: {
+    enableCache: {
+      handler: function (val) {
+        this.$store.commit('set_cacheEnable',{cacheEnable:val})
+        this.$emit('changeCacheOptions',val)
+      },
+      immediate: true,
+    },
+  },
 }
 </script>
 <style scoped>
-@import '../../assets/style/menu-bar.css';
 #show-text{
   font-family: Castellar;
   font-size: 18px;

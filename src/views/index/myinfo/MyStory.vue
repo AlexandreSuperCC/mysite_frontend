@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-if="screenAdapt">
+  <div class="container">
     <div class="introduction">
       <div class="intro-text">
         <h2>
@@ -13,7 +13,7 @@
       <div class="c b-cpn">
         <carousel>
           <template v-slot:swiper-left>
-            <timeline></timeline>
+            <timeline :drawer-size=drawerSizeFather></timeline>
           </template>
           <template v-slot:swiper-right>
             <div class="cr-text-detailIntro">
@@ -35,14 +35,9 @@
       </div>
     </div>
     <div class="contact">
-      <contact-me>
+      <contact-me :map-size=mapSizeFather>
       </contact-me>
     </div>
-  </div>
-  <div class="no-display" style="text-align: center;" v-else>
-    <h2>
-      Please set your browser window width larger <br><br>(*^﹏^*)
-    </h2>
   </div>
 </template>
 
@@ -52,7 +47,8 @@ import Carousel from "@/components/element-pp/Carousel";
 import Timeline from "@/components/element-pp/Timeline";
 import ContactMe from "@/components/element-pp/ContactMe";
 import {aboutMeIntroductionConstant} from "@/utils/const/const";
-import {getConstant} from "@/network/constant/Constant";
+import {setConstants} from "../../../utils/utils";
+import { ycaoId } from "../../../utils/const/const";
 
 
 
@@ -66,10 +62,11 @@ export default {
   },
   data(){
     return {
+      drawerSizeFather:"35%",
+      mapSizeFather:"35%",
       sign:'',
       curUserId:this.$store.state.token.userId,
       domain:'AboutMe',//当前组件名字
-      screenAdapt:true,
       screenWidth: document.body.clientWidth,
     }
   },
@@ -91,35 +88,25 @@ export default {
     },
     //赋值data里sign
     doAssignSign(){
-      if(this.sign===''&&this.$store.state.token.signForAboutMe===''){
-        this.assignConstant(aboutMeIntroductionConstant)
+      //aboutMe和contactMe组件哪一个先渲染后，就不用再次取请求值了
+      if(this.sign===''&&!this.$store.getters.constants[aboutMeIntroductionConstant]){
+        setConstants(ycaoId,this.domain,()=>{
+          this.sign=this.$store.getters.constants[aboutMeIntroductionConstant]
+        })
       }else{
-        this.sign=this.$store.state.token.signForAboutMe;
+        this.sign=this.$store.getters.constants[aboutMeIntroductionConstant];
       }
-    },
-    /**
-     * 通过过滤的方法得到需要的签名文字
-     * @return
-     * @time 2022-01-01 11:41:15
-     */
-    assignConstant(name){
-      getConstant(this.curUserId,this.domain).then(data=>{
-        const curConstantObj= data.data.filter(
-            (constantObj)=>{
-              return constantObj.name===name}
-        )
-        this.sign = (curConstantObj&&curConstantObj.length>0) && curConstantObj[0].content;
-        this.$store.commit('set_signOfMe',{sign:this.sign})//把sign放入vuex，后续MyStory也会用到
-      }).catch(err=>console.log(err))
     },
   },
   watch: {
     screenWidth: {
       handler: function (val) {
-        if(val<=1278){
-          this.screenAdapt=false
+        if(val<=978){
+          this.drawerSizeFather="85%"
+          this.mapSizeFather="85%"
         }else{
-          this.screenAdapt=true
+          this.drawerSizeFather="35%"
+          this.mapSizeFather="35%"
         }
       },
       immediate: true,
@@ -130,8 +117,8 @@ export default {
 
 <style scoped>
 .container{
-  /*position: fixed;*/
-  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -148,9 +135,6 @@ export default {
 }
 .slideshow-photo {
   flex: 0 0 0;
-}
-.contact {
-  /*background-color: #bed5ee;*/
 }
 .cb-cpn{
   /*通过观察盒子模型发现高度/宽度为0，因此一定要指定高度和宽度！！！*/

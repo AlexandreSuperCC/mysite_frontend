@@ -1,4 +1,6 @@
 module.exports={
+    outputDir: '/Library/Tomcat/webapps/ROOT',
+    publicPath: '/',
     //网站图标设置
     pwa: {
         iconPaths: {
@@ -10,6 +12,7 @@ module.exports={
         }
     },
     configureWebpack:{
+        devtool: 'source-map',
         resolve:{
             alias:{
                 'assets':'@/assets',

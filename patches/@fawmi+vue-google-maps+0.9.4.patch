@@ -24,9 +24,9 @@ index d6562e1..691869d 100644
 +          icon: require("@/assets/index/images/gmap/ParisEffel.png")
 +        },
 +        {
-+          lat: 47.6397,
-+          lng: 6.8638,
-+          content: { content: `My location: <b>Belfort</b>` },
++          lat: 48.8457,
++          lng: 2.2170,
++          content: { content: `My location: <b>Saint-Cloud</b>` },
 +          icon: require("@/assets/index/images/gmap/home.png"),
 +        },
 +      ]

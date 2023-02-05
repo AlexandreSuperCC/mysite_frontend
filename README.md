@@ -16,3 +16,6 @@ npm run serve
 //npx patch-package package-name
 npm run build
 ```
+
+### notes
+in this application, ycao's id is always 0

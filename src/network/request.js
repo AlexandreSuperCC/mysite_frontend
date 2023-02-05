@@ -2,6 +2,7 @@ import axios from "axios";
 import {baseURL} from "@/network/api";
 import {ElMessageBox} from "element-plus";
 import store from "@/store"
+
 export function request(config){
     const instance1 = axios.create({
         baseURL:baseURL,
@@ -38,37 +39,43 @@ export function request(config){
     */
     instance1.interceptors.response.use(
         response=>{
+            const adminPages = store.getters.constants.adminPages
 
-            //下面我是进行一个时间的一个对比；如果前台进行一个三十分钟没有操作的话会进行一个重新登入状态；重新登入时候后台会重新生成一个新token；从而不要担心后端token的一个刷新导致前端token不相同问题。
-            let today = new Date().getTime();
-            if(sessionStorage.getItem("nowTime")!=null){
-                if(today-sessionStorage.getItem("nowTime")>1000*60*30){
-                    //add by ycao resolve the problem : after 30m, it should login twice
-                    ElMessageBox.alert("Your session is about to expire. Do you want to extend the duration of the current session?","No activity recently",{
-                        confirmButtonText:'Extend session duration',
-                        showCancelButton: true,
-                        callback:(action)=>{
-                            if(action!='confirm') {//不延长session
-                                sessionStorage.removeItem('token');
-                                sessionStorage.removeItem('nowTime');
-                                window.location.replace("/login")
-                            }else{
-                                sessionStorage.removeItem('nowTime');
-                                store.commit('set_time',today);//延长session。
-                            }
-                        }
-                    }).catch(r => console.log(r))
-                    // location.reload()
-                    return;
-                }else{
-                    sessionStorage.removeItem('nowTime');
-                    store.commit('set_time',today);//每一次请求都会添加新的一个时间从而进行保存。
-                }
+            if(adminPages.indexOf(response.config.url)===-1&&response.config.url!=='/login'){//coming from the pages not authorized
+                return response.data;
             }else{
-                //如果是今天第一次请求的话那就把时间添加进去
-                store.commit('set_time',today)////退出登入后再一次登入会进行添加这一次登入时间。
+                //下面我是进行一个时间的一个对比；如果前台进行一个三十分钟没有操作的话会进行一个重新登入状态；重新登入时候后台会重新生成一个新token；从而不要担心后端token的一个刷新导致前端token不相同问题。
+                let today = new Date().getTime();
+                if(sessionStorage.getItem("nowTime")!=null){
+                    if(today-sessionStorage.getItem("nowTime")>1000*60*30){
+                        //add by ycao resolve the problem : after 30m, it should login twice
+                        ElMessageBox.alert("Your session is about to expire. Do you want to extend the duration of the current session?","No activity recently",{
+                            confirmButtonText:'Extend session duration',
+                            showCancelButton: true,
+                            callback:(action)=>{
+                                if(action!='confirm') {//不延长session
+                                    sessionStorage.removeItem('token');
+                                    sessionStorage.removeItem('nowTime');
+                                    window.location.replace("/login")
+                                }else{
+                                    sessionStorage.removeItem('nowTime');
+                                    store.commit('set_time',today);//延长session。
+                                }
+                            }
+                        }).catch(r => console.log(r))
+                        // location.reload()
+                        return;
+                    }else{
+                        sessionStorage.removeItem('nowTime');
+                        store.commit('set_time',today);//每一次请求都会添加新的一个时间从而进行保存。
+                        return response.data;
+                    }
+                }else{
+                    //如果是今天第一次请求的话那就把时间添加进去
+                    store.commit('set_time',today)////退出登入后再一次登入会进行添加这一次登入时间。
+                    return response.data;
+                }
             }
-            return response.data;
         },error => {
             interceptorHandler(error)
         }
@@ -102,7 +109,7 @@ function interceptorHandler(error){
         ElMessageBox.alert(alertMes + ", please re-login", "Attention!", {
             confirmButtonText: 'OK',
             callback: () => {
-                window.location.replace("/login")
+                window.location.replace("/")
             }
         }).catch(r => console.log(r))
     }else{

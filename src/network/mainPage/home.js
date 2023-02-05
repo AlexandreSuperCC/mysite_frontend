@@ -1,14 +1,11 @@
 import {request} from "@/network/request";
 
 //i was stuck here because in home.vue i use [then] without Promise here => Promise must be used
-export function getHomeData (curUserId){
+export function getHomeData (){
     return new Promise((resolve,reject) => {
         request({
-            url:'/home/article',
+            url:'/index/article',
             method:'get',
-            params:{//we should use params in GET
-                userId:curUserId
-            }
         }).then(data=>resolve(data))
             .catch(err=>reject(err))
     })
