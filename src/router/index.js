@@ -22,6 +22,9 @@ const routes = [
   },
   {
     path:'/login',
+    meta: {
+      title: 'Login'
+    },
     component:Login
   }
   ,{
@@ -31,16 +34,28 @@ const routes = [
     children:[
       {
         path:'index',
+        meta: {
+          title: 'Bienvenue'
+        },
         component:Index
       },
       {
         path:'article',
+        meta: {
+          title: 'Article'
+        },
         component:Article
       },{
         path: 'uploadFile',
+        meta: {
+          title: 'Upload File'
+        },
         component:UploadFile
       },{
         path: 'markdown',
+        meta: {
+          title: 'Markdown'
+        },
         component:Markdown
       },{
         path: 'searchEngine',
@@ -48,18 +63,30 @@ const routes = [
       },
       {
         path:'aboutMe',
+        meta: {
+          title: 'Me'
+        },
         component:AboutMe
       },
       {
         path: 'myStory',
+        meta: {
+          title: 'Welcome'
+        },
         component:MyStory
       },
       {
         path: 'myProject',
+        meta: {
+          title: 'My Project'
+        },
         component:MyProject
       },
       {
         path: 'dashboard',
+        meta: {
+          title: 'Dashboard'
+        },
         component:Dashboard
       }
     ]
@@ -71,6 +98,9 @@ const routes = [
   },
   {
     path: '/404',
+    meta: {
+      title: '404'
+    },
     component:ErrorPage
   }
 ]
@@ -82,6 +112,9 @@ const router = createRouter({
 
 //if you haven't exited but close the page, you can enter the page without login again
 router.beforeEach((to,from,next)=>{
+
+  document.title = `${to.meta.title} | CKlovery`;
+
   const adminPages = store.getters.constants.adminPages
   if(adminPages.indexOf(to.path)===-1) {
     next();
