@@ -99,7 +99,7 @@ const routes = [
   {
     path: '/404',
     meta: {
-      title: '404'
+      title: 'Oops!'
     },
     component:ErrorPage
   }
