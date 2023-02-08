@@ -71,7 +71,7 @@ const routes = [
       {
         path: 'myStory',
         meta: {
-          title: 'Welcome'
+          title: 'Bienvenue'
         },
         component:MyStory
       },
@@ -110,10 +110,23 @@ const router = createRouter({
   routes
 })
 
+let curTimeOut;
+
 //if you haven't exited but close the page, you can enter the page without login again
 router.beforeEach((to,from,next)=>{
 
+  clearTimeout(curTimeOut)
+
   document.title = `Cklovery: ${to.meta.title}`;
+
+  if(to.path==='/home/index'){
+    let documentTitle = 'Cklovery: Designed & Created by ycao while studying in France'  +  " ";
+
+    (function titleMarquee() {
+      document.title = documentTitle = documentTitle.substring(1) + documentTitle.substring(0,1);
+      curTimeOut = setTimeout(titleMarquee, 300);
+    })();
+  }
 
   const adminPages = store.getters.constants.adminPages
   if(adminPages.indexOf(to.path)===-1) {
