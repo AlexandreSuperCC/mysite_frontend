@@ -120,10 +120,13 @@ router.beforeEach((to,from,next)=>{
   document.title = `Cklovery: ${to.meta.title}`;
 
   if(to.path==='/home/index'){
-    let documentTitle = 'Cklovery: Designed & Created by ycao while studying in France'  +  " ";
+    const prefix='Cklovery: ';
+    const pl = prefix.length;
+    let documentTitle = prefix+' Designed & Created by ycao while studying in France'  +  " ";
 
     (function titleMarquee() {
-      document.title = documentTitle = documentTitle.substring(1) + documentTitle.substring(0,1);
+      documentTitle = 'Cklovery: ' + documentTitle.substring(pl+1) + documentTitle.substring(pl,pl+1);
+      document.title = documentTitle;
       curTimeOut = setTimeout(titleMarquee, 300);
     })();
   }
