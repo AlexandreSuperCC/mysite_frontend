@@ -35,7 +35,7 @@ const routes = [
       {
         path:'index',
         meta: {
-          title: 'Welcome aboard!'
+          title: 'Welcome to cklovery.life!'
         },
         component:Index
       },
