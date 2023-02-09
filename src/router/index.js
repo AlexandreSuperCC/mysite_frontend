@@ -120,9 +120,11 @@ router.beforeEach((to,from,next)=>{
   document.title = `Cklovery: ${to.meta.title}`;
 
   if(to.path==='/home/index'){
+    let status = store.getters.constants.myStatus||"Bienvenue"
+
     const prefix='Cklovery: ';
     const pl = prefix.length;
-    let documentTitle = prefix+' Designed & Created by ycao while studying in France'  +  " ";
+    let documentTitle = prefix+' '+status+  " ";
 
     (function titleMarquee() {
       documentTitle = 'Cklovery: ' + documentTitle.substring(pl+1) + documentTitle.substring(pl,pl+1);

@@ -1,6 +1,12 @@
 <!--只传单个文件-->
 <template>
 <div class="dashboard">
+    <div class="value-control">
+        <div class="constant-ctl">
+            <el-input class="cctl-input" v-model="constantContent" placeholder="Enter your current status"/>
+            <el-button @click="updateConstant" type="primary" size="small">Update your status to let people know !</el-button>
+        </div>
+    </div>
     <div class="db-log">
         <div class="login-log-table">
             <el-table       
@@ -63,6 +69,9 @@
 
 </template>
 <script>
+import { ycaoId,ycaoStatusId } from '../../utils/const/const'
+import {ElMessageBox} from "element-plus";
+
 export default {
   name: "UploadFile",
   data(){
@@ -76,14 +85,33 @@ export default {
         getAllLogsLoading: true,
         getLoginLogsLoading: true,
         getVisitLogsLoading: true,
+        constantContent:'',
     }
   },
   mounted(){
     this.init()
   },
+  computed:{
+    getConstantUpdateObj(){
+      return {
+        id: ycaoStatusId,
+        cid: ycaoId,
+        content:this.constantContent,
+      }
+    }
+  },
   methods:{
     init(){
         this.getTwoLogs()
+    },
+    updateConstant(){
+        this.$store.dispatch('UpdateConstant', this.getConstantUpdateObj).then(data=>{
+        if(data.code==='success'){//保存成功
+             ElMessageBox.alert("Update has been saved！ ",{
+                confirmButtonText:'OK'
+            })}
+        else{ElMessageBox.alert("some problems happen while saving: <br/>"+data.msg,{confirmButtonText:'OK',dangerouslyUseHTMLString:true})}})
+      .catch(err=>{console.log(err)})    
     },
     getTwoLogs(){
         this.getAllLogsLoading=true;
@@ -130,17 +158,20 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .dashboard{
     height: 100%;
     width: 100%;
     overflow: scroll;
-    text-align: center;
+    &>div{
+        width: 90%;
+        margin:0 auto;
+        padding-top: 8px;
+    }
+    
 }
-.db-log{
-    width: 90%;
-    margin:0 auto;
-    text-align: center;
+.constant-ctl{
+    width: 300px;
 }
 .login-log-table,.visit-log-table{
     width: 500px;
@@ -150,5 +181,8 @@ export default {
 .all-log-table{
     padding: 8px 8px;
     margin: 0 auto;
+}
+.cctl-input{
+    margin-bottom: 4px;
 }
 </style>
