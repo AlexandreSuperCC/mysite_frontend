@@ -35,7 +35,7 @@ const routes = [
       {
         path:'index',
         meta: {
-          title: 'Bienvenue'
+          title: 'Welcome aboard!'
         },
         component:Index
       },
@@ -117,21 +117,17 @@ router.beforeEach((to,from,next)=>{
 
   clearTimeout(curTimeOut)
 
-  document.title = `Cklovery: ${to.meta.title}`;
+  let status = store.getters.constants.myStatus||`${to.meta.title}`||"Bienvenue"
 
-  if(to.path==='/home/index'){
-    let status = store.getters.constants.myStatus||"Bienvenue"
+  const prefix='Cklovery: ';
+  const pl = prefix.length;
+  let documentTitle = prefix+' '+status+  " ";
 
-    const prefix='Cklovery: ';
-    const pl = prefix.length;
-    let documentTitle = prefix+' '+status+  " ";
-
-    (function titleMarquee() {
-      documentTitle = 'Cklovery: ' + documentTitle.substring(pl+1) + documentTitle.substring(pl,pl+1);
-      document.title = documentTitle;
-      curTimeOut = setTimeout(titleMarquee, 300);
-    })();
-  }
+  (function titleMarquee() {
+    documentTitle = 'Cklovery: ' + documentTitle.substring(pl+1) + documentTitle.substring(pl,pl+1);
+    document.title = documentTitle;
+    curTimeOut = setTimeout(titleMarquee, 300);
+  })();
 
   const adminPages = store.getters.constants.adminPages
   if(adminPages.indexOf(to.path)===-1) {
