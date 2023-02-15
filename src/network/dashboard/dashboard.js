@@ -1,5 +1,16 @@
 import {request} from "@/network/request";
 
+export function updateConstant(param){
+    return new Promise((resolve,reject)=>{
+        request({
+            url:'/db/updateConstant',
+            method:'post',
+            data:{
+                param
+            }
+        }).then(data=>resolve(data)).catch(err=>reject(err))
+    })
+}
 export function getAllLogs (){
     return new Promise((resolve,reject) => {
         request({

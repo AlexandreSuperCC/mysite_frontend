@@ -22,6 +22,9 @@ const routes = [
   },
   {
     path:'/login',
+    meta: {
+      title: 'Login'
+    },
     component:Login
   }
   ,{
@@ -31,16 +34,28 @@ const routes = [
     children:[
       {
         path:'index',
+        meta: {
+          title: 'Welcome to cklovery.life!'
+        },
         component:Index
       },
       {
         path:'article',
+        meta: {
+          title: 'Article'
+        },
         component:Article
       },{
         path: 'uploadFile',
+        meta: {
+          title: 'Upload File'
+        },
         component:UploadFile
       },{
         path: 'markdown',
+        meta: {
+          title: 'Markdown'
+        },
         component:Markdown
       },{
         path: 'searchEngine',
@@ -48,18 +63,30 @@ const routes = [
       },
       {
         path:'aboutMe',
+        meta: {
+          title: 'Me'
+        },
         component:AboutMe
       },
       {
         path: 'myStory',
+        meta: {
+          title: 'Bienvenue'
+        },
         component:MyStory
       },
       {
         path: 'myProject',
+        meta: {
+          title: 'My Project'
+        },
         component:MyProject
       },
       {
         path: 'dashboard',
+        meta: {
+          title: 'Dashboard'
+        },
         component:Dashboard
       }
     ]
@@ -71,6 +98,9 @@ const routes = [
   },
   {
     path: '/404',
+    meta: {
+      title: 'Oops!'
+    },
     component:ErrorPage
   }
 ]
@@ -80,8 +110,25 @@ const router = createRouter({
   routes
 })
 
+let curTimeOut;
+
 //if you haven't exited but close the page, you can enter the page without login again
 router.beforeEach((to,from,next)=>{
+
+  clearTimeout(curTimeOut)
+
+  let status = store.getters.constants.myStatus||`${to.meta.title}`||"Bienvenue"
+
+  const prefix='Cklovery: ';
+  const pl = prefix.length;
+  let documentTitle = prefix+' '+status+  " ";
+
+  (function titleMarquee() {
+    documentTitle = 'Cklovery: ' + documentTitle.substring(pl+1) + documentTitle.substring(pl,pl+1);
+    document.title = documentTitle;
+    curTimeOut = setTimeout(titleMarquee, 300);
+  })();
+
   const adminPages = store.getters.constants.adminPages
   if(adminPages.indexOf(to.path)===-1) {
     next();

@@ -5,10 +5,9 @@
     }">
       <div class="title-in-image">{{ title }}</div>
     </div>
-    <object v-else class="image" :data="image">
-      <div class="title-in-image">{{ title }}</div>
-    </object>
-
+    <video v-else class="image" height="0" controls playsinline loop muted>
+      <source :src="image" type=video/mp4>
+    </video>
     <div class="text-contents">
       <div class="title">{{ title }}</div>
       <div class="description">
