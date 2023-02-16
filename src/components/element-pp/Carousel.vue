@@ -13,16 +13,16 @@
       </el-col>
       <el-col :xl="{span:6}" :lg="{span:8}" :md="{span:10}" :sm="{span:12}">
         <div class="cr-center">
-          <div class="not-safari" v-if="!usingSafari">
+          <div class="not-safari">
             <el-carousel :interval="4000" type="card" height="300px">
               <el-carousel-item v-for="item in photosUrl" :key="item">
                 <img class="my-photo" :src="item" alt="photo">
               </el-carousel-item>
             </el-carousel>
           </div>
-          <div class="is-safari" v-if="usingSafari">
+          <!-- <div class="is-safari" v-if="usingSafari">
             <circular-banner/>
-          </div>
+          </div> -->
         </div>
       </el-col>
       <el-col :xl="{span:2}" :lg="{span:1}" :md="{span:0}"/>
@@ -65,6 +65,7 @@ export default {
      */
     checkBrowser(){
       const mb = myBrowser();
+      console.log(mb);
       if(mb==='Safari'){
         this.usingSafari=true;
       }
