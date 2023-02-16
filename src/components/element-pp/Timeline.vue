@@ -66,7 +66,7 @@
       <br><br>
       During these 6 months as a Fullstack Developer at Diapason in Paris, I realized the Webpack migration, updated our frontend framework and added new Diapason themes. As our group is specialized in financial solutions, I have the chance to acquire a lot of professional knowledge such as treasury, payments except programming techniques. After having done all my work as a Fullstack developer, I know well the techniques that are used in our company, especially in a software in the areas of treasury and also the necessary tools to facilitate my work such as Putty, Veracrypt.
       <br><br>
-      <h4><span style="color: red">Mots clefs :</span>ERP, Supply Chain, Finance, Documentation, Algorithmes, Javascript, Java, Oracle</h4>
+      <h4><span style="color: red">Mots clefs :</span> ERP, Supply Chain, Finance, Documentation, Algorithmes, Javascript, Java, Oracle</h4>
 
     </div>
   </el-drawer>
