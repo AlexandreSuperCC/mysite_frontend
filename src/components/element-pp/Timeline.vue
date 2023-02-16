@@ -42,26 +42,31 @@
       <img class="formation-click-icon" src="~assets/index/images/click_32.png" alt="click-me">
     </div>
   </div>
-  <el-drawer :size="drawerSize" v-model="infoDrawer" direction="ltr" title="Stage 2021 - Développeur Backend chez Yonyou" :with-header="true">
+  <el-drawer :size="drawerSize" v-model="infoDrawer" direction="ltr" title="Internship 2021-2022 Developer at Yonyou and Diapason" :with-header="true">
     <div>
-      Yonyou Network Technology Co., Ltd. a son siège social à Beijing. Fondée en 1988, Yonyou, (en chinois : 用友) est devenue le principal fournisseur de logiciels de gestion d'entreprise, de solutions et de services en nuage en Chine et en Asie - Pacifique.
-      <br><br>
-      <a href="https://www.yonyou.com" target="_blank">
-        <img class="next-page-icon" src="~assets/index/images/stage/yonyou.jpg" style="width: 100%"
-              alt="Youyou">
-      </a>
-      <br><br>
-      Pendant ces 6 mois, j’ai principalement participé à 4 projets qui m’ont pris chacun le temps entre une semaine et 2 mois concernant les améliorations et développements des logiciels ERP de séries différents. J’ai également fait beaucoup de maintenances correctives à ces systèmes en résolvant de problèmes posés fréquemment par les développeurs maintenances applicatives. Ces projets concernent essentiellement les secteurs Supply Chain et affaires financières.
-      <br><br>
       <a href="https://www.yonyou.com" target="_blank">
         <img class="next-page-icon" src="~assets/index/images/stage/rapport.png" style="width: 50%;height: 38%"
              alt="Youyou">
-      </a>
+      </a>  
       <a href="https://www.yonyou.com" target="_blank">
         <img class="next-page-icon" src="~assets/index/images/stage/UML.png" style="width: 50%;height: 38%"
              alt="Youyou">
       </a>
-      <h4><span style="color: red">Mots clefs :</span> Algorithmes, Java, Oracle, ERP, Supply Chain, Finance</h4>
+      <br><br>
+      During these 6 months as a Backend Developer at Yonyou in Shanghai, I mainly participated in 4 projects that each took me between a week and 2 months concerning improvements and developments of ERP software of different series. I also did a lot of corrective maintenance to these systems by solving problems frequently posed by the application maintenance developers. These projects are mainly in the Supply Chain and Financial Affairs sectors.
+      <br><br>
+      <a href="https://www.mydiapason.com" target="_blank">
+        <img class="next-page-icon" src="~assets/index/images/stage/report.png" style="width: 50%;height: 38%"
+             alt="Diapason">
+      </a>  
+      <a href="https://www.mydiapason.com" target="_blank">
+        <img class="next-page-icon" src="~assets/index/images/stage/bundle.png" style="width: 50%;height: 38%"
+             alt="Diapason">
+      </a>
+      <br><br>
+      During these 6 months as a Fullstack Developer at Diapason in Paris, I realized the Webpack migration, updated our frontend framework and added new Diapason themes. As our group is specialized in financial solutions, I have the chance to acquire a lot of professional knowledge such as treasury, payments except programming techniques. After having done all my work as a Fullstack developer, I know well the techniques that are used in our company, especially in a software in the areas of treasury and also the necessary tools to facilitate my work such as Putty, Veracrypt.
+      <br><br>
+      <h4><span style="color: red">Mots clefs :</span>ERP, Supply Chain, Finance, Documentation, Algorithmes, Javascript, Java, Oracle</h4>
 
     </div>
   </el-drawer>
