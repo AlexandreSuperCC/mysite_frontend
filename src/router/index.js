@@ -35,7 +35,7 @@ const routes = [
       {
         path:'index',
         meta: {
-          title: 'Welcome to cklovery.life!'
+          title: 'Welcome'
         },
         component:Index
       },
@@ -115,19 +115,28 @@ let curTimeOut;
 //if you haven't exited but close the page, you can enter the page without login again
 router.beforeEach((to,from,next)=>{
 
-  clearTimeout(curTimeOut)
+  curTimeOut&&clearTimeout(curTimeOut)
+  
+  if(to.path==='/home/index'){
+    let documentTitle = 'Welcome to cklovery.life!' +  " ";
 
-  let status = store.getters.constants.myStatus||`${to.meta.title}`||"Bienvenue"
-
-  const prefix='Cklovery: ';
-  const pl = prefix.length;
-  let documentTitle = prefix+' '+status+  " ";
-
-  (function titleMarquee() {
-    documentTitle = 'Cklovery: ' + documentTitle.substring(pl+1) + documentTitle.substring(pl,pl+1);
-    document.title = documentTitle;
-    curTimeOut = setTimeout(titleMarquee, 300);
-  })();
+    (function titleMarquee() {
+      document.title = documentTitle = documentTitle.substring(1) + documentTitle.substring(0,1);
+      curTimeOut = setTimeout(titleMarquee, 300);
+    })();
+  }else if(store.getters.constants.myStatus){
+    const prefix='Cklovery: ';
+    const pl = prefix.length;
+    let documentTitle = prefix+' '+store.getters.constants.myStatus+  " ";
+  
+    (function titleMarquee() {
+      documentTitle = 'Cklovery: ' + documentTitle.substring(pl+1) + documentTitle.substring(pl,pl+1);
+      document.title = documentTitle;
+      curTimeOut = setTimeout(titleMarquee, 300);
+    })();
+  }else{
+    document.title = 'Cklovery: '+`${to.meta.title}`||"Bienvenue";
+  }
 
   const adminPages = store.getters.constants.adminPages
   if(adminPages.indexOf(to.path)===-1) {

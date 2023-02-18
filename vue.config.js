@@ -1,5 +1,5 @@
 module.exports={
-    outputDir: '/Library/Tomcat/webapps/ROOT',
+    outputDir: 'ROOT',
     publicPath: '/',
     //网站图标设置
     pwa: {

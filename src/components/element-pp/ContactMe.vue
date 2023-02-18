@@ -25,8 +25,8 @@
             <img class="smartphone-icon" src="~assets/index/images/contact/smartphone.png" alt="phone">
           </template>
           <template v-slot:description>
-            <a class="my-telephone" href="tel:0668252048">+33 6 68 25 20 48</a><br>
-            <a class="my-telephone" href="tel:18019010788">+86 18019010788</a>
+            <a class="my-telephone" href="tel:0668252048">+33668252048</a><br>
+            <a class="my-telephone" href="tel:18019010788">+8618019010788</a>
           </template>
         </el-step>
         <el-step title="location" @click="changeActive(3)">
