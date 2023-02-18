@@ -101,6 +101,9 @@ function interceptorHandler(error){
                 sessionStorage.removeItem('token');
                 sessionStorage.removeItem('nowTime');
                 break;
+            case 404:
+                alertMes = "Page not found";
+                break;
             default:
                 alertMes = "Unknown error";
                 console.log(error);
