@@ -104,7 +104,16 @@ export default {
                     //if login succeeds, save the token into Vuex
                     this.$store.commit('set_token',{token:res.token,userId:res.userId,userRole:res.userRole})
                     // window.location.replace('/home')
-                    this.$router.push('/home');
+                      
+                    /**
+                     * judge if it should be redirected
+                     */
+                     if(!this.$route.query.redirect){
+                      this.$router.push('/home');
+                     }else{
+                      const obj = JSON.parse(this.$route.query.redirect);
+                      this.$router.push(obj['url']);
+                     }
 
                     // console.log('login success, your userId: '+this.$store.state.token.userId)
                     return true;//一定要记得返回true

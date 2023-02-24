@@ -19,3 +19,14 @@ npm run build
 
 ### notes
 in this application, ycao's id is always 0
+
+### tomcat
+1. add index.html as error page
+2. in server.xml
+    ```xml
+    <Connector port="80" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" 
+               relaxedPathChars="[]|"
+               relaxedQueryChars="[]|{}"/>
+    ```

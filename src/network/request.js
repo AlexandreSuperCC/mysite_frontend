@@ -93,35 +93,55 @@ function interceptorHandler(error){
     if(error.response){//防止长时间未响应 status变undefined
         switch (error.response.status) {
             case 401:
-                alertMes = "No token yet";
+                ElMessageBox.alert("No token yet, please login", "Attention!", {
+                    confirmButtonText: 'OK',
+                    callback: () => {
+                        const redirect= JSON.stringify({
+                            'url':window.location.pathname,
+                          })
+                        window.location.replace("/login"+"?redirect="+redirect)
+                    }
+                }).catch(r => console.log(r))
                 break;
             case 402:
-                alertMes = "Invalid token";
                 //add by ycao 20220313
                 sessionStorage.removeItem('token');
                 sessionStorage.removeItem('nowTime');
+                ElMessageBox.alert("Invalid token, please re-login", "Attention!", {
+                    confirmButtonText: 'OK',
+                    callback: () => {
+                        const redirect= JSON.stringify({
+                            'url':window.location.pathname,
+                          })
+                        window.location.replace("/login"+"?redirect="+redirect)
+                    }
+                }).catch(r => console.log(r))
                 break;
             case 404:
-                alertMes = "Page not found";
+                ElMessageBox.alert("Page not found, please try again", "Attention!", {
+                    confirmButtonText: 'OK',
+                    callback: () => {
+                        const redirect= JSON.stringify({
+                            'url':window.location.pathname,
+                          })
+                        window.location.replace("/login"+"?redirect="+redirect)
+                    }
+                }).catch(r => console.log(r))
                 break;
             default:
-                alertMes = "Unknown error";
                 console.log(error);
+                ElMessageBox.alert("Unknown error, please try again", "Attention!", {
+                    confirmButtonText: 'OK',
+                    callback: () => {
+                        window.location.replace("/")
+                    }
+                }).catch(r => console.log(r))
                 break;
         }
-        ElMessageBox.alert(alertMes + ", please re-login", "Attention!", {
-            confirmButtonText: 'OK',
-            callback: () => {
-                window.location.replace("/")
-            }
-        }).catch(r => console.log(r))
     }else{
-        ElMessageBox.alert("Please refreshed", "Attention!", {
+        ElMessageBox.alert("No response from server, please try again", "Attention!", {
             confirmButtonText: 'OK',
-            callback: () => {
-                window.location.reload();
-                // window.location.replace("/login")
-            }
+            callback: () => {}
         }).catch(r => console.log(r))
     }
 

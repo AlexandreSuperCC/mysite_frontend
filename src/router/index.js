@@ -143,18 +143,14 @@ router.beforeEach((to,from,next)=>{
     next();
     return;
   }else{
-    const token = sessionStorage.getItem('token')
-    if (token) {
-      if(to.path==='/home/uploadFile'||to.path==='/home/markdown'){
-        if(loginRequiredMethodsCheck()){
-          next({path:'/login'})
-          return;
-        }
-      }
-      next();
+    if (loginRequiredMethodsCheck()) {
+      const redirect= JSON.stringify({
+        'url':to.path,
+      })
+      next({path:'/login',query:{redirect}})
       return;
     }else{
-      next({path:'/login'})
+      next()
       return;
     }
   }

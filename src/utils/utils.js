@@ -28,7 +28,7 @@ export function setConstants(id,domain,successFallback,failFallback){
 }
 
 export function loginRequiredMethodsCheck(){
-    if(store.getters.userRole!==0){
+    if(!sessionStorage.getItem('token')||store.getters.userRole!==0){
         ElMessageBox.alert("Not authorized! Please login!","Sorry!",{
           confirmButtonText:'OK'
         })
