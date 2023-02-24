@@ -118,7 +118,7 @@ function interceptorHandler(error){
                 }).catch(r => console.log(r))
                 break;
             case 404:
-                ElMessageBox.alert("Page not found, please try again", "Attention!", {
+                ElMessageBox.alert("Resource not found, please try again", "Attention!", {
                     confirmButtonText: 'OK',
                     callback: () => {
                         const redirect= JSON.stringify({
