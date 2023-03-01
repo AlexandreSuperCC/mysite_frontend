@@ -12,7 +12,9 @@ module.exports={
         }
     },
     configureWebpack:{
-        devtool: 'source-map',
+        devtool: process.env.NODE_ENV === 'production'
+                    ? ''
+                    : 'source-map',
         resolve:{
             alias:{
                 'assets':'@/assets',
