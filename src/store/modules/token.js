@@ -44,6 +44,12 @@ const token={
             state.userRole = object.userRole
             sessionStorage.token = object.token
         },
+        set_rememberme(state,object){
+            localStorage.token = object.token
+        },
+        del_rememberme(state,object){
+            localStorage.removeItem('token')
+        },
         del_token(state){
             state.token = ''
             state.userId = ''
@@ -58,7 +64,12 @@ const token={
         del_time(state){
             state.nowTime='';
             sessionStorage.removeItem('nowTime')
-        }
+        },
+        logout(state){
+            this.commit("del_time");
+            this.commit("del_token");
+            this.commit("del_rememberme");
+        },
     },
     actions:{
 

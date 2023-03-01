@@ -19,16 +19,17 @@
   }
 
 
-
-.el-checkbox__label{
-  color: $font-color-bright !important;
-}
-.el-checkbox__input.is-checked .el-checkbox__inner {
-  background-color: $menu-color-dark !important;
-  border-color: $menu-color-dark !important;
-}
-.el-checkbox__input.is-focus .el-checkbox__inner {
-  border: $menu-color-dark !important;
+*:not(.cb-my){
+  &>.el-checkbox__label{
+    color: $font-color-bright !important;
+  }
+  &>.el-checkbox__input.is-checked .el-checkbox__inner {
+    background-color: $menu-color-dark !important;
+    border-color: $menu-color-dark !important;
+  }
+  &>.el-checkbox__input.is-focus .el-checkbox__inner {
+    border: $menu-color-dark !important;
+  }
 }
 
 .el-drawer.ltr.open{

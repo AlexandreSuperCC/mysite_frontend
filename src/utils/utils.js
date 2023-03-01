@@ -28,11 +28,26 @@ export function setConstants(id,domain,successFallback,failFallback){
 }
 
 export function loginRequiredMethodsCheck(){
-    if(!sessionStorage.getItem('token')||store.getters.userRole!==0){
+    if(!sessionStorage.getItem('token')
+    &&!localStorage.getItem('token')
+    // ||store.getters.userRole!==0
+    ){
         ElMessageBox.alert("Not authorized! Please login!","Sorry!",{
           confirmButtonText:'OK'
         })
         return true;
+    }else{
+        return false;
     }
-    return false;
+}
+
+export function isLoginCheck(){
+    if(!sessionStorage.getItem('token')
+    &&!localStorage.getItem('token')
+    // ||store.getters.userRole!==0
+    ){
+        return false;
+    }else{
+        return true;
+    }
 }

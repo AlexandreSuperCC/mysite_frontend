@@ -18,7 +18,8 @@ npm run build
 ```
 
 ### notes
-in this application, ycao's id is always 0
+1. in this application, ycao's id is always 0
+2. after the version 1/3/2023 userId is deprecated because it is useless in my website app
 
 ### tomcat
 1. add index.html as error page

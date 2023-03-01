@@ -5,7 +5,7 @@
         CKLOVERY
       </span>
     </a>
-    <a id="my-dashboard" href="#" @click.native.prevent="getRoute('dashboard')" v-if="role===0">
+    <a id="my-dashboard" href="#" @click.native.prevent="getRoute('dashboard')" v-if="isLogin">
       <span>Dashboard</span>
     </a>
     <a id="my-article" href="#" @click.native.prevent="getRoute('article')">
@@ -20,10 +20,10 @@
     <a id="my-project" href="#" @click.native.prevent="getRoute('myProject')">
       <span>My Project</span>
     </a>
-    <a id="markdown-editor-menu" href="#" @click.native.prevent="getRoute('markdown')" v-if="role===0">
+    <a id="markdown-editor-menu" href="#" @click.native.prevent="getRoute('markdown')" v-if="isLogin">
       <span>Markdown Editor</span>
     </a>
-    <a id="upload-file" href="#" @click.native.prevent="getRoute('uploadFile')" v-if="role===0">
+    <a id="upload-file" href="#" @click.native.prevent="getRoute('uploadFile')" v-if="isLogin">
       <span>Upload File</span>
     </a>
     <a id="admin-login" href="#" @click.native.prevent="smallExitEvent">
@@ -46,6 +46,7 @@
 
 import {ElMessageBox} from "element-plus";
 import { Slide } from 'vue3-burger-menu'
+import { isLoginCheck } from "../../utils/utils";
 
 export default {
   name: "MainFrame",
@@ -57,7 +58,7 @@ export default {
       // activeIndex:this.$store.state.token.curIndex,
       // activeIndex2:'2',
       disableUpload:false,
-      role:this.$store.getters.userRole,
+      isLogin: isLoginCheck(),
       enableCache:this.$store.getters.cacheEnable,
     }
   },
@@ -119,8 +120,7 @@ export default {
       this.$store
           .dispatch("LogOut")
           .then(res=>{
-            this.$store.commit("del_token");
-            this.$store.commit("del_time");
+            this.$store.commit("logout");
             if(res&&res.code&&res.code==='success'){//normal case
               window.location.replace('/');
             }else{//not normal case, perhaps due to unknown error or long-time no interaction
