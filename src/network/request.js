@@ -118,6 +118,8 @@ function interceptorHandler(error){
                 }).catch(r => console.log(r))
                 break;
             case 404:
+                sessionStorage.removeItem('token');
+                sessionStorage.removeItem('nowTime');
                 ElMessageBox.alert("Resource not found, please try again", "Attention!", {
                     confirmButtonText: 'OK',
                     callback: () => {

@@ -1,12 +1,13 @@
 import {request} from "@/network/request";
 
-export function login(username,password){
+export function login(username,password,rememberMe){
     return request({
         url:'/login',
         method:'post',
         data:{
             username,
-            password
+            password,
+            rememberMe,
         }
     })
 }

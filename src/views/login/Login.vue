@@ -16,7 +16,8 @@
               <el-input :type="pwdType" v-model="loginForm.password"
                         autocomplete="on" placeholder="Please input password" show-password />
             </el-form-item>
-            <el-form-item style="margin-bottom: 20px">
+            <el-form-item style="margin-bottom: 20px" prop="rememberMe">
+              <el-checkbox class="cb-my" style="width: 100%;" v-model="loginForm.rememberMe">Remember Me</el-checkbox>
               <el-button type="primary" :loading="loading" @click.native.prevent="handlerLogin">login</el-button>
               <el-button type="primary" @click="this.$router.back()">back to previous page</el-button>
             </el-form-item>
@@ -69,7 +70,8 @@ export default {
       loading:false,
       loginForm:{
         username:'',
-        password:''
+        password:'',
+        rememberMe:false,
       },
       rules:{
         username:[//here the name must be the same as the object in model strictly
