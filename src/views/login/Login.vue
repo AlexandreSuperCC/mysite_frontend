@@ -170,7 +170,7 @@ export default {
   left: 0;
   right: 0;
   width: 360px;
-  margin: 100px auto;
+  margin: 88px auto;
   border-top: 10px solid #409eff;
   opacity: 0.8;
 }
