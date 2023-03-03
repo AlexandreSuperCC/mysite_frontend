@@ -11,6 +11,7 @@ const AboutMe = () => import('@/views/index/myinfo/AboutMe')
 const MyStory = () => import('@/views/index/myinfo/MyStory')
 const MyProject = () => import('@/views/index/myCreation/MyProject')
 const Dashboard = () => import('@/views/index/Dashboard')
+const Notepad = () => import('@/components/notepad/Notepad')
 const ErrorPage = () => import('@/components/common/ErrorPage')
 import store from "@/store"
 import { loginRequiredMethodsCheck } from '../utils/utils';
@@ -88,6 +89,13 @@ const routes = [
           title: 'Dashboard'
         },
         component:Dashboard
+      },
+      {
+        path: 'notepad',
+        meta: {
+          title: 'Notepad'
+        },
+        component:Notepad
       }
     ]
   },

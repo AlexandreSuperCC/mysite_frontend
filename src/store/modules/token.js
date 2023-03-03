@@ -69,6 +69,7 @@ const token={
             this.commit("del_time");
             this.commit("del_token");
             this.commit("del_rememberme");
+            this.dispatch('clearevent');
         },
     },
     actions:{

@@ -26,6 +26,9 @@
     <a id="upload-file" href="#" @click.native.prevent="getRoute('uploadFile')" v-if="isLogin">
       <span>Upload File</span>
     </a>
+    <a id="my-notepad" href="#" @click.native.prevent="getRoute('notepad')" v-if="isLogin">
+      <span>My Notepad</span>
+    </a>
     <a id="admin-login" href="#" @click.native.prevent="smallExitEvent">
       <span>Admin Login</span>
     </a>
@@ -83,6 +86,8 @@ export default {
           return this.$router.push('/home/markdown')
         case 'uploadFile':
           return this.$router.push('/home/uploadFile')
+        case 'notepad':
+          return this.$router.push('/home/notepad')
         default:
           break;
       }
@@ -102,6 +107,8 @@ export default {
           return window.location.replace('/home/markdown')
         case 'uploadFile':
           return window.location.replace('/home/uploadFile')
+        case 'notepad':
+          return window.location.replace('/home/notepad')
         default:
           break;
       }
