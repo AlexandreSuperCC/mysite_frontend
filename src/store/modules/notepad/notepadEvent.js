@@ -106,8 +106,8 @@ const notepadEvent={
         },
         [type.UPLOADEVENT](states, data){
             data = JSON.parse(data);
-            states.event = data.event.event;
-            states.count = data.event.count;
+            states.event = data.event;
+            states.count = data.count;
             func.local.set(states);
         }
     },

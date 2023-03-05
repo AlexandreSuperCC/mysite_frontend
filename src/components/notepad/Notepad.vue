@@ -33,6 +33,8 @@
     import nTheme from './cpn/theme.vue';
     import {ElMessageBox} from "element-plus";
 
+    import { ycaoId,myNotesId } from '../../utils/const/const';
+
     export default {
         data(){
             return {
@@ -45,7 +47,7 @@
                 del_info: {
                     index: 0,
                     id: 0
-                }
+                },
             }
         },
         components: {
@@ -54,6 +56,20 @@
         computed:{
             getTheme(){             // 获取主题色
                 return this.$store.getters.getTheme;
+            },
+            getConstantUpdateObj(){
+                return {
+                    id: myNotesId,
+                    cid: ycaoId,
+                    content:JSON.stringify(this.$store.state.notepadEvent),
+                }
+            },
+            getDefaultNotesObj(){
+                return {
+                    id: myNotesId,
+                    cid: ycaoId,
+                    content:JSON.stringify({event: [],count: 0}),
+                }
             }
         },
         methods: {
@@ -105,7 +121,7 @@
                     this.tools = !this.tools
                 }
             }
-        }
+        },
     }
 </script>
 <style lang="scss" rel="stylesheet/scss" src="../../assets/style/notepadTheme.scss"></style>

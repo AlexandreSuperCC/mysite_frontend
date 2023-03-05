@@ -1,22 +1,52 @@
 <template>
   <footer class="footer">
-    路漫漫其修远兮，吾将上下而求索！
     <el-button type="primary" size="small" @click="saveNotes">
-        Save<el-icon class="el-icon--right"><Upload /></el-icon>
+        Save to database<el-icon class="el-icon--right"><Upload /></el-icon>
       </el-button>
+      <el-popconfirm title="Are you sure to overwrite local changes?" @confirm="getNotes">
+        <template #reference>
+          <el-button type="primary" size="small">
+            Download from database<el-icon class="el-icon--right"><Download /></el-icon>
+          </el-button>
+        </template>
+      </el-popconfirm>
   </footer>
 </template>
 <script>
+import { myNotesId, ycaoId } from '../../../utils/const/const';
+import {ElMessageBox} from "element-plus";
+import { setConstants } from '../../../utils/utils';
+
 export default {
   name: "Footer",
   data(){
     return {
     }
   },
-  methods:{
-    saveNotes(){
-      
+  computed:{
+    getConstantUpdateObj(){
+      return {
+        id: myNotesId,
+        cid: ycaoId,
+        content:JSON.stringify(this.$store.state.notepadEvent),
+      }
     }
+  },
+  methods:{
+    getNotes(){
+      setConstants(ycaoId,'Notepad',()=>{
+        this.$store.getters.constants.myNotes&&this.$store.dispatch('uploadevent',this.$store.getters.constants.myNotes);
+      })
+    },
+    saveNotes(){
+        this.$store.dispatch('UpdateConstant', this.getConstantUpdateObj).then(data=>{
+        if(data.code==='success'){//保存成功
+             ElMessageBox.alert("Update has been saved！ ",{
+                confirmButtonText:'OK'
+            })}
+        else{ElMessageBox.alert("some problems happen while saving: <br/>"+data.msg,{confirmButtonText:'OK',dangerouslyUseHTMLString:true})}})
+      .catch(err=>{console.log(err)})    
+    },
   },
 }
 </script>
