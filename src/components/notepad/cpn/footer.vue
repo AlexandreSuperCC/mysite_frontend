@@ -35,7 +35,7 @@ export default {
   methods:{
     getNotes(){
       setConstants(ycaoId,'Notepad',()=>{
-        this.$store.getters.constants.myNotes&&this.$store.dispatch('uploadevent',this.$store.getters.constants.myNotes);
+        this.$store.dispatch('uploadevent',this.$store.getters.constants.myNotes);
       })
     },
     saveNotes(){
