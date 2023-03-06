@@ -6,6 +6,7 @@ export const aboutMeIntroductionConstant = 'signForAboutMe'
 export const ycaoId = 0
 export const ycaoStatusId = 423
 export const myNotesId = 2
+export const cacheArrRoute = ['UploadFile','Markdown','Article','AboutMe','MyStory','Member']
 
 export const httpOrHttps = 'http://'
 //assets 七牛云文件链接地址 【点击鼠标有星星特效】

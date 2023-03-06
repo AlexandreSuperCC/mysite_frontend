@@ -73,7 +73,7 @@ export default {
       if(this.enableCache){
         switch (cpn) {
         case 'dashboard':
-          return this.$router.push('/home/dashboard')
+          return this.$router.push('/member/dashboard')
         case 'article':
           return this.$router.push('/home/article')
         case 'aboutme':
@@ -83,18 +83,18 @@ export default {
         case 'myProject':
           return this.$router.push('/home/myProject')
         case 'markdown':
-          return this.$router.push('/home/markdown')
+          return this.$router.push('/member/markdown')
         case 'uploadFile':
-          return this.$router.push('/home/uploadFile')
+          return this.$router.push('/member/uploadFile')
         case 'notepad':
-          return this.$router.push('/home/notepad')
+          return this.$router.push('/member/notepad')
         default:
           break;
       }
       }else{
         switch (cpn) {
         case 'dashboard':
-          return window.location.replace('/home/dashboard')
+          return window.location.replace('/member/dashboard')
         case 'article':
           return window.location.replace('/home/article')
         case 'aboutme':
@@ -104,11 +104,11 @@ export default {
         case 'myProject':
           return window.location.replace('/home/myProject')
         case 'markdown':
-          return window.location.replace('/home/markdown')
+          return window.location.replace('/member/markdown')
         case 'uploadFile':
-          return window.location.replace('/home/uploadFile')
+          return window.location.replace('/member/uploadFile')
         case 'notepad':
-          return window.location.replace('/home/notepad')
+          return window.location.replace('/member/notepad')
         default:
           break;
       }

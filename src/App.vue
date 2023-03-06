@@ -22,8 +22,16 @@ import {setConstants} from './utils/utils'
   },
     mounted() {
       setConstants(ycaoId,this.domain)
+      window.addEventListener('unload',this.saveStateToken)
+      window.addEventListener('load',this.clearStateToken)
     },
     methods: {
+      saveStateToken(){
+        sessionStorage.setItem('stateToken',JSON.stringify(this.$store.state.token))
+      },
+      clearStateToken(){
+        sessionStorage.removeItem('stateToken')
+      },
     },
     components:{
 
