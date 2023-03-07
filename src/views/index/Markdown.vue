@@ -15,6 +15,9 @@
               </template>
             </el-popconfirm>
           </span>
+          <span class="md-ifCreate-switch">
+            private<el-switch class="md-switch" v-model="ifPublic" active-color="#13ce66" inactive-color="#ff4949" />public
+          </span>
         </div>
         <div class="md-rate-div"><el-rate class="md-rate" v-model="fileStar" allow-half /></div>
       </div>
@@ -77,6 +80,7 @@ export default {
     return {
       'converter':null,
       ifCreate:true,
+      ifPublic:true,
       saveFileLoading:false,
       getCategoryLoading:false,
       'content':'',
@@ -123,6 +127,7 @@ export default {
     getSendObj(){
       return {
         ifCreate:this.ifCreate,
+        pv:this.ifPublic?0:1,
         uniqueMdFileId:this.uniqueMdFileId,
         userId:this.curUserId,
         content:this.content,
@@ -201,6 +206,7 @@ export default {
      */
     clearAll(){
       this.ifCreate=true;
+      this.ifPublic=true;
       this.uniqueMdFileId='';
       this.fileStar=0;
       this.fileName='';
