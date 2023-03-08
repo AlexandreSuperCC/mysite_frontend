@@ -157,6 +157,7 @@ export default {
         'fname':file.mname,
         'fcat':file.pkCategory,
         'rawContent':file.content,
+        'pb':file.pv===0?true:false,
       }
       // this.keyTimer=new Date().getTime()//force refresh file list
       const arr = JSON.stringify(sendEditPageObj);

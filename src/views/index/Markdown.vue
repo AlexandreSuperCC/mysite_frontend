@@ -222,6 +222,7 @@ export default {
       this.fileStar=this.doParseRouteObjOrBlank('rate')
       this.fileName=this.doParseRouteObjOrBlank('fname')
       this.fileCategory=this.doParseRouteObjOrBlank('fcat')
+      this.ifPublic=this.doParseRouteObjOrBlank('pb')
       // this.$refs.htmlText.innerHTML='';
     },
     rateToInt(str){
