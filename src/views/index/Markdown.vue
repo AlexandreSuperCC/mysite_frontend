@@ -1,40 +1,64 @@
 <template>
   <div class="md-container" v-loading="saveFileLoading" >
     <div class="md-info">
-      <div class="md-uniqueMdFileId">
-        <div class="md-uniqueMdFileId-div"><el-input class="md-uniqueMdFileId-input" onkeyup="value=value.replace(/[^\d]/g,'')"
-                                                     v-model="uniqueMdFileId" placeholder="fid"/></div>
-        <div class="md-ifCreate">
-          <span class="md-ifCreate-switch">
-            modify<el-switch class="md-switch" v-model="ifCreate" active-color="#13ce66" inactive-color="#ff4949" />create
-          </span>
-          <span class="clear-btn">
-            <el-popconfirm title="Are you sure to clear all?" @confirm="clearAll">
-              <template #reference>
-                <el-button class="clear-btn-in" type="danger" round size="mini">clear</el-button>
-              </template>
-            </el-popconfirm>
-          </span>
-        </div>
-        <div class="md-rate-div"><el-rate class="md-rate" v-model="fileStar" allow-half /></div>
-      </div>
-      <div class="md-name-cat">
-        <div class="md-name"><el-input class="md-name-input" v-model="fileName" placeholder="filename"/></div>
-        <div class="md-cat">
-            <el-select class="md-select" v-model="fileCategory" placeholder="select/create category" v-loading="getCategoryLoading"
-            filterable allow-create ref="editMdCat">
-              <el-option
-                  v-for="category in categoryOption"
-                  :key="category"
-                  :value="category"
-              >
-              </el-option>
-            </el-select>
-        </div>
-      </div>
+      <el-row>
+        <el-col :xl="{span:12}" :lg="{span:12}" :md="{span:24}">
+          <div class="md-uniqueMdFileId">
+            <el-row>
+              <el-col :xl="{span:4}" :lg="{span:4}" :md="{span:24}">
+                <div class="md-uniqueMdFileId-div"><el-input class="md-uniqueMdFileId-input" onkeyup="value=value.replace(/[^\d]/g,'')"
+                                                          v-model="uniqueMdFileId" placeholder="fid"/></div>
+              </el-col>
+              <el-col :xl="{span:16}" :lg="{span:14}" :md="{span:24}">
+                <div class="md-ifCreate">
+                  <span class="md-ifCreate-switch">
+                    modify<el-switch class="md-switch" v-model="ifCreate" active-color="#13ce66" inactive-color="#ff4949" />create
+                  </span>
+                  <span class="clear-btn">
+                    <el-popconfirm title="Are you sure to clear all?" @confirm="clearAll">
+                      <template #reference>
+                        <el-button class="clear-btn-in" type="danger" round size="mini">clear</el-button>
+                      </template>
+                    </el-popconfirm>
+                  </span>
+                  <span class="md-ifCreate-switch">
+                    private<el-switch class="md-switch" v-model="ifPublic" active-color="#13ce66" inactive-color="#ff4949" />public
+                  </span>
+                </div>
+              </el-col>    
+              <el-col :xl="{span:4}" :lg="{span:6}" :md="{span:24}">
+                <div class="md-rate-div"><el-rate class="md-rate" v-model="fileStar" allow-half /></div>
+              </el-col>                                        
+            </el-row>
+          </div>
+        </el-col>
+        <el-col :xl="{span:12}" :lg="{span:12}" :md="{span:24}">
+          <div class="md-name-cat">
+            <el-row>
+              <el-col :xl="{span:6}" :lg="{span:8}" :md="{span:24}">
+                <div class="md-name"><el-input class="md-name-input" v-model="fileName" placeholder="filename"/></div>
+              </el-col>
+              <el-col :xl="{span:6}" :lg="{span:8}" :md="{span:24}">
+                <div class="md-cat">
+                    <el-select class="md-select" v-model="fileCategory" placeholder="select/create category" v-loading="getCategoryLoading"
+                    filterable allow-create ref="editMdCat">
+                      <el-option
+                          v-for="category in categoryOption"
+                          :key="category"
+                          :value="category"
+                      >
+                      </el-option>
+                    </el-select>
+                </div>
+              </el-col>
+              <el-col :xl="{span:12}" :lg="{span:8}" :md="{span:0}" :xs="{span:0}"/>
+            </el-row>
+          </div>
+        </el-col>
+      </el-row>
     </div>
     <el-row >
-      <el-col :span="11" class="left-md">
+      <el-col :xl="{span:12}" :lg="{span:12}" :md="{span:12}" class="left-md">
         <el-row>
           <el-input ref="rawText" id="markdown-editor" type="textarea" v-model="content" :autosize="{ minRows: 20, maxRows: 80}" placeholder="type your markdown and use CTRL+S to save it!" >
           </el-input>
@@ -45,7 +69,7 @@
           </div>
         </el-row>
       </el-col>
-      <el-col :span="12" class="right-md">
+      <el-col :xl="{span:12}" :lg="{span:12}" :md="{span:12}" class="right-md">
         <div ref="htmlText" id="show-content" class="text-left">
           <div v-if="!this.$refs.htmlText">
             <h3>Type something to see your markdown</h3>
@@ -77,6 +101,7 @@ export default {
     return {
       'converter':null,
       ifCreate:true,
+      ifPublic:true,
       saveFileLoading:false,
       getCategoryLoading:false,
       'content':'',
@@ -123,6 +148,7 @@ export default {
     getSendObj(){
       return {
         ifCreate:this.ifCreate,
+        pv:this.ifPublic?0:1,
         uniqueMdFileId:this.uniqueMdFileId,
         userId:this.curUserId,
         content:this.content,
@@ -201,6 +227,7 @@ export default {
      */
     clearAll(){
       this.ifCreate=true;
+      this.ifPublic=true;
       this.uniqueMdFileId='';
       this.fileStar=0;
       this.fileName='';
@@ -216,6 +243,7 @@ export default {
       this.fileStar=this.doParseRouteObjOrBlank('rate')
       this.fileName=this.doParseRouteObjOrBlank('fname')
       this.fileCategory=this.doParseRouteObjOrBlank('fcat')
+      this.ifPublic=this.doParseRouteObjOrBlank('pb')
       // this.$refs.htmlText.innerHTML='';
     },
     rateToInt(str){
@@ -239,7 +267,7 @@ export default {
 </script>
 <style>
 .md-container{
-margin: 10px 40px;
+padding: 10px 40px;
 }
 .left-md{
   /*margin-left: 13px;*/
@@ -258,21 +286,14 @@ margin: 10px 40px;
   display:none
 }
 .md-info{
-  display: flex;
   margin: 20px 0px;
   overflow-y: scroll;
 }
 .md-uniqueMdFileId,.md-name,.md-cat{
-  flex: 1;
   margin: 0px 5px;
 }
-
-.md-uniqueMdFileId{
-  display: flex;
-}
 .md-uniqueMdFileId-div {
-  width: 70px;
-  flex-grow: 0;
+  max-width: 200px;
 }
 /*.md-ifCreate{*/
 /*  flex-grow: 1;*/
@@ -290,23 +311,12 @@ margin: 10px 40px;
   flex-grow: 0;
   padding-top: 10px;
 }
-
-.md-cat{
-  padding-right: 25px;
-  text-align: left;
-}
-.md-name{
-  text-align: right;
-}
 .md-select{
   margin-right: 10px;
   width: 200px;
 }
 .md-name-input{
   width: 200px;
-}
-.md-name-cat{
-  display: flex;
 }
 .executeBtn{
   margin-top: 10px;
@@ -323,5 +333,8 @@ margin: 10px 40px;
 }
 .clear-btn-in{
   font-size: 14px;
+}
+.el-col{
+  margin-top: 3px;
 }
 </style>

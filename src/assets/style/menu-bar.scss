@@ -2,6 +2,7 @@
     position: fixed!important;
     top: 8px!important;
     left: 15px!important;
+    z-index: 500;
 }
 .bm-burger-bars {
     background-color: $menu-bar-bg !important;

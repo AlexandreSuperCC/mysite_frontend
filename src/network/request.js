@@ -20,6 +20,8 @@ export function request(config){
         if(sessionStorage.getItem("token")){
             config.headers.Authorization = `{token: ${sessionStorage.getItem('token')}}"`
             // console.log("for test: Authorization: "+config.headers.Authorization)
+        }else if(localStorage.getItem("token")){
+            config.headers.Authorization = `{token: ${localStorage.getItem('token')}}"`
         }
         return config;
     },
@@ -47,18 +49,18 @@ export function request(config){
                 //下面我是进行一个时间的一个对比；如果前台进行一个三十分钟没有操作的话会进行一个重新登入状态；重新登入时候后台会重新生成一个新token；从而不要担心后端token的一个刷新导致前端token不相同问题。
                 let today = new Date().getTime();
                 if(sessionStorage.getItem("nowTime")!=null){
-                    if(today-sessionStorage.getItem("nowTime")>1000*60*30){
+                    // 12*60*60*1000
+                    if(today-sessionStorage.getItem("nowTime")>43200000){
                         //add by ycao resolve the problem : after 30m, it should login twice
                         ElMessageBox.alert("Your session is about to expire. Do you want to extend the duration of the current session?","No activity recently",{
                             confirmButtonText:'Extend session duration',
                             showCancelButton: true,
                             callback:(action)=>{
                                 if(action!='confirm') {//不延长session
-                                    sessionStorage.removeItem('token');
-                                    sessionStorage.removeItem('nowTime');
+                                    store.commit("logout");
                                     window.location.replace("/login")
                                 }else{
-                                    sessionStorage.removeItem('nowTime');
+                                    store.commit("del_time");
                                     store.commit('set_time',today);//延长session。
                                 }
                             }
@@ -66,7 +68,7 @@ export function request(config){
                         // location.reload()
                         return;
                     }else{
-                        sessionStorage.removeItem('nowTime');
+                        store.commit("del_time");
                         store.commit('set_time',today);//每一次请求都会添加新的一个时间从而进行保存。
                         return response.data;
                     }
@@ -93,35 +95,55 @@ function interceptorHandler(error){
     if(error.response){//防止长时间未响应 status变undefined
         switch (error.response.status) {
             case 401:
-                alertMes = "No token yet";
+                ElMessageBox.alert("No token yet, please login", "Attention!", {
+                    confirmButtonText: 'OK',
+                    callback: () => {
+                        const redirect= JSON.stringify({
+                            'url':window.location.pathname,
+                          })
+                        window.location.replace("/login"+"?redirect="+redirect)
+                    }
+                }).catch(r => console.log(r))
                 break;
             case 402:
-                alertMes = "Invalid token";
                 //add by ycao 20220313
-                sessionStorage.removeItem('token');
-                sessionStorage.removeItem('nowTime');
+                store.commit("logout");
+                ElMessageBox.alert("Invalid token, please re-login", "Attention!", {
+                    confirmButtonText: 'OK',
+                    callback: () => {
+                        const redirect= JSON.stringify({
+                            'url':window.location.pathname,
+                          })
+                        window.location.replace("/login"+"?redirect="+redirect)
+                    }
+                }).catch(r => console.log(r))
                 break;
             case 404:
-                alertMes = "Page not found";
+                store.commit("logout");
+                ElMessageBox.alert("Resource not found, please try again", "Attention!", {
+                    confirmButtonText: 'OK',
+                    callback: () => {
+                        const redirect= JSON.stringify({
+                            'url':window.location.pathname,
+                          })
+                        window.location.replace("/login"+"?redirect="+redirect)
+                    }
+                }).catch(r => console.log(r))
                 break;
             default:
-                alertMes = "Unknown error";
                 console.log(error);
+                ElMessageBox.alert("Unknown error, please try again", "Attention!", {
+                    confirmButtonText: 'OK',
+                    callback: () => {
+                        window.location.replace("/")
+                    }
+                }).catch(r => console.log(r))
                 break;
         }
-        ElMessageBox.alert(alertMes + ", please re-login", "Attention!", {
-            confirmButtonText: 'OK',
-            callback: () => {
-                window.location.replace("/")
-            }
-        }).catch(r => console.log(r))
     }else{
-        ElMessageBox.alert("Please refreshed", "Attention!", {
+        ElMessageBox.alert("No response from server, please try again", "Attention!", {
             confirmButtonText: 'OK',
-            callback: () => {
-                window.location.reload();
-                // window.location.replace("/login")
-            }
+            callback: () => {}
         }).catch(r => console.log(r))
     }
 

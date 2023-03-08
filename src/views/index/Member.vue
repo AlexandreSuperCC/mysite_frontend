@@ -1,5 +1,5 @@
 <template>
-<div class="home-container">
+<div class="member-container">
 <main-frame @changeCacheOptions="changeCacheArr"></main-frame>
   <router-view v-slot="{ Component }">
     <keep-alive :include="cacheArr">
@@ -14,7 +14,7 @@ import MainFrame from "@/components/common/MainFrame";
 import { cacheArrRoute } from "../../utils/const/const";
 
 export default {
-  name: "Home",
+  name: "Member",
   components: {MainFrame},
   data(){
     return {
@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style scoped>
-.home-container{
+.member-container{
   height: 100%;
   margin: 0;
   padding: 0;

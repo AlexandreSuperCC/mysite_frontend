@@ -5,7 +5,7 @@
         CKLOVERY
       </span>
     </a>
-    <a id="my-dashboard" href="#" @click.native.prevent="getRoute('dashboard')" v-if="role===0">
+    <a id="my-dashboard" href="#" @click.native.prevent="getRoute('dashboard')" v-if="isLogin">
       <span>Dashboard</span>
     </a>
     <a id="my-article" href="#" @click.native.prevent="getRoute('article')">
@@ -20,11 +20,14 @@
     <a id="my-project" href="#" @click.native.prevent="getRoute('myProject')">
       <span>My Project</span>
     </a>
-    <a id="markdown-editor-menu" href="#" @click.native.prevent="getRoute('markdown')" v-if="role===0">
+    <a id="markdown-editor-menu" href="#" @click.native.prevent="getRoute('markdown')" v-if="isLogin">
       <span>Markdown Editor</span>
     </a>
-    <a id="upload-file" href="#" @click.native.prevent="getRoute('uploadFile')" v-if="role===0">
+    <a id="upload-file" href="#" @click.native.prevent="getRoute('uploadFile')" v-if="isLogin">
       <span>Upload File</span>
+    </a>
+    <a id="my-notepad" href="#" @click.native.prevent="getRoute('notepad')" v-if="isLogin">
+      <span>My Notepad</span>
     </a>
     <a id="admin-login" href="#" @click.native.prevent="smallExitEvent">
       <span>Admin Login</span>
@@ -46,6 +49,7 @@
 
 import {ElMessageBox} from "element-plus";
 import { Slide } from 'vue3-burger-menu'
+import { isLoginCheck } from "../../utils/utils";
 
 export default {
   name: "MainFrame",
@@ -57,7 +61,7 @@ export default {
       // activeIndex:this.$store.state.token.curIndex,
       // activeIndex2:'2',
       disableUpload:false,
-      role:this.$store.getters.userRole,
+      isLogin: isLoginCheck(),
       enableCache:this.$store.getters.cacheEnable,
     }
   },
@@ -69,7 +73,7 @@ export default {
       if(this.enableCache){
         switch (cpn) {
         case 'dashboard':
-          return this.$router.push('/home/dashboard')
+          return this.$router.push('/member/dashboard')
         case 'article':
           return this.$router.push('/home/article')
         case 'aboutme':
@@ -79,16 +83,18 @@ export default {
         case 'myProject':
           return this.$router.push('/home/myProject')
         case 'markdown':
-          return this.$router.push('/home/markdown')
+          return this.$router.push('/member/markdown')
         case 'uploadFile':
-          return this.$router.push('/home/uploadFile')
+          return this.$router.push('/member/uploadFile')
+        case 'notepad':
+          return this.$router.push('/member/notepad')
         default:
           break;
       }
       }else{
         switch (cpn) {
         case 'dashboard':
-          return window.location.replace('/home/dashboard')
+          return window.location.replace('/member/dashboard')
         case 'article':
           return window.location.replace('/home/article')
         case 'aboutme':
@@ -98,9 +104,11 @@ export default {
         case 'myProject':
           return window.location.replace('/home/myProject')
         case 'markdown':
-          return window.location.replace('/home/markdown')
+          return window.location.replace('/member/markdown')
         case 'uploadFile':
-          return window.location.replace('/home/uploadFile')
+          return window.location.replace('/member/uploadFile')
+        case 'notepad':
+          return window.location.replace('/member/notepad')
         default:
           break;
       }
@@ -119,8 +127,7 @@ export default {
       this.$store
           .dispatch("LogOut")
           .then(res=>{
-            this.$store.commit("del_token");
-            this.$store.commit("del_time");
+            this.$store.commit("logout");
             if(res&&res.code&&res.code==='success'){//normal case
               window.location.replace('/');
             }else{//not normal case, perhaps due to unknown error or long-time no interaction

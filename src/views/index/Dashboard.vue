@@ -73,7 +73,7 @@ import { ycaoId,ycaoStatusId } from '../../utils/const/const'
 import {ElMessageBox} from "element-plus";
 
 export default {
-  name: "UploadFile",
+  name: "Dashboard",
   data(){
     return {
         logData:[],

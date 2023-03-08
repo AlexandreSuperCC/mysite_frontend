@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 const Index = () => import('@/views/Index')
 const Login = () => import('@/views/login/Login')
 const Home = () => import('@/views/index/Home')
+const Member = () => import('@/views/index/Member')
 const Article = () => import('@/views/index/Article')
 const UploadFile = () => import('@/views/index/UploadFile')
 const Markdown = () => import('@/views/index/Markdown')
@@ -11,6 +12,7 @@ const AboutMe = () => import('@/views/index/myinfo/AboutMe')
 const MyStory = () => import('@/views/index/myinfo/MyStory')
 const MyProject = () => import('@/views/index/myCreation/MyProject')
 const Dashboard = () => import('@/views/index/Dashboard')
+const Notepad = () => import('@/components/notepad/Notepad')
 const ErrorPage = () => import('@/components/common/ErrorPage')
 import store from "@/store"
 import { loginRequiredMethodsCheck } from '../utils/utils';
@@ -26,6 +28,43 @@ const routes = [
       title: 'Login'
     },
     component:Login
+  },
+  {
+    path: '/member',
+    component:Member,
+    redirect: '/member/dashboard',
+    children:[
+      {
+        path: 'dashboard',
+        meta: {
+          title: 'Dashboard'
+        },
+        component:Dashboard
+      },
+      {
+        path: 'notepad',
+        meta: {
+          title: 'Notepad'
+        },
+        component:Notepad
+      },
+      {
+        path: 'uploadFile',
+        meta: {
+          title: 'Upload File'
+        },
+        component:UploadFile
+      },{
+        path: 'markdown',
+        meta: {
+          title: 'Markdown'
+        },
+        component:Markdown
+      },{
+        path: 'searchEngine',
+        component:SearchEngine
+      },
+    ]
   }
   ,{
     path: '/home',
@@ -45,21 +84,6 @@ const routes = [
           title: 'Article'
         },
         component:Article
-      },{
-        path: 'uploadFile',
-        meta: {
-          title: 'Upload File'
-        },
-        component:UploadFile
-      },{
-        path: 'markdown',
-        meta: {
-          title: 'Markdown'
-        },
-        component:Markdown
-      },{
-        path: 'searchEngine',
-        component:SearchEngine
       },
       {
         path:'aboutMe',
@@ -82,13 +106,6 @@ const routes = [
         },
         component:MyProject
       },
-      {
-        path: 'dashboard',
-        meta: {
-          title: 'Dashboard'
-        },
-        component:Dashboard
-      }
     ]
   },
   {
@@ -139,22 +156,18 @@ router.beforeEach((to,from,next)=>{
   }
 
   const adminPages = store.getters.constants.adminPages
-  if(adminPages.indexOf(to.path)===-1) {
+  if(adminPages.indexOf(to.path)===-1&&!to.path.startsWith('/member')) {
     next();
     return;
   }else{
-    const token = sessionStorage.getItem('token')
-    if (token) {
-      if(to.path==='/home/uploadFile'||to.path==='/home/markdown'){
-        if(loginRequiredMethodsCheck()){
-          next({path:'/login'})
-          return;
-        }
-      }
-      next();
+    if (loginRequiredMethodsCheck()) {
+      const redirect= JSON.stringify({
+        'url':to.path,
+      })
+      next({path:'/login',query:{redirect}})
       return;
     }else{
-      next({path:'/login'})
+      next()
       return;
     }
   }
