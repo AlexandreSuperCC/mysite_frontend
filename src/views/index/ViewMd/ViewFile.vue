@@ -1,6 +1,6 @@
 <template>
   <div class="pop">
-    <p class="view-btn"><el-button type="success" plain @click="hiddenTellFather">click the button or anyplace outside the view to close</el-button></p>
+    <p class="view-btn"><el-button type="success" plain @click="hiddenTellFather">click me or anywhere outside to close</el-button></p>
     <div class="html-content">
       <p v-html="textHtml"></p>
     </div>

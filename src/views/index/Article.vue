@@ -20,6 +20,8 @@
         <el-space wrap class="file-space" size="medium">
           <el-card v-for="file in curCatData" :key="file" class="box-card" style="width: 250px">
             <template #header>
+              <div class="inner-triangle-pv" v-if="file.pv===1"><span class="inner-triangle-text-pv">{{formatRate(file.rate)}}</span></div>
+              <div class="inner-triangle-public" v-else><span class="inner-triangle-text-public">{{formatRate(file.rate)}}</span></div>
               <div class="card-header">
                 <div class="file-name">{{file.mname}}</div>
                 <div class="md-action">
@@ -97,6 +99,13 @@ export default {
     }
   },
   methods:{
+    formatRate(rate){
+      if(rate.indexOf('.')===-1){
+        return rate+'.0'
+      }else{
+        return rate
+      }
+    },
     // changeStatusView(){
     //   if(this.showModal===true){
     //     this.showModal=false
