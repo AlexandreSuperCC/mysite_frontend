@@ -40,6 +40,7 @@ import {Const} from "@/utils";
 import {ElMessageBox} from "element-plus";
 import UploadedFileList from "@/views/index/uploadFile/UploadedFileList";
 import { httpOrHttps } from '../../utils/const/const';
+import { copyToClipboard } from '../../utils/utils';
 export default {
   name: "UploadFile",
   data(){
@@ -75,7 +76,7 @@ export default {
   },
   methods:{
     copyText() {
-      navigator.clipboard.writeText(this.uploadReturnMsg);
+      copyToClipboard(this.uploadReturnMsg)
     },
     clearText() {
       this.uploadReturnMsg="";
