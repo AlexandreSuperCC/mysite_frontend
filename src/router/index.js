@@ -7,6 +7,7 @@ const Member = () => import('@/views/index/Member')
 const Article = () => import('@/views/index/Article')
 const UploadFile = () => import('@/views/index/UploadFile')
 const Markdown = () => import('@/views/index/Markdown')
+const IdMarkdown = () => import('@/views/index/ViewMd/IdMarkdown')
 const SearchEngine = () => import('@/views/index/searchEngine/SearchEngine')
 const AboutMe = () => import('@/views/index/myinfo/AboutMe')
 const MyStory = () => import('@/views/index/myinfo/MyStory')
@@ -60,6 +61,12 @@ const routes = [
           title: 'Markdown'
         },
         component:Markdown
+      },{
+        path: 'markdown/:mid',
+        meta: {
+          title: 'Markdown'
+        },
+        component:IdMarkdown
       },{
         path: 'searchEngine',
         component:SearchEngine

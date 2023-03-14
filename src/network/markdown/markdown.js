@@ -27,3 +27,14 @@ export function getAllCategory(param){
         }).then(data=>resolve(data)).catch(err=>reject(err))
     })
 }
+export function getOneMd(param){
+    return new Promise((resolve,reject)=>{
+        request({
+            url:'/home/getOneFile',
+            method:'get',
+            params:{
+                mid:param,
+            }
+        }).then(data=>resolve(data)).catch(err=>reject(err))
+    })
+}

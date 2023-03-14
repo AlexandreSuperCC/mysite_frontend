@@ -1,4 +1,4 @@
-import {getAllCategory, saveMarkdown} from "@/network/markdown/markdown";
+import {getAllCategory, saveMarkdown, getOneMd} from "@/network/markdown/markdown";
 
 const markdown = {
     actions:{
@@ -10,6 +10,11 @@ const markdown = {
         GetAllCategory(context,param){
             return new Promise((resolve,reject)=>{
                 getAllCategory(param).then(res=>resolve(res)).catch(err=>reject(err))
+            })
+        },
+        GetOneMd(context,param){
+            return new Promise((resolve,reject)=>{
+                getOneMd(param.mid).then(res=>resolve(res)).catch(err=>reject(err))
             })
         }
     }
