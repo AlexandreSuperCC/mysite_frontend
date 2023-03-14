@@ -256,7 +256,7 @@ export default {
   */
   beforeRouteEnter(to,from,next){
     next(vm=>{
-      if(to.query.arr){
+      if(to.params.mid){
         // this.ifCreate=false;
         vm.ifCreate=false;
       }
