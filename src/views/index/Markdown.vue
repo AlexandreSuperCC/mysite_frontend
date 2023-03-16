@@ -244,6 +244,7 @@ export default {
       this.fileName=this.doParseRouteObjOrBlank('fname')
       this.fileCategory=this.doParseRouteObjOrBlank('fcat')
       this.ifPublic=this.doParseRouteObjOrBlank('pb')
+      document.title = 'Cklovery: '+this.fileName
       // this.$refs.htmlText.innerHTML='';
     },
     rateToInt(str){

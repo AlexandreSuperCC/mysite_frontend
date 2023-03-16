@@ -7,6 +7,7 @@ export const ycaoId = 0
 export const ycaoStatusId = 423
 export const myNotesId = 2
 export const cacheArrRoute = ['UploadFile','Markdown','Article','AboutMe','MyStory','Dashboard']
+export const tokenExpireTimeClient = 43200000 // 12*60*60*1000
 
 export const httpOrHttps = 'http://'
 //assets 七牛云文件链接地址 【点击鼠标有星星特效】

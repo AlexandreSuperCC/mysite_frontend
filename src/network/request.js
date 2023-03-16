@@ -2,6 +2,7 @@ import axios from "axios";
 import {baseURL} from "@/network/api";
 import {ElMessageBox} from "element-plus";
 import store from "@/store"
+import { tokenExpireTimeClient } from "../utils/const/const";
 
 export function request(config){
     const instance1 = axios.create({
@@ -49,8 +50,7 @@ export function request(config){
                 //下面我是进行一个时间的一个对比；如果前台进行一个三十分钟没有操作的话会进行一个重新登入状态；重新登入时候后台会重新生成一个新token；从而不要担心后端token的一个刷新导致前端token不相同问题。
                 let today = new Date().getTime();
                 if(sessionStorage.getItem("nowTime")!=null){
-                    // 12*60*60*1000
-                    if(today-sessionStorage.getItem("nowTime")>43200000){
+                    if(today-sessionStorage.getItem("nowTime")>tokenExpireTimeClient){
                         //add by ycao resolve the problem : after 30m, it should login twice
                         ElMessageBox.alert("Your session is about to expire. Do you want to extend the duration of the current session?","No activity recently",{
                             confirmButtonText:'Extend session duration',

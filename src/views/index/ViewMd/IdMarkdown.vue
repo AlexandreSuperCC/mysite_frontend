@@ -237,6 +237,7 @@ export default {
             this.fileName=data.data.mname
             this.fileCategory=data.data.pkCategory
             this.ifPublic=data.data.pv===1?false:true
+            document.title = 'Cklovery: '+this.fileName
           }
           this.getMdLoading=false;
         })
