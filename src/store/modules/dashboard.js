@@ -1,4 +1,4 @@
-import {updateConstant,getAllLogs,getLoginLogs,getVisitLogs} from "@/network/dashboard/dashboard";
+import {updateConstant,getAllLogs,getLoginLogs,getVisitLogs,updatePwd} from "@/network/dashboard/dashboard";
 
 const dashboard = {
     actions:{
@@ -20,6 +20,11 @@ const dashboard = {
         UpdateConstant(context,params){
             return new Promise((resolve,reject)=>{
                 updateConstant(params).then(res=>resolve(res)).catch(err=>reject(err))
+            })
+        },
+        UpdatePwd(context,param){
+            return new Promise((resolve,reject)=>{
+                updatePwd(param).then(res=>resolve(res)).catch(err=>reject(err))
             })
         },
     }

@@ -29,7 +29,8 @@ module.exports={
                     type: "javascript/auto"
                 },
             ]
-        }
+        },
+        performance: { hints: false },
     },
     chainWebpack:config => {
         config.devServer
