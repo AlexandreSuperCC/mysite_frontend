@@ -9,6 +9,7 @@
         :on-error="uploadRes"
         v-loading="uploadLoading"
         element-loading-text="uploading..."
+        multiple
     >
       <img class="upload-img" src="~assets/index/images/upload.svg" alt="upload">
       <div class="el-upload__text">
@@ -21,7 +22,7 @@
       </template>
     </el-upload>
     <div class="upload-msg">
-      <el-input v-model="uploadReturnMsg" placeholder="Uploaded File URL">
+      <el-input v-model="uploadReturnMsg" placeholder="Uploaded File URL" autosize type="textarea">
       </el-input>
       <el-button style="margin-top: 8px" type="primary" @click="copyText">Copy</el-button>
       <el-button style="margin-top: 8px" type="primary" @click="clearText">Clear</el-button>
@@ -40,6 +41,7 @@ import {Const} from "@/utils";
 import {ElMessageBox} from "element-plus";
 import UploadedFileList from "@/views/index/uploadFile/UploadedFileList";
 import { httpOrHttps } from '../../utils/const/const';
+import { copyToClipboard } from '../../utils/utils';
 export default {
   name: "UploadFile",
   data(){
@@ -75,7 +77,7 @@ export default {
   },
   methods:{
     copyText() {
-      navigator.clipboard.writeText(this.uploadReturnMsg);
+      copyToClipboard(this.uploadReturnMsg)
     },
     clearText() {
       this.uploadReturnMsg="";
@@ -108,7 +110,11 @@ export default {
             }
           })
         }else{
-          this.uploadReturnMsg=resJson.msg
+          if(this.uploadReturnMsg){
+            this.uploadReturnMsg+='\n'+resJson.msg
+          }else{
+            this.uploadReturnMsg=resJson.msg
+          }
         };
         this.uploadLoading=false//停止加载
         this.childTimer = new Date().getTime()//force refresh file list

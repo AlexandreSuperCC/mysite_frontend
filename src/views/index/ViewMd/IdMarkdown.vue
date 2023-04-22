@@ -1,5 +1,5 @@
 <template>
-  <div class="md-container" v-loading="saveFileLoading" >
+  <div class="md-container" v-loading="saveFileLoading||getMdLoading">
     <div class="md-info">
       <el-row>
         <el-col :xl="{span:12}" :lg="{span:12}" :md="{span:24}">
@@ -99,6 +99,7 @@ export default {
   },
   data () {
     return {
+      getMdLoading:false,
       'converter':null,
       ifCreate:true,
       ifPublic:true,
@@ -125,7 +126,7 @@ export default {
      * @return
      * @time 2021-12-12 15:53:13
      */
-    this.reassigningValueIfRoute();
+    this.reassigningValueWithMid();
   },
   mounted(){
     this.init();
@@ -210,17 +211,6 @@ export default {
       return toTest!=''&&numReg.test(toTest);
     },
     /**
-     * serve for route changing, when the passing(query) parameter is an object
-     * @return
-     * @time 2021-12-12 13:11:10
-     */
-    doParseRouteObjOrBlank(attrName){
-      if(!this.$route.query.arr) return '';//no route parameter
-      const obj = JSON.parse(this.$route.query.arr);
-      this[`${"attrName"}`] = obj[attrName];
-      return obj[attrName];
-    },
-    /**
      * clear all
      * @return
      * @time 2021-12-12 14:09:32
@@ -236,16 +226,25 @@ export default {
       this.$refs.htmlText.innerHTML='';
     },
     //see comment where used
-    reassigningValueIfRoute(){
-      if(!this.$route.query.arr) return;
-      this.content=this.doParseRouteObjOrBlank('rawContent')
-      this.uniqueMdFileId=this.doParseRouteObjOrBlank('fid')
-      this.fileStar=this.doParseRouteObjOrBlank('rate')
-      this.fileName=this.doParseRouteObjOrBlank('fname')
-      this.fileCategory=this.doParseRouteObjOrBlank('fcat')
-      this.ifPublic=this.doParseRouteObjOrBlank('pb')
-      document.title = 'Cklovery: '+this.fileName
-      // this.$refs.htmlText.innerHTML='';
+    reassigningValueWithMid(){
+      if(!this.$route.params.mid) return;
+      this.getMdLoading=true;
+      this.$store.dispatch('GetOneMd', {mid:this.$route.params.mid}).then(data=>{
+          if(data&&data.data){//保证拿到数据
+            this.content=data.data.content
+            this.uniqueMdFileId=data.data.mid
+            this.fileStar=data.data.rate
+            this.fileName=data.data.mname
+            this.fileCategory=data.data.pkCategory
+            this.ifPublic=data.data.pv===1?false:true
+            document.title = 'Cklovery: '+this.fileName
+          }
+          this.getMdLoading=false;
+        })
+        .catch(err=>{
+          this.getMdLoading=false
+          console.log(err)
+        })
     },
     rateToInt(str){
       if (str==='') return 0;
@@ -258,7 +257,7 @@ export default {
   */
   beforeRouteEnter(to,from,next){
     next(vm=>{
-      if(to.query.arr){
+      if(to.params.mid){
         // this.ifCreate=false;
         vm.ifCreate=false;
       }

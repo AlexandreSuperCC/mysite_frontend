@@ -39,3 +39,41 @@
 .bm-overlay {
   background: none !important;
 }
+
+.el-card__header{
+  position: relative;
+}
+.inner-triangle-public{
+  border-left: 30px solid transparent;
+  border-right: 30px solid var(--el-color-primary);
+  border-bottom: 30px solid transparent;
+  bottom: 47px;
+  width: 0;
+  position: absolute;
+  right: 0px;
+  z-index: 2;
+  .inner-triangle-text-public{
+    color: white;
+    font-size: 12px;
+    position: absolute;
+    left: 14px;
+    top: 1px;
+  }
+}
+.inner-triangle-pv{
+  border-left: 30px solid transparent;
+  border-right: 30px solid red;
+  border-bottom: 30px solid transparent;
+  bottom: 47px;
+  width: 0;
+  position: absolute;
+  right: 0px;
+  z-index: 2;
+  .inner-triangle-text-pv{
+    color: white;
+    font-size: 12px;
+    position: absolute;
+    left: 14px;
+    top: 1px;
+  }
+}

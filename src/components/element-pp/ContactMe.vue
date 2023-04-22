@@ -35,13 +35,13 @@
           </template>
           <template v-slot:description>
             <div>
-              <span class="my-direction"  @click="mapDrawer=true">Paris, France</span>
+              <span class="my-direction"  @click="mapDrawer=true">Paris</span>
               <span class="locate-me">
                 <img class="locate-img" src="~assets/index/images/contact/locate.png" alt="locate me">
               </span>
             </div>
             <div>
-              <span class="my-direction"  @click="mapDrawer=true">Shanghai, China</span>
+              <span class="my-direction"  @click="mapDrawer=true">Shanghai</span>
             </div>
           </template>
         </el-step>

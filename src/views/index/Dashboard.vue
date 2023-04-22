@@ -1,14 +1,64 @@
 <!--只传单个文件-->
 <template>
-<div class="dashboard">
-    <div class="value-control">
-        <div class="constant-ctl">
-            <el-input class="cctl-input" v-model="constantContent" placeholder="Enter your current status"/>
-            <el-button @click="updateConstant" type="primary" size="small">Update your status to let people know !</el-button>
-        </div>
-    </div>
-    <div class="db-log">
-        <div class="login-log-table">
+<div class="dashboard" style="padding-top: 8px;">
+    <el-row>
+      <el-col class="db-ctl" :xl="{span:6}" :lg="{span:8}" :md="{span:10}" :sm="{span:12}" :xs="{span:24}">
+        <el-card shadow="hover">
+          <div class="user-info">
+              <img src="~assets/index/images/director.png" class="user-avator" alt />
+              <div class="user-info-cont">
+                  <div class="user-info-name">{{ myPwdObj.name }}</div>
+                  <div @click="changeDate">{{ role }}</div>
+              </div>
+          </div>
+          <div class="update-pwd">
+            <div class="old-pwd">
+              <el-input
+                  size="small"
+                  class="cctl-input"
+                  v-model="myPwdObj.oldPassword"
+                  type="password"
+                  placeholder="Input the old password"
+                  show-password
+              />
+            </div>
+            <div class="new-pwd">
+              <el-input
+                  size="small"
+                  class="cctl-input"
+                  v-model="myPwdObj.newPassword"
+                  type="password"
+                  placeholder="Input the new password"
+                  show-password
+              />
+            </div>
+            <div class="update-pwd-btn">
+              <el-button :disabled="!isFilled" type="primary" size="small" @click="updatePwd">Update your password</el-button>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col class="db-ctl" :xl="{span:6}" :lg="{span:8}" :md="{span:10}" :sm="{span:12}" :xs="{span:24}">
+        <el-card shadow="hover">
+          <template #header>
+            Mini Moments  
+          </template>
+          <div class="value-control">
+            <div class="constant-ctl">
+                <el-input class="cctl-input" size="small" v-model="constantContent" placeholder="Enter your current status"/>
+                <el-button @click="updateConstant" type="primary" size="small">Update your status</el-button>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>      
+    <el-row>
+      <el-col class="db-ctl" :xl="{span:8}" :lg="{span:8}" :md="{span:8}" :sm="{span:16}">
+        <el-card shadow="hover">
+          <template #header>
+            Admin Login Logs  
+          </template>
+          <div class="login-log-table">
             <el-table       
                 :data="
                 loginLogData.filter(
@@ -26,8 +76,16 @@
                     </template>
                 </el-table-column>
             </el-table>
-        </div>
-        <div class="visit-log-table">
+        
+          </div>
+        </el-card>
+      </el-col>
+      <el-col class="db-ctl" :xl="{span:6}" :lg="{span:6}" :md="{span:6}" :sm="{span:8}">
+        <el-card shadow="hover">
+          <template #header>
+            Website Visit Logs  
+          </template>
+          <div class="visit-log-table">
             <el-table       
                 :data="
                 visitLogData.filter(
@@ -43,28 +101,37 @@
                     </template>
                 </el-table-column>
             </el-table>
-        </div>
-        <div class="all-log-table">
-            <el-table       
-                :data="
-                logData.filter(
-                    (data) =>
-                    !searchAllLogs || data.content.toLowerCase().includes(searchAllLogs.toLowerCase())
-                )"
-                v-loading="getAllLogsLoading"
-                element-loading-text="getting logs..." max-height="500" border>
-                <el-table-column prop="id" label="ID" width="60" />
-                <el-table-column prop="component" label="Component" />
-                <el-table-column prop="content" label="Details" >
-                    <template #header>
-                        <el-input v-model="searchAllLogs" size="small" placeholder="Search in details" />
-                    </template>
-                </el-table-column>
-                <el-table-column prop="userId" label="UserId" width="70"/>
-                <el-table-column prop="ts" label="Execution Time" width="150"/>
-            </el-table>
-        </div>
-    </div>
+          </div>
+        </el-card> 
+      </el-col>
+      <el-col class="db-ctl" :xl="{span:10}" :lg="{span:10}" :md="{span:10}" :sm="{span:24}">
+        <el-card shadow="hover">
+          <template #header>
+            Autotask Execution Logs  
+          </template>
+          <div class="all-log-table">
+          <el-table       
+              :data="
+              logData.filter(
+                  (data) =>
+                  !searchAllLogs || data.content.toLowerCase().includes(searchAllLogs.toLowerCase())
+              )"
+              v-loading="getAllLogsLoading"
+              element-loading-text="getting logs..." max-height="500" border>
+              <el-table-column prop="id" label="ID" width="60" />
+              <el-table-column prop="component" label="Component" />
+              <el-table-column prop="content" label="Details" >
+                  <template #header>
+                      <el-input v-model="searchAllLogs" size="small" placeholder="Search in details" />
+                  </template>
+              </el-table-column>
+              <el-table-column prop="userId" label="UserId" width="70"/>
+              <el-table-column prop="ts" label="Execution Time" width="150"/>
+          </el-table>
+          </div>
+        </el-card> 
+      </el-col>
+    </el-row>
 </div>
 
 </template>
@@ -86,19 +153,31 @@ export default {
         getLoginLogsLoading: true,
         getVisitLogsLoading: true,
         constantContent:'',
+        myPwdObj:{
+            id:this.$store.getters.userId,
+            name:this.$store.getters.userName,
+            oldPassword:'',
+            newPassword:''
+        },
     }
   },
   mounted(){
     this.init()
   },
   computed:{
+    role() {
+      return this.$store.getters.userRole === 0 ? "Director" : "Staff";
+    },
     getConstantUpdateObj(){
       return {
         id: ycaoStatusId,
         cid: ycaoId,
         content:this.constantContent,
       }
-    }
+    },
+    isFilled() {
+        return this.myPwdObj.oldPassword && this.myPwdObj.newPassword;
+    },
   },
   methods:{
     init(){
@@ -153,7 +232,30 @@ export default {
             console.log(err)
             this.getLoginLogsLoading=false;
         })
-    }
+    },
+    updatePwd(){
+        this.$store.dispatch('UpdatePwd', this.myPwdObj).then(res => {
+          if(res){
+            if (res.code === 'success') {
+              ElMessageBox.alert("Updating the password succeeds",{
+                confirmButtonText:'OK',
+                callback:()=>{
+                }
+              })
+            } else {
+              ElMessageBox.alert("Updating the password fails: "+res.msg,{
+                confirmButtonText:'OK',
+                callback:()=>{
+                }
+              })
+            }
+          }else{
+            console.log('server response error');
+          }
+        }).catch(err => {
+          console.log(err)
+        })
+      },
   }
 }
 </script>
@@ -166,23 +268,38 @@ export default {
     &>div{
         width: 90%;
         margin:0 auto;
-        padding-top: 8px;
     }
     
 }
 .constant-ctl{
     width: 300px;
 }
-.login-log-table,.visit-log-table{
-    width: 500px;
-    padding: 8px 8px;
-    margin: 0 auto;
-}
-.all-log-table{
-    padding: 8px 8px;
-    margin: 0 auto;
-}
 .cctl-input{
     margin-bottom: 4px;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 20px;
+}
+.user-avator {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+.user-info-cont {
+    padding-left: 50px;
+    flex: 1;
+    font-size: 14px;
+    color: #999;
+}
+.user-info-cont div:first-child {
+    font-size: 30px;
+    color: #222;
+}
+.db-ctl{
+  padding: 4px 4px;
 }
 </style>

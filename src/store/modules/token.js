@@ -19,6 +19,7 @@ const token={
         token:'',
         userId:'',
         userRole:'',
+        userName:'',
         nowTime:'',
         constants:{
             adminPages:[]
@@ -27,7 +28,9 @@ const token={
         // curIndex:'1',//used widely: store the current index of the page so that the related icon of the mainFrame will be selected after refreshing
     },
     getters:{
+        userId:state=>state.userId,
         userRole:state=>state.userRole,
+        userName:state=>state.userName,
         constants:state=>state.constants,
         cacheEnable:state=>state.cacheEnable,
     },
@@ -42,6 +45,7 @@ const token={
             state.token = object.token
             state.userId = object.userId
             state.userRole = object.userRole
+            state.userName = object.userName
             sessionStorage.token = object.token
         },
         set_rememberme(state,object){
@@ -54,6 +58,7 @@ const token={
             state.token = ''
             state.userId = ''
             state.userRole = ''
+            state.userName = ''
             sessionStorage.removeItem('token')
         },
         //the time of saving
